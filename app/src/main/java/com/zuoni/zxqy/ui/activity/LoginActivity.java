@@ -3,6 +3,7 @@ package com.zuoni.zxqy.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jaeger.library.StatusBarUtil;
@@ -29,6 +30,10 @@ public class LoginActivity extends BaseTitleActivity {
     TextView tv1;
     @BindView(R.id.tv2)
     TextView tv2;
+    @BindView(R.id.et1)
+    EditText et1;
+    @BindView(R.id.et2)
+    EditText et2;
 
     @Override
     public int setLayoutId() {
@@ -47,7 +52,11 @@ public class LoginActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btSure:
-                LoginInfo info = new LoginInfo("123456", "123456"); // config...
+                String a1=et1.getText().toString().trim();
+                String a2=et2.getText().toString().trim();
+
+
+                LoginInfo info = new LoginInfo(a1, a2); // config...
                 RequestCallback<LoginInfo> callback =
                         new RequestCallback<LoginInfo>() {
                             @Override

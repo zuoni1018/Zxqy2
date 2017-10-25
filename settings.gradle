@@ -1,1 +1,1 @@
-include ':app', ':zuoni-common', ':qrcode'
+include ':app', ':zuoni-common', ':qrcode', ':uikit'

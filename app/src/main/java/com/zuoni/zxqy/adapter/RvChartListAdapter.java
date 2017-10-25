@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.netease.nim.uikit.NimUIKit;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.util.TimeUtil;
@@ -51,6 +53,14 @@ public class RvChartListAdapter extends RecyclerView.Adapter<RvChartListAdapter.
         String timeString = TimeUtil.getTimeShowString(mList.get(position).getTime(), true);
         holder.tvTime.setText(timeString);
 
+        holder.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NimUIKit.startP2PSession(mContext, mList.get(position).getFromAccount(),null);
+
+            }
+        });
+
     }
 
     @Override
@@ -60,6 +70,7 @@ public class RvChartListAdapter extends RecyclerView.Adapter<RvChartListAdapter.
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName,tvMessage,tvTime;
+        LinearLayout layoutMain;
 
 
         MyViewHolder(View itemView) {
@@ -67,6 +78,7 @@ public class RvChartListAdapter extends RecyclerView.Adapter<RvChartListAdapter.
             tvTime=(TextView) itemView.findViewById(R.id.tvTime);
             tvName=(TextView) itemView.findViewById(R.id.tvName);
             tvMessage=(TextView) itemView.findViewById(R.id.tvMessage);
+            layoutMain= (LinearLayout) itemView.findViewById(R.id.layoutMain);
         }
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Environment;
 
 import com.baidu.mapapi.SDKInitializer;
+import com.netease.nim.uikit.NimUIKit;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.SDKOptions;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
@@ -13,6 +14,7 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.zuoni.zxqy.ui.activity.MainActivity;
+import com.zuoni.zxqy.util.SystemUtil;
 
 /**
  * Created by zangyi_shuai_ge on 2017/9/27
@@ -32,14 +34,19 @@ public class MainApplication extends Application {
         NIMClient.init(this, loginInfo(), options());
 
         // ... your codes
-//        if (inMainProcess()) {
-            // 注意：以下操作必须在主进程中进行
-            // 1、UI相关初始化操作
-            // 2、相关Service调用
-//        }
+        if (inMainProcess()) {
+            initUiKit();
+        }
 
-
+//
     }
+
+    public boolean inMainProcess() {
+        String packageName = getPackageName();
+        String processName = SystemUtil.getProcessName(this);
+        return packageName.equals(processName);
+    }
+
     // 如果返回值为 null，则全部使用默认参数。
     private SDKOptions options() {
         SDKOptions options = new SDKOptions();
@@ -103,5 +110,26 @@ public class MainApplication extends Application {
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
         return null;
+    }
+
+    private void initUiKit() {
+
+        // 初始化
+        NimUIKit.init(this);
+
+        // 可选定制项
+        // 注册定位信息提供者类（可选）,如果需要发送地理位置消息，必须提供。
+        // demo中使用高德地图实现了该提供者，开发者可以根据自身需求，选用高德，百度，google等任意第三方地图和定位SDK。
+//        NimUIKit.setLocationProvider(new NimDemoLocationProvider());
+
+        // 会话窗口的定制: 示例代码可详见demo源码中的SessionHelper类。
+        // 1.注册自定义消息附件解析器（可选）
+        // 2.注册各种扩展消息类型的显示ViewHolder（可选）
+        // 3.设置会话中点击事件响应处理（一般需要）
+//        SessionHelper.init();
+
+        // 通讯录列表定制：示例代码可详见demo源码中的ContactHelper类。
+        // 1.定制通讯录列表中点击事响应处理（一般需要，UIKit 提供默认实现为点击进入聊天界面)
+//        ContactHelper.init();
     }
 }
