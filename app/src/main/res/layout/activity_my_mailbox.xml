@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <com.androidkun.xtablayout.XTabLayout
+            android:id="@+id/xTablayout"
+            android:layout_width="wrap_content"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            app:xTabIndicatorColor="#D0021B"
+            app:xTabIndicatorHeight="1dp"
+            app:xTabIndicatorWidth="60dp"
+            app:xTabMode="scrollable"
+            app:xTabSelectedTextColor="#D0021B"
+            app:xTabSelectedTextSize="12sp"
+            app:xTabTextColor="#F1D3D7"
+            app:xTabTextSize="12sp" />
+
+    </LinearLayout>
+
+
+    <com.zuoni.common.widget.MyViewPager
+        android:id="@+id/MyViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>

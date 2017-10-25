@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <TextView
+        android:layout_width="144dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="15dp"
+        android:text="收信人：网站管理员"
+        android:textColor="#FF333333"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="21dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="19dp"
+            android:text="类型："
+            android:textColor="#FF333333"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/zx_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:text="咨询"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/zx_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:text="咨询"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/zx_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:text="咨询"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/zx_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:text="咨询"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="4dp"
+                    android:src="@mipmap/zx_3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:text="咨询"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <EditText
+        android:layout_width="329dp"
+        android:layout_height="329dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:background="@color/color_white"
+        android:gravity="top"
+        android:padding="5dp" />
+
+    <Button
+        android:layout_width="329dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bt_bg_red_unclickable"
+        android:text="发送"
+        android:textColor="@color/color_white" />
+
+
+</LinearLayout>

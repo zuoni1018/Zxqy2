@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/layoutMenu1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv01"
+            android:layout_width="17.3dp"
+            android:layout_height="17.3dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/zx_46" />
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="19dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="首页"
+            android:textColor="#FFD0021B"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutMenu2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="17.3dp"
+            android:layout_height="17.3dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/zx_51" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_marginTop="6dp"
+            android:text="发布职位"
+            android:textColor="#FF999999"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutMenu3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="17.3dp"
+            android:layout_height="17.3dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/zx_52" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="简历管理"
+            android:textColor="#FF999999"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutMenu4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv02"
+            android:layout_width="17.3dp"
+            android:layout_height="17.3dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/zx_53" />
+
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="约聊"
+            android:textColor="#FF999999"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

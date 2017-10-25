@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="12dp"
+        android:background="#ff0000" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="陈子栋"
+            android:textColor="#FF333333"
+            android:textSize="15sp" />
+
+        <TextView
+            android:visibility="invisible"
+            android:layout_width="116dp"
+            android:layout_height="16dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="9dp"
+            android:text="沟通职位：UI设计师"
+            android:textColor="#FF333333"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9.5dp"
+            android:layout_marginLeft="15dp"
+            android:text="你好，很喜欢贵司，能否告知这一岗位的具体..."
+            android:textColor="#FF999999"
+            android:textSize="11sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#FFEFEFEF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="11dp"
+            android:text="09:56"
+            android:textColor="#FF999999"
+            android:textSize="11sp" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

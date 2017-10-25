@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="28dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公司名称"
+                    android:textColor="#FF666666"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="17dp"
+                    android:text="杭州晖鸿科技有限公司"
+                    android:textColor="#FF666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="招聘负责人"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="法人代表（选填）"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:text="联系电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_11"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:text="请填写新密码"
+                android:textColor="#FF999999"
+                android:textSize="13sp" />
+
+            <Button
+                android:layout_width="329dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:layout_marginTop="46dp"
+                android:background="@drawable/bt_bg_red_clickable"
+                android:text="修改"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

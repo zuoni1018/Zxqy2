@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D0021B</color>
+    <color name="colorPrimaryDark">#D0021B</color>
+    <color name="colorAccent">#D0021B</color>
+
+    <!--EditText-->
+    <color name="textColorHint">#CFCECC</color>
+    <color name="primaryColor">#CFCECC</color>
+
+
+    <color name="menu_color_1">#3effffff</color>
+    <color name="menu_color_2">#00ffffff</color>
+
+
+    <color name="settings_item_bg_color">#414246</color>
+
+
+    <color name="bg_color">#FAE5E8</color>
+
+
+
+    <color name="tab_color_01">#FF999999</color>
+    <color name="tab_color_02">#FFD0021B</color>
+</resources>
