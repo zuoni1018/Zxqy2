@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.bean.model.Job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
 public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPositionManagementAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<String> mList;
+    private List<Job> mList;
     private LayoutInflater mInflater;
 
-    public RvPositionManagementAdapter(Context mContext, List<String> mList) {
+    public RvPositionManagementAdapter(Context mContext, List<Job> mList) {
         this.mContext = mContext;
         if (mList != null) {
             this.mList = mList;

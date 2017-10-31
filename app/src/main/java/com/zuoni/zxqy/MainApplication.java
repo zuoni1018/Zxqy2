@@ -13,6 +13,7 @@ import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
+import com.yanzhenjie.nohttp.NoHttp;
 import com.zuoni.zxqy.ui.activity.MainActivity;
 import com.zuoni.zxqy.util.SystemUtil;
 
@@ -24,7 +25,8 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        //网络访问框架初始化
+        NoHttp.initialize(this);
         //百度地图初始化
         SDKInitializer.initialize(getApplicationContext());
 

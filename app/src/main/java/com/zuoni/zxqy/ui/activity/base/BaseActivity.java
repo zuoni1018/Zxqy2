@@ -13,13 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import com.zuoni.zxqy.GlobalVariable;
-import com.zuoni.zxqy.R;
-import com.zuoni.zxqy.ui.activity.MainActivity;
 import com.zuoni.common.dialog.loading.LoadingDialog;
 import com.zuoni.common.utils.EmptyUtils;
 import com.zuoni.common.utils.KeyBoardUtils;
 import com.zuoni.common.utils.ToastUtils;
+import com.zuoni.zxqy.GlobalVariable;
+import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.cache.CacheUtils;
+import com.zuoni.zxqy.ui.activity.LoginActivity;
 
 
 /**
@@ -93,8 +94,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                 builder.setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        CacheUtils.setLogin(false,getContext());
                         ActivityCollector.finishAll();
-                        Intent mIntent = new Intent(context, MainActivity.class);
+                        Intent mIntent = new Intent(context, LoginActivity.class);
                         context.startActivity(mIntent);
                         alertDialog.dismiss();
                     }
@@ -102,6 +104,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 builder.setNegativeButton("退出", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        CacheUtils.setLogin(false,getContext());
                         ActivityCollector.finishAll();
                         alertDialog.dismiss();
                     }

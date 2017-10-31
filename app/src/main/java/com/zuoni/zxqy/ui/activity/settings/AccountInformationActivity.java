@@ -1,11 +1,17 @@
 package com.zuoni.zxqy.ui.activity.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.bean.model.CompanyInfo;
+import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -14,28 +20,56 @@ import butterknife.OnClick;
  */
 
 public class AccountInformationActivity extends BaseTitleActivity {
+
+
+    @BindView(R.id.tv01)
+    TextView tv01;
+    @BindView(R.id.layout1)
+    LinearLayout layout1;
+    @BindView(R.id.tv02)
+    TextView tv02;
+    @BindView(R.id.layout2)
+    LinearLayout layout2;
+    @BindView(R.id.tv03)
+    TextView tv03;
+    @BindView(R.id.layout3)
+    LinearLayout layout3;
+
     @Override
     public int setLayoutId() {
         return R.layout.activity_settings_account_information;
     }
+
+
+    private CompanyInfo companyInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("账号信息");
+        companyInfo = CacheUtils.getCompanyInfo(getContext());
+
+        tv01.setText(companyInfo.getCname());
+        tv02.setText(companyInfo.getPhone());
+        tv03.setText(companyInfo.getEmail());
     }
 
-    @OnClick({R.id.layout1, R.id.layout2})
+    private Intent mIntent;
+
+    @OnClick({R.id.layout1, R.id.layout2, R.id.layout3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout1:
-                //联系人管理
-//                jumpToActivity(ContactManagerActivity.class);
                 break;
             case R.id.layout2:
-                //修改密码
-//                jumpToActivity(ModifyPasswordActivity.class);
+                //修改手机号码;
+                mIntent=new Intent(getContext(),ModifyPhoneActivity.class);
+                mIntent.putExtra("isFirstStep",true);
+                startActivity(mIntent);
+
+                break;
+            case R.id.layout3:
                 break;
         }
     }

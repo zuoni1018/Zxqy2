@@ -1,9 +1,13 @@
 package com.zuoni.zxqy.ui.activity.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.cache.CacheUtils;
+import com.zuoni.zxqy.ui.activity.LoginActivity;
+import com.zuoni.zxqy.ui.activity.base.ActivityCollector;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
 import butterknife.ButterKnife;
@@ -34,7 +38,10 @@ public class OtherFunctionsActivity extends BaseTitleActivity {
                 jumpToActivity(ModifyDataActivity.class);
                 break;
             case R.id.layout2:
-                showToast("退出登录成功！！！！！！！！！！！！！！！！！！！！！！");
+                ActivityCollector.finishAll();
+                CacheUtils.setLogin(false,getContext());
+                Intent mIntent=new Intent(getContext(), LoginActivity.class);
+                startActivity(mIntent);
                 break;
         }
     }

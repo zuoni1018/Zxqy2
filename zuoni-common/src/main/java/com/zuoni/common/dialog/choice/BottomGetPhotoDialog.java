@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
 import com.zuoni.common.R;
 
 
@@ -48,19 +50,27 @@ public class BottomGetPhotoDialog extends Dialog {
         }
 
         public BottomGetPhotoDialog create() {
-            BottomGetPhotoDialog dialog = new BottomGetPhotoDialog(context, params.shadow ?
+            final BottomGetPhotoDialog dialog = new BottomGetPhotoDialog(context, params.shadow ?
                     R.style.Theme_Light_NoTitle_Dialog : R.style.Theme_Light_NoTitle_NoShadow_Dialog);
 
             View view = LayoutInflater.from(context).inflate(R.layout.bottom_get_photo_dialog, null);
-            Button btGetPhoto = (Button) view.findViewById(R.id.btGetPhoto);
-            Button btTakePhoto = (Button) view.findViewById(R.id.btTakePhoto);
+            LinearLayout layoutRight = (LinearLayout) view.findViewById(R.id.layoutRight);
+            LinearLayout layoutLeft = (LinearLayout) view.findViewById(R.id.layoutLeft);
 
             if(params.takePhotoOnClickListener!=null){
-                btTakePhoto.setOnClickListener(params.takePhotoOnClickListener);
+                layoutLeft.setOnClickListener(params.takePhotoOnClickListener);
             }
             if(params.getPhotoOnClickListener!=null){
-                btGetPhoto.setOnClickListener(params.getPhotoOnClickListener);
+                layoutRight.setOnClickListener(params.getPhotoOnClickListener);
             }
+
+            Button btCancel=(Button)view.findViewById(R.id.btCancel);
+            btCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
 
             Window win = dialog.getWindow();
             assert win != null;

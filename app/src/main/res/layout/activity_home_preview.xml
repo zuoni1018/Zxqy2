@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_color"
@@ -8,6 +9,7 @@
     <include layout="@layout/top_bar_style" />
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,13 +25,18 @@
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
-                <ImageView
+                <com.joooonho.SelectableRoundedImageView
+                    android:id="@+id/ivHead"
                     android:layout_width="75.3dp"
                     android:layout_height="75.3dp"
                     android:layout_marginBottom="16.7dp"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="17dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:scaleType="centerCrop"
+                    app:sriv_left_bottom_corner_radius="10dp"
+                    app:sriv_left_top_corner_radius="10dp"
+                    app:sriv_right_bottom_corner_radius="10dp"
+                    app:sriv_right_top_corner_radius="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,22 +47,23 @@
 
 
                     <TextView
+                        android:id="@+id/title"
                         android:layout_width="160dp"
                         android:layout_height="19dp"
-                        android:text="杭州晖鸿科技有限公司"
                         android:textColor="#FF333333"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/cateName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="12dp"
-                        android:text="互联网"
                         android:textColor="#FF999999"
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="50-150人"
@@ -89,11 +97,11 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="11dp"
                         android:layout_marginTop="5dp"
-                        android:text="民营"
                         android:textColor="#FF333333"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -114,11 +122,11 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/web"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="11dp"
                         android:layout_marginTop="5dp"
-                        android:text="www.hhkj.com"
                         android:textColor="#FFD0021B"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -158,11 +166,11 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="10.2dp"
-                    android:text="赛银国际广场8号楼802#"
                     android:textColor="#FF999999"
                     android:textSize="13sp" />
 
@@ -202,16 +210,13 @@
                 </LinearLayout>
 
                 <TextView
-
+                    android:id="@+id/info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="21dp"
                     android:layout_marginRight="21dp"
                     android:layout_marginTop="9dp"
-                    android:text="     杭州晖鸿科技有限公司隶属于杭州鸿鹄电子有限公司，是公司专业从事软件技术开发、信息化建设的高新技术团队。公司研发团队坐落于中国杭州核心互联网区域未来科技城内，拥有行业内最顶尖的人才和软硬件基础，同时秉承着鸿鹄电子优良的企业传统，融合时下最新的互联网技术和概念，为各行各业的客户提供优质、高科技含量的产品和技术支持，满足不同客户在信息化时代的发展需要。
-     公司由80、90后中青年组成，涵盖JAVA、PHP、.NET、HTML5、Android、IOS、微信等市面主流技术和研发能力。由10年以上开发经验工程师带队，结合各大高校优质毕业生，结合打造一支年轻又富有潜力，全面又不失专精的高质量技术团队。
-"
                     android:textColor="#FF999999"
                     android:textSize="14sp" />
 

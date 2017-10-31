@@ -5,22 +5,27 @@ package com.zuoni.zxqy.bean.gson;
  */
 
 public class BaseHttpResponse  {
-    private int httpCode;
-    private String httpMessage;
+    /**
+     * status : true
+     * message : 短信验证码发送成功
+     */
 
-    public int getHttpCode() {
-        return httpCode;
+    private String status;
+    private String message;
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setHttpCode(int httpCode) {
-        this.httpCode = httpCode;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getHttpMessage() {
-        return httpMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setHttpMessage(String httpMessage) {
-        this.httpMessage = httpMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

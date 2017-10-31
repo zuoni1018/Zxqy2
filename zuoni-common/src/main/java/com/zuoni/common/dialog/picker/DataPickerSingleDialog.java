@@ -168,6 +168,7 @@ public class DataPickerSingleDialog extends Dialog {
             LoopView loopData = (LoopView) view.findViewById(R.id.loop_data);
             loopData.setArrayList(params.dataList);//给滚轮控件设置数据源
             loopData.setNotLoop();
+            loopData.setTextSize(18);
             if (params.dataList.size() > 0) {
                 loopData.setCurrentItem(params.initSelection);//滚轮默认指到的位置
             }

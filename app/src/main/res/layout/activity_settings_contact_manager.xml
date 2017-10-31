@@ -5,7 +5,7 @@
     android:background="@color/bg_color"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_add" />
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
         android:id="@+id/mRecyclerView"

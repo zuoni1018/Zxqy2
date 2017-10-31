@@ -47,9 +47,6 @@ public class MainActivity extends BaseActivity {
         mList = new ArrayList<>();
         mList.add(new HomeFragment());
         mList.add(new ChartFragment());
-//        mList.add(new CardFragment());
-//        mList.add(new NewsFragment());
-//        mList.add(new SettingsFragment());
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), mList);
         viewPager.setAdapter(mPagerAdapter);
 

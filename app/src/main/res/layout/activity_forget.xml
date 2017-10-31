@@ -44,7 +44,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="41dp"
         android:background="@drawable/bg_04"
         android:orientation="horizontal">
 
@@ -61,6 +61,8 @@
         </RelativeLayout>
 
         <EditText
+            android:inputType="phone"
+            android:id="@+id/et01"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -71,6 +73,8 @@
             android:textSize="13sp" />
 
         <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv01"
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:layout_gravity="center"
@@ -84,7 +88,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_04"
         android:orientation="horizontal">
 
@@ -101,6 +105,8 @@
         </RelativeLayout>
 
         <EditText
+            android:inputType="textPassword"
+            android:id="@+id/et02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -111,6 +117,7 @@
             android:textSize="13sp" />
 
         <ImageView
+            android:id="@+id/iv02"
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:layout_gravity="center"
@@ -124,7 +131,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/bg_04"
         android:orientation="horizontal">
 
@@ -141,6 +148,8 @@
         </RelativeLayout>
 
         <EditText
+            android:inputType="number"
+            android:id="@+id/et03"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -150,23 +159,28 @@
             android:hint="请输验证码"
             android:textSize="13sp" />
 
+
         <TextView
-            android:layout_width="87dp"
-            android:layout_height="23.3dp"
+            android:id="@+id/tv03"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
-            android:background="@drawable/bg_02"
+            android:background="@drawable/bg_get_code_01"
             android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="获取验证码"
-            android:textColor="#D0021B"
+            android:textColor="@color/get_code_text_01"
             android:textSize="11sp" />
     </LinearLayout>
 
-    <TextView
+    <Button
+        android:id="@+id/bt04"
         android:layout_width="329dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/bt_bg_red_clickable"
         android:gravity="center"
         android:text="确认"

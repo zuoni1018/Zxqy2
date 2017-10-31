@@ -32,4 +32,8 @@ public abstract class BaseTitleActivity extends BaseActivity {
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
+
+    public  void setBackOnClickListener(View.OnClickListener listener){
+        layoutLeft.setOnClickListener(listener);
+    }
 }

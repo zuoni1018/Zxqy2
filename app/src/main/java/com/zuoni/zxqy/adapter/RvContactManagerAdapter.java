@@ -1,15 +1,17 @@
 package com.zuoni.zxqy.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.zuoni.common.widget.SwipeMenuView;
 import com.zuoni.zxqy.R;
-import com.zuoni.zxqy.ui.activity.settings.ContactActivity;
+import com.zuoni.zxqy.bean.model.Contact;
+import com.zuoni.zxqy.callback.ContactManagerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +23,26 @@ import java.util.List;
 public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManagerAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<String> mList;
+    private List<Contact> mList;
     private LayoutInflater mInflater;
 
-    public RvContactManagerAdapter(Context mContext, List<String> mList) {
+    private ContactManagerListener layout01OnClickListener;
+
+    public void setLayout01OnClickListener(ContactManagerListener listener){
+        layout01OnClickListener=listener;
+    }
+    private ContactManagerListener layout02OnClickListener;
+
+    public void setLayout02OnClickListener(ContactManagerListener listener){
+        layout02OnClickListener=listener;
+    }
+
+    private ContactManagerListener layoutMainOnClickListener;
+
+    public void setLayoutMainOnClickListener(ContactManagerListener listener){
+        layoutMainOnClickListener=listener;
+    }
+    public RvContactManagerAdapter(Context mContext, List<Contact> mList) {
         this.mContext = mContext;
         if (mList != null) {
             this.mList = mList;
@@ -45,11 +63,31 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
         holder.layoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent=new Intent(mContext, ContactActivity.class);
-                mContext.startActivity(mIntent);
+             layoutMainOnClickListener.onClickListener(mList.get(position),position);
+                holder.swipeMenuView.smoothClose();
             }
         });
 
+        holder.name.setText(mList.get(position).getName());
+        holder.tele.setText(mList.get(position).getTele());
+        holder.email.setText(mList.get(position).getEmail());
+//        holder.address.setText(mList.get(position).getAddress());
+
+
+        holder.layout01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout01OnClickListener.onClickListener(mList.get(position),position);
+                holder.swipeMenuView.smoothClose();
+            }
+        });
+        holder.layout02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout02OnClickListener.onClickListener(mList.get(position),position);
+                holder.swipeMenuView.smoothClose();
+            }
+        });
     }
 
     @Override
@@ -58,12 +96,29 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout layoutMain;
+        LinearLayout layoutMain,layout01,layout02;
+        TextView name,tele,fax,email,address,add_time;
+        SwipeMenuView swipeMenuView;
+
+
 
 
         MyViewHolder(View itemView) {
             super(itemView);
             layoutMain=(LinearLayout)itemView.findViewById(R.id.layoutMain);
+            layout01=(LinearLayout)itemView.findViewById(R.id.layout01);
+            layout02=(LinearLayout)itemView.findViewById(R.id.layout02);
+            name= (TextView) itemView.findViewById(R.id.name);
+            tele= (TextView) itemView.findViewById(R.id.tele);
+//            fax= (TextView) itemView.findViewById(R.id.fax);
+            email= (TextView) itemView.findViewById(R.id.email);
+//            address= (TextView) itemView.findViewById(R.id.address);
+
+            add_time= (TextView) itemView.findViewById(R.id.add_time);
+            swipeMenuView= (SwipeMenuView) itemView.findViewById(R.id.swipeMenuView);
         }
     }
+
+
+
 }

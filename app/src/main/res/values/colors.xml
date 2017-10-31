@@ -22,4 +22,8 @@
 
     <color name="tab_color_01">#FF999999</color>
     <color name="tab_color_02">#FFD0021B</color>
+
+    <color name="get_code_text_01">#D0021B</color>
+    <color name="get_code_text_02">#FF999999</color>
+
 </resources>

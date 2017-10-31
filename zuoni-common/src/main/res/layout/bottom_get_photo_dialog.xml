@@ -2,36 +2,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dialog_bg"
+    android:background="@color/color_white"
     android:orientation="vertical">
 
-    <Button
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:id="@+id/btGetPhoto"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:gravity="left|center"
-        android:text="从手机相册选择"
-        android:textColor="#666666"
-        android:textSize="14sp" />
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/layoutLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_white"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/zx_37" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:text="拍摄照片"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutRight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_white"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/zx_38" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:text="相册照片"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#eeeeee" />
+        android:layout_height="1dp"
+        android:background="#E0E0E0" />
 
     <Button
-        android:id="@+id/btTakePhoto"
+        android:id="@+id/btCancel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="#fff"
-        android:gravity="left|center"
-        android:text="拍照"
-        android:textColor="#666666"
-        android:textSize="14sp" />
+        android:layout_height="40dp"
+        android:background="@color/color_white"
+        android:text="取消"
+        android:textColor="#FF333333"
+        android:textSize="17sp" />
 
 </LinearLayout>
