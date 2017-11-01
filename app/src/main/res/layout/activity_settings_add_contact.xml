@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="姓名"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/et01"
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@mipmap/zx_112"
+                android:gravity="left|center_vertical"
+                android:hint="请填写姓名"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:textColor="#FF333333"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="E-mail（选填）"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/et02"
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@mipmap/zx_112"
+                android:gravity="left|center_vertical"
+                android:hint="请填写E-mail"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:textColor="#FF333333"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="电话"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/et03"
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@mipmap/zx_112"
+                android:gravity="left|center_vertical"
+                android:hint="请填写联系电话"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:textColor="#FF333333"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="传真（选填）"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/et04"
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@mipmap/zx_112"
+                android:gravity="left|center_vertical"
+                android:hint="请填写传真号码"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:textColor="#FF333333"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="公司地址"
+                android:textColor="#FF666666"
+                android:textSize="14sp" />
+
+
+            <EditText
+                android:id="@+id/et05"
+                android:layout_width="331dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:background="@mipmap/zx_112"
+                android:gravity="left|center_vertical"
+                android:hint="请填写公司地址"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:textColor="#FF333333"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/btChange"
+                android:layout_width="329dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="75dp"
+                android:layout_marginTop="87dp"
+                android:background="@drawable/bt_bg_red_clickable"
+                android:text="修改"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

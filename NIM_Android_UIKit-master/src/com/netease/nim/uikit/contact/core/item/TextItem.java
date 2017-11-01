@@ -1,9 +1,9 @@
 package com.netease.nim.uikit.contact.core.item;
 
+import android.text.TextUtils;
+
 import com.netease.nim.uikit.contact.core.model.ContactGroupStrategy;
 import com.netease.nim.uikit.contact.core.query.TextComparator;
-
-import android.text.TextUtils;
 
 public class TextItem extends AbsContactItem implements Comparable<TextItem> {
 	private final String text;

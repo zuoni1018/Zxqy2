@@ -23,8 +23,6 @@ package com.netease.nim.uikit.common.ui.imageview;
  * Copyright (C) 2009 The Android Open Source Project
  */
 
-import com.netease.nim.uikit.common.util.media.SampleSizeUtil;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -41,6 +39,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+
+import com.netease.nim.uikit.common.util.media.SampleSizeUtil;
 
 public abstract class BaseZoomableImageView extends View {
 	// Statics

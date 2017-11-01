@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\workSpace\\Zxqy\\NIM_Android_UIKit-master\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\800e3e8b14fe914df2b836f212c0c102f8ee208a\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\NIM_Android_UIKit-master\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\800e3e8b14fe914df2b836f212c0c102f8ee208a\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\NIM_Android_UIKit-master\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\800e3e8b14fe914df2b836f212c0c102f8ee208a\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\NIM_Android_UIKit-master\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\800e3e8b14fe914df2b836f212c0c102f8ee208a\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    }
+]

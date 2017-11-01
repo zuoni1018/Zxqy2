@@ -1,15 +1,15 @@
 package com.netease.nim.uikit.common.media.picker.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.netease.nim.uikit.session.constant.Extras;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.netease.nim.uikit.session.constant.Extras;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PickerContract {
 	// NOTE MAINTAIN PICKER ACTIVITY CLASS NAME

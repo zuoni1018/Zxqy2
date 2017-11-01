@@ -1,7 +1,7 @@
 package com.netease.nim.uikit.recent.holder;
 
-import com.netease.nim.uikit.core.NimUIKitImpl;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseQuickAdapter;
+import com.netease.nim.uikit.core.NimUIKitImpl;
 import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;

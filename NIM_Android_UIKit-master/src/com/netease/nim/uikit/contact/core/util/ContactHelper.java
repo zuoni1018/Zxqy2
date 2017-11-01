@@ -1,11 +1,11 @@
 package com.netease.nim.uikit.contact.core.util;
 
-import com.netease.nim.uikit.core.NimUIKitImpl;
 import com.netease.nim.uikit.cache.NimUserInfoCache;
 import com.netease.nim.uikit.cache.TeamDataCache;
 import com.netease.nim.uikit.contact.core.model.IContact;
-import com.netease.nimlib.sdk.search.model.MsgIndexRecord;
+import com.netease.nim.uikit.core.NimUIKitImpl;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.search.model.MsgIndexRecord;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 
 /**

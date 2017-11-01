@@ -3,9 +3,9 @@ package com.netease.nim.uikit.chatroom.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.chatroom.viewholder.ChatRoomMsgViewHolderBase;
 import com.netease.nim.uikit.chatroom.viewholder.ChatRoomMsgViewHolderFactory;
-import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.common.ui.recyclerview.adapter.BaseMultiItemFetchLoadAdapter;
 import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
 import com.netease.nim.uikit.session.module.Container;
