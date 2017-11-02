@@ -19,6 +19,7 @@ import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.bean.gson.GetJobsCate;
 import com.zuoni.zxqy.bean.gson.GetSetting;
+import com.zuoni.zxqy.bean.gson.getPositionDetail;
 import com.zuoni.zxqy.bean.model.Contact;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
@@ -34,6 +35,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.zuoni.zxqy.AppUrl.get_position_detail;
 
 
 /**
@@ -107,12 +110,25 @@ public class PostingPositionActivity extends BaseTitleActivity {
     @BindView(R.id.bt17)
     Button bt17;
 
+    private boolean isAdd=true;
+    private String jobId="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("发布新职位");
         getUserCompany();
+
+        isAdd=getIntent().getBooleanExtra("isAdd",true);
+
+        if(!isAdd){
+             jobId=getIntent().getStringExtra("jobId");
+
+            get_position_detail(jobId);
+        }
+
+
     }
 
     @Override
@@ -148,7 +164,53 @@ public class PostingPositionActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+    private void get_position_detail(String jobId) {
 
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(get_position_detail);//职位详情
+        httpRequest.add("jobId",jobId);
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                closeLoading();
+                LogUtil.i("职位详情" + response);
+                getPositionDetail info = gson.fromJson(response, getPositionDetail.class);
+                if (info.getStatus().equals("true")) {
+                    contact=new Contact();
+                    contact.setContactId(info.getData().getContactId());
+
+                    et01.setText(info.getData().getTitle());
+                    tv02.setText(info.getData().getCateName());
+                    tv03.setText(info.getData().getContactName());
+                    tv04.setText(info.getData().getArea());
+                    tv05.setText(info.getData().getEdu());
+
+
+                    et06.setText(info.getData().getHukou());
+                    tv08.setText(info.getData().getYears());
+                    tv07.setText(info.getData().getJobs());
+                    tv09.setText(info.getData().getPay());
+                    tv10.setText(info.getData().getGender());
+
+                    et11.setText(info.getData().getAges());
+                    tv12.setText(info.getData().getHouse());
+                    tv13.setText(info.getData().getTele());
+                    et14.setText(info.getData().getNums());
+                    et16.setText(info.getData().getInfo());
+                } else {
+                    showToast(info.getMessage());
+                    myFinish();
+                }
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                closeLoading();
+                showToast("服务器异常");
+                myFinish();
+            }
+        }, getContext());
+    }
     private void getJobsCate() {
 
         showLoading();
@@ -244,7 +306,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                 break;
             case R.id.layout04:
                 //工作地点
-                createPicker("工作地点1,工作地点2,工作地点3", tv04);
+                createPicker(AppSetting.getDictionary("citys"), tv04);
                 break;
             case R.id.layout05:
                 //学历要求
@@ -282,7 +344,6 @@ public class PostingPositionActivity extends BaseTitleActivity {
             case R.id.layout13:
                 //应聘方式
                 createPicker(AppSetting.getDictionary("user_tele"), tv13);
-
                 break;
             case R.id.layout14:
                 break;
@@ -324,70 +385,75 @@ public class PostingPositionActivity extends BaseTitleActivity {
 
         String title = et01.getText().toString().trim();
         String contactId = "";
-        String area=tv04.getText().toString().trim();
-        String edu=tv05.getText().toString().trim();
-        String hukou=et06.getText().toString().trim();
+        String area = tv04.getText().toString().trim();
+        String edu = tv05.getText().toString().trim();
+        String hukou = et06.getText().toString().trim();
 
-        String jobs=tv07.getText().toString().trim();
-        String years=tv08.getText().toString().trim();
-        String pay=tv09.getText().toString().trim();
-        String gender=tv10.getText().toString().trim();
-        String ages=et11.getText().toString().trim();
+        String jobs = tv07.getText().toString().trim();
+        String years = tv08.getText().toString().trim();
+        String pay = tv09.getText().toString().trim();
+        String gender = tv10.getText().toString().trim();
+        String ages = et11.getText().toString().trim();
 
-        String house=tv12.getText().toString().trim();
-        String tele=tv13.getText().toString().trim();
-        String nums=et14.getText().toString().trim();
-        String info=et16.getText().toString().trim();
-        String cateName=tv02.getText().toString().trim();
-        if(isInPut(title)){
+        String house = tv12.getText().toString().trim();
+        String tele = tv13.getText().toString().trim();
+        String nums = et14.getText().toString().trim();
+        String info = et16.getText().toString().trim();
+        String cateName = tv02.getText().toString().trim();
+        if (isInPut(title)) {
             showToast("请填写职位名称");
-        }else {
-            if(isInPut(cateName)){
+        } else {
+            if (isInPut(cateName)) {
                 showToast("请选择职位类别");
-            }else {
-
-                if(contact==null){
+            } else {
+                if (contact == null) {
                     showToast("请选择联系人");
-                }else {
-                    contactId=contact.getContactId();
-                    if(isInPut(area)){
+                } else {
+                    contactId = contact.getContactId();
+                    if (isInPut(area)) {
                         showToast("请选择工作地点");
-                    }else {
-                        if(isInPut(edu)){
+                    } else {
+                        if (isInPut(edu)) {
                             showToast("请选择学历要求");
-                        }else {
-                            if(isInPut(hukou)){
+                        } else {
+                            if (isInPut(hukou)) {
                                 showToast("请填写户口要求");
-                            }else {
-                                if(isInPut(jobs)){
+                            } else {
+                                if (isInPut(jobs)) {
                                     showToast("请选择工作类型");
-                                }else {
-                                    if(isInPut(years)){
+                                } else {
+                                    if (isInPut(years)) {
                                         showToast("请选择工作经验");
-                                    }else {
-                                        if(isInPut(pay)){
+                                    } else {
+                                        if (isInPut(pay)) {
                                             showToast("请选择月薪");
-                                        }else {
-                                            if(isInPut(gender)){
+                                        } else {
+                                            if (isInPut(gender)) {
                                                 showToast("请选择性别要求");
-                                            }else {
-                                                if(isInPut(ages)){
+                                            } else {
+                                                if (isInPut(ages)) {
                                                     showToast("请输入年龄要求");
-                                                }else {
-                                                    if(isInPut(house)){
+                                                } else {
+                                                    if (isInPut(house)) {
                                                         showToast("请选择住房要求");
-                                                    }else {
-                                                        if(isInPut(tele)){
+                                                    } else {
+                                                        if (isInPut(tele)) {
                                                             showToast("请选择应聘方式");
-                                                        }else {
-                                                            if(isInPut(nums)){
+                                                        } else {
+                                                            if (isInPut(nums)) {
                                                                 showToast("请输入招聘人数");
-                                                            }else {
-                                                                if(isInPut(info)){
+                                                            } else {
+                                                                if (isInPut(info)) {
                                                                     showToast("请输入岗位要求");
-                                                                }else {
-                                                                    postPosition(title,contactId,area,edu,hukou
-                                                                            ,jobs,years,pay,gender,ages,house,tele,nums,info,cateName);
+                                                                } else {
+                                                                    if(isAdd){
+                                                                        postPosition(title, contactId, area, edu, hukou
+                                                                                , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
+                                                                    }else {
+                                                                        update_position(title, contactId, area, edu, hukou
+                                                                                , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
+                                                                    }
+
                                                                 }
                                                             }
                                                         }
@@ -406,7 +472,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
     }
 
     private boolean isInPut(String text) {
-        return text.equals("")|text.equals("请选择");
+        return text.equals("") | text.equals("请选择");
     }
 
     private void postPosition(String title, String contactId, String area, String edu, String hukou,
@@ -414,19 +480,19 @@ public class PostingPositionActivity extends BaseTitleActivity {
                               String house, String tele, String nums, String info, String cateName) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.POST_POSITION);//发布
-        httpRequest.add("title",title);
+        httpRequest.add("title", title);
         httpRequest.add("contactId", contactId);
         httpRequest.add("area", area);
         httpRequest.add("edu", edu);
         httpRequest.add("hukou", hukou);
 
-        httpRequest.add("jobs",jobs);
+        httpRequest.add("jobs", jobs);
         httpRequest.add("years", years);
         httpRequest.add("pay", pay);
         httpRequest.add("gender", gender);
         httpRequest.add("ages", ages);
 
-        httpRequest.add("house",house);
+        httpRequest.add("house", house);
         httpRequest.add("tele", tele);
         httpRequest.add("nums", nums);
         httpRequest.add("info", info);
@@ -439,6 +505,54 @@ public class PostingPositionActivity extends BaseTitleActivity {
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
                 if (info.getStatus().equals("true")) {
                     showToast("发布成功");
+                    setResult(10087);
+                    myFinish();
+                } else {
+                    showToast(info.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                closeLoading();
+                showToast("服务器异常");
+            }
+        }, getContext());
+    }
+
+    private void update_position(String title, String contactId, String area, String edu, String hukou,
+                              String jobs, String years, String pay, String gender, String ages,
+                              String house, String tele, String nums, String info, String cateName) {
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(AppUrl.update_position);//修改
+        httpRequest.add("title", title);
+        httpRequest.add("contactId", contactId);
+        httpRequest.add("area", area);
+        httpRequest.add("edu", edu);
+        httpRequest.add("hukou", hukou);
+
+        httpRequest.add("jobs", jobs);
+        httpRequest.add("years", years);
+        httpRequest.add("pay", pay);
+        httpRequest.add("gender", gender);
+        httpRequest.add("ages", ages);
+
+        httpRequest.add("house", house);
+        httpRequest.add("tele", tele);
+        httpRequest.add("nums", nums);
+        httpRequest.add("info", info);
+        httpRequest.add("cateName", cateName);
+
+        httpRequest.add("jobId", jobId);
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                closeLoading();
+                LogUtil.i("修改" + response);
+                BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
+                if (info.getStatus().equals("true")) {
+                    showToast("修改成功");
+                    setResult(10087);
                     myFinish();
                 } else {
                     showToast(info.getMessage());

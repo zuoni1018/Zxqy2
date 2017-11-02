@@ -51,6 +51,14 @@ public class AppUrl {
 
     public static final String GET_POSITION=BASE_URL+"/Jobs/get_position";
 
+    public static final String DELETE_POSITION=BASE_URL+"/Jobs/delete_position";
+
+    public static final String alter_position_status=BASE_URL+"/Jobs/alter_position_status";
+
+    public static final String get_position_detail=BASE_URL+"/Jobs/get_position_detail";
+
+    public static final String update_position=BASE_URL+"/Jobs/update_position";
+
 
 
 

@@ -16,6 +16,15 @@ public class Job {
     private String jobId;
     private String title;
     private boolean isChoose=false;
+    private String ordid;
+
+    public String getOrdid() {
+        return ordid;
+    }
+
+    public void setOrdid(String ordid) {
+        this.ordid = ordid;
+    }
 
     public boolean isChoose() {
         return isChoose;

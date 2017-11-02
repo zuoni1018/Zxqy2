@@ -22,7 +22,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <TextView
+        <Button
+            android:id="@+id/bt01"
             android:layout_width="104.3dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -32,14 +33,15 @@
             android:textColor="#D0021B"
             android:textSize="14sp" />
 
-        <TextView
+        <Button
+            android:id="@+id/bt02"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_09"
+            android:background="@drawable/bt_bg_red_clickable"
             android:gravity="center"
             android:text="发布新职位"
             android:textColor="#FFFFFF"
