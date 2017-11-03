@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.github.jdsjlzx.interfaces.OnRefreshListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
@@ -33,6 +34,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.zuoni.zxqy.AppUrl.alter_position_status;
+import static com.zuoni.zxqy.AppUrl.refresh_position;
+import static com.zuoni.zxqy.AppUrl.update_order;
 
 /**
  * Created by zangyi_shuai_ge on 2017/10/21
@@ -45,9 +48,16 @@ public class PositionManagementActivity extends BaseTitleActivity {
     Button bt01;
     @BindView(R.id.bt02)
     Button bt02;
+    @BindView(R.id.layoutRight01)
+    RelativeLayout layoutRight01;
+    @BindView(R.id.layoutRight02)
+    RelativeLayout layoutRight02;
 
     private LRecyclerViewAdapter mAdapter;
     private List<Job> mList;
+
+
+    private List<Job> upDateList;
 
     @Override
     public int setLayoutId() {
@@ -61,11 +71,13 @@ public class PositionManagementActivity extends BaseTitleActivity {
         setTitle("职位管理");
 
         mList = new ArrayList<>();
+        upDateList = new ArrayList<>();
+
         RvPositionManagementAdapter rvPositionManagementAdapter = new RvPositionManagementAdapter(getContext(), mList);
         rvPositionManagementAdapter.setOnPositionManagementListener(new OnPositionManagementListener() {
             @Override
             public void onClick01(Job job, int position) {
-                createPicker(position);
+                createPicker(position, job);
             }
 
             @Override
@@ -82,10 +94,10 @@ public class PositionManagementActivity extends BaseTitleActivity {
 
             @Override
             public void onClick03(Job job, int position) {
-                Intent mIntent=new Intent(getContext(),PostingPositionActivity.class);
-                mIntent.putExtra("isAdd",false);
-                mIntent.putExtra("jobId",job.getJobId());
-                startActivityForResult(mIntent,10086);
+                Intent mIntent = new Intent(getContext(), PostingPositionActivity.class);
+                mIntent.putExtra("isAdd", false);
+                mIntent.putExtra("jobId", job.getJobId());
+                startActivityForResult(mIntent, 10086);
             }
 
             @Override
@@ -107,14 +119,15 @@ public class PositionManagementActivity extends BaseTitleActivity {
         getPosition();
 
     }
+
     //公司性质
-    private void createPicker(final int position) {
+    private void createPicker(final int position, final Job job) {
 
         DataPickerSingleDialog.Builder builder = new DataPickerSingleDialog.Builder(getContext());
         List<String> list = new ArrayList<>();
 
-        for (int i = 0; i <mList.size() ; i++) {
-            list.add(i+"");
+        for (int i = 0; i < mList.size(); i++) {
+            list.add(i + "");
         }
 
         builder.setOnDataSelectedListener(new OnSingleDataSelectedListener() {
@@ -122,6 +135,13 @@ public class PositionManagementActivity extends BaseTitleActivity {
             public void onDataSelected(String itemValue) {
                 mList.get(position).setOrdid(itemValue);
                 mAdapter.notifyDataSetChanged();
+                for (int i = 0; i < upDateList.size(); i++) {
+                    if (upDateList.get(i).getJobId().equals(job.getJobId())) {
+                        upDateList.remove(i);
+                        break;
+                    }
+                }
+                upDateList.add(job);
             }
         });
 
@@ -193,7 +213,8 @@ public class PositionManagementActivity extends BaseTitleActivity {
                     mList.addAll(info.getData());
                     mAdapter.notifyDataSetChanged();
                 } else {
-                    showToast("获取失败");
+                    mList.clear();
+                    mAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -206,30 +227,88 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
+    private void update_order(String jobId, String ordid) {
+
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(update_order);//职位显示顺序修改
+        httpRequest.add("jobId", jobId);
+        httpRequest.add("ordid", ordid);
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                mRecyclerView.refreshComplete(1);
+                closeLoading();
+                LogUtil.i("职位显示顺序修改" + response);
+                BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
+                if (info.getStatus().equals("true")) {
+                    upDateList.clear();
+                    getPosition();
+                } else {
+//                    showToast(info.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                mRecyclerView.refreshComplete(1);
+                closeLoading();
+                showToast("服务器异常");
+            }
+        }, getContext());
+    }
+
+    private void refresh_position() {
+
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(refresh_position);//刷新职位
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                mRecyclerView.refreshComplete(1);
+                closeLoading();
+                LogUtil.i("刷新职位" + response);
+                BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
+                if (info.getStatus().equals("true")) {
+                    getPosition();
+                } else {
+                    showToast(info.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                mRecyclerView.refreshComplete(1);
+                closeLoading();
+                showToast("服务器异常");
+            }
+        }, getContext());
+    }
 
     @OnClick({R.id.bt01, R.id.bt02})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt01:
-                String ids="";
-                for (int i = 0; i <mList.size() ; i++) {
-                    if(mList.get(i).isChoose()){
-                        ids=ids+mList.get(i).getJobId()+",";
+                String ids = "";
+                for (int i = 0; i < mList.size(); i++) {
+                    if (mList.get(i).isChoose()) {
+                        ids = ids + mList.get(i).getJobId() + ",";
                     }
                 }
 
-                if(ids.equals("")){
+                if (ids.equals("")) {
                     showToast("请先选择职位");
-                }else {
-                    ids=ids.substring(0,ids.length()-1);
-                    LogUtil.i("删除职位",ids);
+                } else {
+                    ids = ids.substring(0, ids.length() - 1);
+                    LogUtil.i("删除职位", ids);
                     deletePosition(ids);
                 }
 
                 break;
             case R.id.bt02:
-                Intent mIntent=new Intent(getContext(),PostingPositionActivity.class);
-                startActivityForResult(mIntent,10086);
+                Intent mIntent = new Intent(getContext(), PostingPositionActivity.class);
+                startActivityForResult(mIntent, 10086);
                 break;
         }
     }
@@ -237,8 +316,35 @@ public class PositionManagementActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==10086&&resultCode==10087){
+        if (requestCode == 10086 && resultCode == 10087) {
             getPosition();
+        }
+    }
+
+    @OnClick({R.id.layoutRight01, R.id.layoutRight02})
+    public void topBarClick(View view) {
+        switch (view.getId()) {
+            case R.id.layoutRight01:
+                if (upDateList.size() == 0) {
+                    showToast("还未修改排序");
+                    return;
+                }
+                String jobId = "";
+                String ordid = "";
+
+                for (int i = 0; i < upDateList.size(); i++) {
+                    jobId = jobId + upDateList.get(i).getJobId() + ",";
+                    ordid = ordid + upDateList.get(i).getOrdid() + ",";
+                }
+
+                jobId = jobId.substring(0, jobId.length() - 1);
+                ordid = ordid.substring(0, ordid.length() - 1);
+
+                update_order(jobId, ordid);
+                break;
+            case R.id.layoutRight02:
+                refresh_position();
+                break;
         }
     }
 }

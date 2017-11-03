@@ -147,6 +147,7 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
                                 if (location.getPoiList() != null) {
                                     onBMapLocationListener.onGetLatLng(ll);
                                     onBMapLocationListener.onGetPoiList(location.getPoiList());
+                                    onBMapLocationListener.onCity(location.getCity());
                                 }
                             }
                         }

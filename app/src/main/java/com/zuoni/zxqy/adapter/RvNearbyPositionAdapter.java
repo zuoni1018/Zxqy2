@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.callback.ItemOnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,11 @@ public class RvNearbyPositionAdapter extends RecyclerView.Adapter<RvNearbyPositi
     private Context mContext;
     private List<PoiInfo> mList;
     private LayoutInflater mInflater;
+    private ItemOnClickListener itemOnClickListener;
+
+    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
+        this.itemOnClickListener = itemOnClickListener;
+    }
 
     public RvNearbyPositionAdapter(Context mContext, List<PoiInfo> mList) {
         this.mContext = mContext;
@@ -48,6 +54,7 @@ public class RvNearbyPositionAdapter extends RecyclerView.Adapter<RvNearbyPositi
             @Override
             public void onClick(View v) {
 
+                itemOnClickListener.onClickListener(position);
             }
         });
     }

@@ -60,7 +60,12 @@ public class AppUrl {
     public static final String update_position=BASE_URL+"/Jobs/update_position";
 
 
+    public static final String refresh_position=BASE_URL+"/Jobs/refresh_position";
 
+    public static final String update_order=BASE_URL+"/Jobs/update_order";
+
+    public static final String check_phone=BASE_URL+"/User/check_phone";
+    public static final String alter_phone=BASE_URL+"/User/alter_phone";
 
 
 }

@@ -56,7 +56,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
         if (isSetPersonalInfo) {
             Intent mIntent = new Intent();
             mIntent.putExtra("text", et01.getText().toString());
-            setResult(10087, mIntent);
+            setResult(10088, mIntent);
             myFinish();
         } else {
             String info=et01.getText().toString().trim();
@@ -83,7 +83,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                     showToast("修改成功");
                     Intent mIntent = new Intent();
                     mIntent.putExtra("text", et01.getText().toString());
-                    setResult(10087, mIntent);
+                    setResult(10088, mIntent);
                     myFinish();
                 }else {
                     showToast(info.getMessage());

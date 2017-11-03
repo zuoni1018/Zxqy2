@@ -5,7 +5,7 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_save" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,32 +21,72 @@
             android:src="@mipmap/zx_72" />
 
         <TextView
+            android:id="@+id/tv01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:text="杭州"
             android:textColor="#FFFFFFFF"
             android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_width="142dp"
+            android:id="@+id/layoutSearch"
+            android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:background="@color/color_white">
+            android:layout_weight="1"
+            android:background="@drawable/bg_17"
+            android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:src="@mipmap/zx_10" />
+
+            <TextView
+                android:id="@+id/tvSearch01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                android:singleLine="true"
+                android:text="查找写字楼等"
+                android:textColor="#FF999999"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="142dp"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/color_white">
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="11dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_17">
 
+            <ImageView
+                android:layout_width="11.5dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:src="@mipmap/zx_66" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3.5dp"
+                android:background="@null"
+                android:hint="输入楼号-门牌号"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textColorHint="#999999"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/layoutMap"

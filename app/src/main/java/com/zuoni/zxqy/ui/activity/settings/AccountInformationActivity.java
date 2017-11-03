@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zuoni.zxqy.AppSetting;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.model.CompanyInfo;
 import com.zuoni.zxqy.cache.CacheUtils;
@@ -51,8 +52,10 @@ public class AccountInformationActivity extends BaseTitleActivity {
         companyInfo = CacheUtils.getCompanyInfo(getContext());
 
         tv01.setText(companyInfo.getCname());
-        tv02.setText(companyInfo.getPhone());
+//        tv02.setText(companyInfo.getPhone());
         tv03.setText(companyInfo.getEmail());
+
+        AppSetting.phone=companyInfo.getPhone();
     }
 
     private Intent mIntent;
@@ -64,13 +67,20 @@ public class AccountInformationActivity extends BaseTitleActivity {
                 break;
             case R.id.layout2:
                 //修改手机号码;
-                mIntent=new Intent(getContext(),ModifyPhoneActivity.class);
-                mIntent.putExtra("isFirstStep",true);
+                mIntent = new Intent(getContext(), ModifyPhoneActivity.class);
+                mIntent.putExtra("isFirstStep", true);
+                mIntent.putExtra("phone", companyInfo.getPhone());
                 startActivity(mIntent);
 
                 break;
             case R.id.layout3:
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv02.setText(AppSetting.phone);
     }
 }

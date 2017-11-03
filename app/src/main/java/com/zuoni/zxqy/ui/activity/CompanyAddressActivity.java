@@ -1,10 +1,13 @@
 package com.zuoni.zxqy.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvNearbyPositionAdapter;
+import com.zuoni.zxqy.callback.ItemOnClickListener;
 import com.zuoni.zxqy.callback.OnBMapLocationListener;
 import com.zuoni.zxqy.ui.activity.base.BMapLocationBaseActivity;
 
@@ -31,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class CompanyAddressActivity extends BMapLocationBaseActivity implements OnBMapLocationListener {
@@ -41,6 +46,18 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
     TextView tvTitle;
     @BindView(R.id.mRecyclerView)
     LRecyclerView mRecyclerView;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
+    @BindView(R.id.tv01)
+    TextView tv01;
+    @BindView(R.id.tvSearch01)
+    TextView tvSearch01;
+    @BindView(R.id.layoutSearch)
+    LinearLayout layoutSearch;
+    @BindView(R.id.etSearch)
+    EditText etSearch;
+    @BindView(R.id.layoutMap)
+    LinearLayout layoutMap;
     private BaiduMap baiduMap;
 
 
@@ -75,6 +92,19 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
                 showLoading();
             }
         });
+        mList = new ArrayList<>();
+        mRecyclerView.setPullRefreshEnabled(false);
+        RvNearbyPositionAdapter rvNearbyPositionAdapter = new RvNearbyPositionAdapter(getContext(), mList);
+        rvNearbyPositionAdapter.setItemOnClickListener(new ItemOnClickListener() {
+            @Override
+            public void onClickListener(int pos) {
+                tvSearch01.setText(mList.get(pos).name);
+            }
+        });
+
+        mAdapter = new LRecyclerViewAdapter(rvNearbyPositionAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(mAdapter);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -82,11 +112,6 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
                 setLocationMode(MyLocationConfiguration.LocationMode.FOLLOWING);
                 setLocationMode(MyLocationConfiguration.LocationMode.NORMAL);
                 closeLoading();
-                mList = new ArrayList<>();
-                mRecyclerView.setPullRefreshEnabled(false);
-                mAdapter = new LRecyclerViewAdapter(new RvNearbyPositionAdapter(getContext(), mList));
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                mRecyclerView.setAdapter(mAdapter);
             }
         }, 2000);
 
@@ -111,9 +136,12 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
 
     GeoCoder mSearch;
 
+    private LatLng latLng;
+
     //收到定位结果了
     @Override
     public void onGetLatLng(LatLng latLng) {
+        this.latLng = latLng;
         LogUtil.i("拿到坐标");
         mSearch = GeoCoder.newInstance();
         mSearch.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
@@ -127,10 +155,8 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
                 //反地理编码搜索
                 List<PoiInfo> mPoiList = reverseGeoCodeResult.getPoiList();
                 if (mPoiList != null) {
-                    LogUtil.i("附近点数量===" + mPoiList.size());
                     mList.clear();
                     mList.addAll(mPoiList);
-                    LogUtil.i("附近点数量2===" + mList.size());
                     mAdapter.notifyDataSetChanged();
                 }
 
@@ -142,43 +168,51 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
 
 
 ////        search("");
-//        //搜索该附近的POI
-//        PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword("写字楼")
-//                .sortType(PoiSortType.distance_from_near_to_far)
-//                .location(latLng)
-//                .radius(10000)
-//                .pageNum(10);
-//        PoiSearch mPoiSearch = PoiSearch.newInstance();
-//
-//
-//
-//        OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
-//            public void onGetPoiResult(PoiResult result) {
-//                Message message=Message.obtain();
-//                handler.sendMessage(message);
-//                //获取POI检索结果
-//                result.getAllPoi();
-//                //这里是异步操作
-//                for (int i = 0; i < result.getAllPoi().size(); i++) {
-//                    PoiInfo mPoiInfo = result.getAllPoi().get(i);
-//                    LogUtil.i("检索结果" + mPoiInfo.address + mPoiInfo.name + mPoiInfo.describeContents());
-//                }
-//            }
-//
-//            public void onGetPoiDetailResult(PoiDetailResult result) {
-//                //获取Place详情页检索结果
-//            }
-//
-//            @Override
-//            public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
-//
-//            }
-//        };
-//        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
-//        mPoiSearch.searchNearby(nearbySearchOption);
-////        PoiNearbySearchOption option=new PoiNearbySearchOption();
-////        option.location(latLng);
-////        option.keyword("写字楼");
-////        mPoiSearch.searchNearby(option);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10086 && resultCode == 10087) {
+            String text = data.getStringExtra("text");
+            tvSearch01.setText(text);
+        }
+    }
+
+    @Override
+    public void onCity(String city) {
+        LogUtil.i("城市999" + city);
+        tv01.setText(city);
+    }
+
+    @OnClick({R.id.tvRight, R.id.layoutSearch})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvRight:
+                //保存
+                String door=etSearch.getText().toString().trim();
+                if(door.equals("")|tvSearch01.getText().toString().equals("")){
+                    showToast("请输入门牌号码或选择地址");
+                }else {
+                    String message=tv01.getText().toString()+tvSearch01.getText().toString()+door;
+                    Intent mIntent=new Intent();
+                    mIntent.putExtra("message",message);
+                    setResult(10087,mIntent);
+                    myFinish();
+                }
+                break;
+            case R.id.layoutSearch:
+                //搜索框
+                if (latLng == null) {
+                    showToast("定位失败");
+                    return;
+                }
+                Intent mIntent = new Intent(getContext(), MapSearchActivity.class);
+                mIntent.putExtra("latitude", latLng.latitude);
+                mIntent.putExtra("longitude", latLng.longitude);
+                startActivityForResult(mIntent, 10086);
+                break;
+        }
     }
 }

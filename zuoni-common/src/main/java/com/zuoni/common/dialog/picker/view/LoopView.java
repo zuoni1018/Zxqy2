@@ -32,26 +32,35 @@ public class LoopView extends View {
     Paint paintC;
     List arrayList;
     int textSize;
-    int g;
-    int h;
+
+
     int colorGray;
     int colorBlack;
     int colorGrayLight;
     float l;
-    boolean isLoop;
-    int n;
-    int o;
+
+
     int mCurrentItem;
     int positon;
     int r;
-    int s;
     int t;
     int u;
-    int v;
     int w;
     float x;
     float y;
     float z;
+
+
+    boolean isLoop;//是否支持无限滚动
+    int viewWidth;//view 宽度
+    int viewHeight;//view 高度
+    //2条辅助线的Y坐标
+    int lineY01;
+    int lineY02;
+
+    int loopWidth;//滚轮宽度
+    int loopHeight;//滚轮高度
+
 
     public LoopView(Context context) {
         super(context);
@@ -90,7 +99,7 @@ public class LoopView extends View {
         paintA = new Paint();
         paintB = new Paint();
         paintC = new Paint();
-        setTextSize(16F);
+        setTextSize(14F);
     }
 
     private int customPaintAColor;
@@ -134,7 +143,7 @@ public class LoopView extends View {
             paintB.setColor(context.getResources().getColor(R.color.black));
         }
         paintB.setAntiAlias(true);
-        paintB.setTextScaleX(1.05F);
+        paintB.setTextScaleX(1.02F);
         paintB.setTypeface(Typeface.MONOSPACE);
         paintB.setTextSize(textSize);
 //        paintC = new Paint();
@@ -148,13 +157,13 @@ public class LoopView extends View {
         }
         gestureDetector = new GestureDetector(context, simpleOnGestureListener);
         gestureDetector.setIsLongpressEnabled(false);
-        e();
-        t = (int) ((float) h * l * (float) (r - 1));
-        s = (int) ((double) (t * 2) / Math.PI);
+        setLoopSize();
+        t = (int) ((float) loopHeight * l * (float) (r - 1));
+        viewHeight = (int) ((double) (t * 2) / Math.PI);
         u = (int) ((double) t / Math.PI);
-        v = g + textSize;
-        n = (int) (((float) s - l * (float) h) / 2.0F);
-        o = (int) (((float) s + l * (float) h) / 2.0F);
+        viewWidth = loopWidth + textSize;
+        lineY01 = (int) (((float) viewHeight - l * (float) loopHeight) / 2.0F);
+        lineY02 = (int) (((float) viewHeight + l * (float) loopHeight) / 2.0F);
         if (positon == -1) {
             if (isLoop) {
                 positon = (arrayList.size() + 1) / 2;
@@ -165,29 +174,34 @@ public class LoopView extends View {
         mCurrentItem = positon;
     }
 
-    private void e() {
+
+    /**
+     * 设置滚轮尺寸
+     */
+    private void setLoopSize() {
         Rect rect = new Rect();
-        for (int i1 = 0; i1 < arrayList.size(); i1++) {
-            // String s1 = (String) arrayList.get(i1);
-            // wangpeng:调整可触摸区域的宽度为4个字符
-            paintB.getTextBounds("0000", 0, "0000".length(), rect);
-            int j1 = rect.width();
-            // wangpeng:调整区域增大2倍，提升体验。
-            j1 = (int) (j1 * 2.0f);
-            if (j1 > g) {
-                g = j1;
+        for (int i = 0; i < arrayList.size(); i++) {
+            // 设置滚轮宽度
+            paintB.getTextBounds("000000", 0, "000000".length(), rect);
+            int loopWidth = rect.width();
+            // 滚轮宽度增大2倍，提升体验。
+            loopWidth = (int) (loopWidth * 2.0f);
+            //设置滚轮宽度
+            if (loopWidth > this.loopWidth) {
+                this.loopWidth = loopWidth;
             }
+            //设置滚动高度
             paintB.getTextBounds("\u661F\u671F", 0, 2, rect);
-            j1 = rect.height();
-            if (j1 > h) {
-                h = j1;
+            int loopHeight = rect.height();
+            if (loopHeight > this.loopHeight) {
+                this.loopHeight = loopHeight;
             }
         }
 
     }
 
     private void f() {
-        int i1 = (int) ((float) totalScrollY % (l * (float) h));
+        int i1 = (int) ((float) totalScrollY % (l * (float) loopHeight));
         Timer timer = new Timer();
         mTimer = timer;
         timer.schedule(new MTimer(this, i1, timer), 0L, 10L);
@@ -269,7 +283,7 @@ public class LoopView extends View {
             return;
         }
         as = new String[r];
-        w = (int) ((float) totalScrollY / (l * (float) h));
+        w = (int) ((float) totalScrollY / (l * (float) loopHeight));
         mCurrentItem = positon + w % arrayList.size();
         int i1;
         if (!isLoop) {
@@ -290,7 +304,7 @@ public class LoopView extends View {
             // continue;
         }
         do {
-            int j2 = (int) ((float) totalScrollY % (l * (float) h));
+            int j2 = (int) ((float) totalScrollY % (l * (float) loopHeight));
             int k1 = 0;
             while (k1 < r) {
                 int l1 = mCurrentItem - (4 - k1);
@@ -313,18 +327,18 @@ public class LoopView extends View {
                 }
                 k1++;
             }
-            k1 = (v - g) / 2;
-            canvas.drawLine(0.0F, n, v, n, paintC);
-            canvas.drawLine(0.0F, o, v, o, paintC);
+            k1 = (viewWidth - loopWidth) / 2;
+            canvas.drawLine(0.0F, lineY01, viewWidth, lineY01, paintC);
+            canvas.drawLine(0.0F, lineY02, viewWidth, lineY02, paintC);
             int j1 = 0;
             while (j1 < r) {
                 canvas.save();
-                double d1 = ((double) ((float) (h * j1) * l - (float) j2) * 3.1415926535897931D) / (double) t;
+                double d1 = ((double) ((float) (loopHeight * j1) * l - (float) j2) * 3.1415926535897931D) / (double) t;
                 float f1 = (float) (90D - (d1 / 3.1415926535897931D) * 180D);
                 if (f1 >= 90F || f1 <= -90F) {
                     canvas.restore();
                 } else {
-                    int i2 = (int) ((double) u - Math.cos(d1) * (double) u - (Math.sin(d1) * (double) h) / 2D);
+                    int i2 = (int) ((double) u - Math.cos(d1) * (double) u - (Math.sin(d1) * (double) loopHeight) / 2D);
                     canvas.translate(0.0F, i2);
                     canvas.scale(1.0F, (float) Math.sin(d1));
 
@@ -339,7 +353,7 @@ public class LoopView extends View {
                     paintA.setTextSize(zoomTextSize);
                     paintB.setTextSize(zoomTextSize);
 
-                    int startX = (int) (n + (getLeft() * 0.5));
+                    int startX = (int) (lineY01 + (getLeft() * 0.5));
 
                     Rect rect = new Rect();
                     paintB.getTextBounds(str, 0, str.length(), rect);
@@ -353,31 +367,31 @@ public class LoopView extends View {
                         startX += (maxWidth - itemWidth) * 0.5;
                     }
 
-                    if (i2 <= n && h + i2 >= n) {
+                    if (i2 <= lineY01 && loopHeight + i2 >= lineY01) {
                         canvas.save();
-                        canvas.clipRect(0, 0, v, n - i2);
-                        canvas.drawText(as[j1], startX, h, paintA);
+                        canvas.clipRect(0, 0, viewWidth, lineY01 - i2);
+                        canvas.drawText(as[j1], startX, loopHeight, paintA);
                         canvas.restore();
                         canvas.save();
-                        canvas.clipRect(0, n - i2, v, (int) ((float) h * l));
-                        canvas.drawText(as[j1], startX, h, paintB);
+                        canvas.clipRect(0, lineY01 - i2, viewWidth, (int) ((float) loopHeight * l));
+                        canvas.drawText(as[j1], startX, loopHeight, paintB);
                         canvas.restore();
-                    } else if (i2 <= o && h + i2 >= o) {
+                    } else if (i2 <= lineY02 && loopHeight + i2 >= lineY02) {
                         canvas.save();
-                        canvas.clipRect(0, 0, v, o - i2);
-                        canvas.drawText(as[j1], startX, h, paintB);
+                        canvas.clipRect(0, 0, viewWidth, lineY02 - i2);
+                        canvas.drawText(as[j1], startX, loopHeight, paintB);
                         canvas.restore();
                         canvas.save();
-                        canvas.clipRect(0, o - i2, v, (int) ((float) h * l));
-                        canvas.drawText(as[j1], startX, h, paintA);
+                        canvas.clipRect(0, lineY02 - i2, viewWidth, (int) ((float) loopHeight * l));
+                        canvas.drawText(as[j1], startX, loopHeight, paintA);
                         canvas.restore();
-                    } else if (i2 >= n && h + i2 <= o) {
-                        canvas.clipRect(0, 0, v, (int) ((float) h * l));
-                        canvas.drawText(as[j1], startX, h, paintB);
+                    } else if (i2 >= lineY01 && loopHeight + i2 <= lineY02) {
+                        canvas.clipRect(0, 0, viewWidth, (int) ((float) loopHeight * l));
+                        canvas.drawText(as[j1], startX, loopHeight, paintB);
                         mSelectItem = arrayList.indexOf(as[j1]);
                     } else {
-                        canvas.clipRect(0, 0, v, (int) ((float) h * l));
-                        canvas.drawText(as[j1], startX, h, paintA);
+                        canvas.clipRect(0, 0, viewWidth, (int) ((float) loopHeight * l));
+                        canvas.drawText(as[j1], startX, loopHeight, paintA);
                     }
                     canvas.restore();
                 }
@@ -390,7 +404,7 @@ public class LoopView extends View {
 
     protected void onMeasure(int i1, int j1) {
         d();
-        setMeasuredDimension(v, s);
+        setMeasuredDimension(viewWidth, viewHeight);//设置控件高度和宽度
     }
 
     public boolean onTouchEvent(MotionEvent motionevent) {
@@ -404,10 +418,10 @@ public class LoopView extends View {
                 x = y;
                 totalScrollY = (int) ((float) totalScrollY + z);
                 if (!isLoop) {
-                    if (totalScrollY > (int) ((float) (-positon) * (l * (float) h))) {
+                    if (totalScrollY > (int) ((float) (-positon) * (l * (float) loopHeight))) {
                         break; /* Loop/switch isn't completed */
                     }
-                    totalScrollY = (int) ((float) (-positon) * (l * (float) h));
+                    totalScrollY = (int) ((float) (-positon) * (l * (float) loopHeight));
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -418,10 +432,10 @@ public class LoopView extends View {
                 return true;
         }
 
-        if (totalScrollY < (int) ((float) (arrayList.size() - 1 - positon) * (l * (float) h))) {
+        if (totalScrollY < (int) ((float) (arrayList.size() - 1 - positon) * (l * (float) loopHeight))) {
             invalidate();
         } else {
-            totalScrollY = (int) ((float) (arrayList.size() - 1 - positon) * (l * (float) h));
+            totalScrollY = (int) ((float) (arrayList.size() - 1 - positon) * (l * (float) loopHeight));
             invalidate();
         }
 

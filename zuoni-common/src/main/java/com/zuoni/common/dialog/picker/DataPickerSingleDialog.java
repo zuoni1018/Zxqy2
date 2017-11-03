@@ -83,7 +83,11 @@ public class DataPickerSingleDialog extends Dialog {
             params.rightText = rightText;
             return this;
         }
-
+        //设置右边的字
+        public Builder setTextSize(int textSize) {
+            params.size = textSize;
+            return this;
+        }
         //设置左边的字及其颜色
         public Builder setLeftText(String leftText, @ColorInt int leftColor) {
             params.leftText = leftText;
@@ -168,7 +172,7 @@ public class DataPickerSingleDialog extends Dialog {
             LoopView loopData = (LoopView) view.findViewById(R.id.loop_data);
             loopData.setArrayList(params.dataList);//给滚轮控件设置数据源
             loopData.setNotLoop();
-            loopData.setTextSize(18);
+            loopData.setTextSize(params.size);
             if (params.dataList.size() > 0) {
                 loopData.setCurrentItem(params.initSelection);//滚轮默认指到的位置
             }
@@ -203,6 +207,7 @@ public class DataPickerSingleDialog extends Dialog {
 
     //设置dialog各个属性
     private static final class Params {
+        private int size=18;
         private boolean shadow = true;
         private boolean canCancel = true;//点击外部是否可取消
         private LoopView loopData;//滚轮

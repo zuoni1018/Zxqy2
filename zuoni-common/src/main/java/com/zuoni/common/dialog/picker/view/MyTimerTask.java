@@ -30,7 +30,7 @@ final class MyTimerTask extends TimerTask {
 
     public final void run() {
         if (a == 2.147484E+09F) {
-            a = (float) (c - LoopView.getSelectItem(loopView)) * loopView.l * (float) loopView.h;
+            a = (float) (c - LoopView.getSelectItem(loopView)) * loopView.l * (float) loopView.loopHeight;
             if (c > LoopView.getSelectItem(loopView)) {
                 b = -1000F;
             } else {

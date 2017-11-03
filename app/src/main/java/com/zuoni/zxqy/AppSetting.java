@@ -12,6 +12,8 @@ import java.util.List;
 public class AppSetting {
     public static List<Dictionaries> mList;
 
+    public static  String phone="";
+
     public static String getDictionary(String key) {
 
         if (mList == null) {

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.RequestQueue;
 import com.yanzhenjie.nohttp.rest.Response;
 import com.yanzhenjie.nohttp.rest.SimpleResponseListener;
+import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.GlobalVariable;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.cache.CacheUtils;
@@ -48,14 +50,21 @@ public class CallServer {
             public void onSucceed(int what, Response<String> response) {
                 super.onSucceed(what, response);
                 Gson gson=new Gson();
-                BaseHttpResponse baseHttpResponse=gson.fromJson(response.get(),BaseHttpResponse.class);
-                if(baseHttpResponse.getStatus().equals("3")){
-                    Intent intent = new Intent();
-                    intent.setAction(GlobalVariable.BROADCAST_TOKEN_ERROR);
-                    context.sendBroadcast(intent);
-                }else {
-                    httpResponseListener.onSucceed(response.get(),gson);
+                try{
+                    BaseHttpResponse baseHttpResponse=gson.fromJson(response.get(),BaseHttpResponse.class);
+                    if(baseHttpResponse.getStatus().equals("3")){
+                        Intent intent = new Intent();
+                        intent.setAction(GlobalVariable.BROADCAST_TOKEN_ERROR);
+                        context.sendBroadcast(intent);
+                    }else {
+                        httpResponseListener.onSucceed(response.get(),gson);
+                    }
+                }catch (JsonSyntaxException e){
+                    LogUtil.i("手动报错"+response.get());
+                    LogUtil.i("手动报错"+e);
+                    httpResponseListener.onFailed(e);
                 }
+
 
             }
 

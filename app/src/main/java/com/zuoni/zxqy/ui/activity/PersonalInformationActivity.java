@@ -82,7 +82,8 @@ public class PersonalInformationActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvGetAddress:
-                jumpToActivity(CompanyAddressActivity.class);
+                Intent intent=new Intent(getContext(),CompanyAddressActivity.class);
+                startActivityForResult(intent,10086);
                 break;
             case R.id.layout02:
                 //所属行业
@@ -185,14 +186,21 @@ public class PersonalInformationActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10086 && resultCode == 10087) {
-//            公司简介传回来的信息
-            String text = data.getStringExtra("text");
-            if (text != null) {
-                tv07.setText(text);
+        if (requestCode == 10086 ) {
+
+            if(resultCode==10087){
+                //            公司简介传回来的信息
+                String text = data.getStringExtra("message");
+                if (text != null) {
+                    tvGetAddress.setText(text);
+                }
+            }else if(resultCode==10088){
+                String text = data.getStringExtra("text");
+                if (text != null) {
+                    tv07.setText(text);
+                }
             }
         }
-
     }
 
     private void getUserCompany() {

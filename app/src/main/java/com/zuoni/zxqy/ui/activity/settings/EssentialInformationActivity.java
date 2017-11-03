@@ -41,6 +41,7 @@ import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
+import com.zuoni.zxqy.ui.activity.CompanyAddressActivity;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
 import java.io.File;
@@ -136,6 +137,16 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
 
         tv08.setText(companyInfo.getType());
 
+        et05.setFocusable(false);
+
+        et05.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),CompanyAddressActivity.class);
+                startActivityForResult(intent,10086);
+            }
+        });
+
     }
 
     @Override
@@ -153,6 +164,17 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         getTakePhoto().onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10086 && resultCode == 10087) {
+//            公司简介传回来的信息
+            String text = data.getStringExtra("message");
+            if (text != null) {
+                et05.setText(text);
+            }
+        }
+
+
+
+
     }
 
     @Override

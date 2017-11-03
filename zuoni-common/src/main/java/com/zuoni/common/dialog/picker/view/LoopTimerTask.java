@@ -46,11 +46,11 @@ final class LoopTimerTask extends TimerTask {
         LoopView loopview = loopView;
         loopview.totalScrollY = loopview.totalScrollY - i;
         if (!loopView.isLoop) {
-            if (loopView.totalScrollY <= (int) ((float) (-loopView.positon) * (loopView.l * (float) loopView.h))) {
+            if (loopView.totalScrollY <= (int) ((float) (-loopView.positon) * (loopView.l * (float) loopView.loopHeight))) {
                 a = 40F;
-                loopView.totalScrollY = (int) ((float) (-loopView.positon) * (loopView.l * (float) loopView.h));
-            } else if (loopView.totalScrollY >= (int) ((float) (loopView.arrayList.size() - 1 - loopView.positon) * (loopView.l * (float) loopView.h))) {
-                loopView.totalScrollY = (int) ((float) (loopView.arrayList.size() - 1 - loopView.positon) * (loopView.l * (float) loopView.h));
+                loopView.totalScrollY = (int) ((float) (-loopView.positon) * (loopView.l * (float) loopView.loopHeight));
+            } else if (loopView.totalScrollY >= (int) ((float) (loopView.arrayList.size() - 1 - loopView.positon) * (loopView.l * (float) loopView.loopHeight))) {
+                loopView.totalScrollY = (int) ((float) (loopView.arrayList.size() - 1 - loopView.positon) * (loopView.l * (float) loopView.loopHeight));
                 a = -40F;
             }
         }

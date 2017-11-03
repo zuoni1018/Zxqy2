@@ -274,7 +274,9 @@ public class PostingPositionActivity extends BaseTitleActivity {
 
         DataPickerSingleDialog.Builder builder = new DataPickerSingleDialog.Builder(getContext());
         List<String> list = new ArrayList<>();
+        list.add("不限");
         Collections.addAll(list, aa);
+
         builder.setOnDataSelectedListener(new OnSingleDataSelectedListener() {
             @Override
             public void onDataSelected(String itemValue) {
@@ -332,7 +334,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                 break;
             case R.id.layout10:
                 //性别要求
-                createPicker("男,女,不要求", tv10);
+                createPicker("男,女", tv10);
                 break;
             case R.id.layout11:
                 break;
@@ -523,6 +525,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
     private void update_position(String title, String contactId, String area, String edu, String hukou,
                               String jobs, String years, String pay, String gender, String ages,
                               String house, String tele, String nums, String info, String cateName) {
+
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.update_position);//修改
         httpRequest.add("title", title);

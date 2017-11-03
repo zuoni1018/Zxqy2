@@ -26,6 +26,7 @@ import com.zuoni.zxqy.ui.activity.InvitationInterviewRecordActivity;
 import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
 import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
+import com.zuoni.zxqy.ui.activity.ResumeSearchActivity;
 import com.zuoni.zxqy.ui.activity.SettingsActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
 
@@ -160,6 +161,7 @@ public class HomeFragment extends Fragment {
                 break;
             case R.id.menu_2:
                 //简历搜索
+                jumpToActivity(ResumeSearchActivity.class);
                 break;
             case R.id.menu_3:
                 //邀请面试记录

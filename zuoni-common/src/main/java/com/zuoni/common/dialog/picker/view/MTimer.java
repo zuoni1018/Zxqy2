@@ -27,13 +27,13 @@ final class MTimer extends TimerTask {
     public final void run() {
         if (a == 0x7fffffff) {
             if (c < 0) {
-                if ((float) (-c) > (loopView.l * (float) loopView.h) / 2.0F) {
-                    a = (int) (-loopView.l * (float) loopView.h - (float) c);
+                if ((float) (-c) > (loopView.l * (float) loopView.loopHeight) / 2.0F) {
+                    a = (int) (-loopView.l * (float) loopView.loopHeight - (float) c);
                 } else {
                     a = -c;
                 }
-            } else if ((float) c > (loopView.l * (float) loopView.h) / 2.0F) {
-                a = (int) (loopView.l * (float) loopView.h - (float) c);
+            } else if ((float) c > (loopView.l * (float) loopView.loopHeight) / 2.0F) {
+                a = (int) (loopView.l * (float) loopView.loopHeight - (float) c);
             } else {
                 a = -c;
             }

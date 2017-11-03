@@ -13,4 +13,5 @@ import java.util.List;
 public interface OnBMapLocationListener {
     void onGetPoiList(List<Poi> list);
     void onGetLatLng(LatLng latLng);
+    void onCity(String  city);
 }

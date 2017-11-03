@@ -293,7 +293,7 @@ public class RegisterActivity extends BaseTitleActivity {
                     for (int i = 0; i < citys.size(); i++) {
                         list.add(citys.get(i).getName());
                     }
-
+                    builder.setTextSize(14);
                     builder.setOnDataSelectedListener(new OnSingleDataSelectedListener() {
                         @Override
                         public void onDataSelected(String itemValue) {
