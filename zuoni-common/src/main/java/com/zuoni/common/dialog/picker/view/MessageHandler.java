@@ -7,26 +7,23 @@ package com.zuoni.common.dialog.picker.view;
 import android.os.Handler;
 import android.os.Message;
 
-// Referenced classes of package com.qingchifan.view:
-//            LoopView
-
 final class MessageHandler extends Handler {
 
-    final LoopView a;
+    private final LoopView loopView;
 
     MessageHandler(LoopView loopview) {
         super();
-        a = loopview;
+        this.loopView = loopview;
     }
 
     public final void handleMessage(Message paramMessage) {
         if (paramMessage.what == 1000)
-            this.a.invalidate();
+            this.loopView.invalidate();
         while (true) {
             if (paramMessage.what == 2000)
-                LoopView.b(a);
+                LoopView.b(loopView);
             else if (paramMessage.what == 3000)
-                this.a.c();
+                this.loopView.c();
             super.handleMessage(paramMessage);
             return;
         }

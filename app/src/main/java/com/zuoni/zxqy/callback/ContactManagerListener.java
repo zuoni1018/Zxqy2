@@ -8,5 +8,5 @@ import com.zuoni.zxqy.bean.model.Contact;
  */
 
 public interface ContactManagerListener {
-    void onClickListener(Contact contact ,int pos);
+    void onClickListener(Contact contact ,int position);
 }

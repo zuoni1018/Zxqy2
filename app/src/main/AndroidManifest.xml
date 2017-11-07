@@ -107,10 +107,13 @@
         <activity android:name=".ui.activity.PersonalInformationActivity" />
         <activity android:name=".ui.activity.YlzpActivity" />
         <activity android:name=".ui.activity.ResumeManagementActivity" />
-        <activity android:name=".ui.activity.InvitationInterviewActivity" />
+
+
+        <activity android:name=".ui.activity.InvitationInterviewActivity"
+            android:windowSoftInputMode="adjustResize"            />
         <activity android:name="com.netease.nim.uikit.session.activity.P2PMessageActivity" />
         <activity android:name=".ui.activity.settings.ModifyPhoneActivity"/>
-        <activity android:name=".ui.activity.ResumeSearchActivity"/>
+        <activity android:name=".ui.activity.resumesearch.ResumeSearchActivity"/>
         <activity android:name=".ui.activity.MapSearchActivity"/>
 
         <service
@@ -121,6 +124,8 @@
         <activity
             android:name="com.zuoni.zxqy.wxapi.WXEntryActivity"
             android:exported="true" />
+        <activity android:name=".ui.activity.resumesearch.ResumeSearchResultActivity" />
+        <activity android:name=".ui.activity.ResumeDetailsActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

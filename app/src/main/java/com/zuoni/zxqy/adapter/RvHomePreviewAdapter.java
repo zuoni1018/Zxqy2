@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.bean.model.EnterpriseInformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,10 @@ import java.util.List;
 public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<String> mList;
+    private List<EnterpriseInformation.JobsBean> mList;
     private LayoutInflater mInflater;
 
-    public RvHomePreviewAdapter(Context mContext, List<String> mList) {
+    public RvHomePreviewAdapter(Context mContext, List<EnterpriseInformation.JobsBean> mList) {
         this.mContext = mContext;
         if (mList != null) {
             this.mList = mList;
@@ -39,6 +41,10 @@ public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdap
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        holder.job_name.setText(mList.get(position).getJob_name());
+        holder.company_name.setText(mList.get(position).getCompany_name());
+        holder.update_time.setText(mList.get(position).getUpdate_time());
+        holder.pay.setText(mList.get(position).getPay());
 
     }
 
@@ -49,10 +55,14 @@ public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        TextView job_name,company_name,pay,update_time;
 
         MyViewHolder(View itemView) {
             super(itemView);
-
+            job_name=itemView.findViewById(R.id.job_name);
+            company_name=itemView.findViewById(R.id.company_name);
+            update_time=itemView.findViewById(R.id.update_time);
+            pay=itemView.findViewById(R.id.pay);
         }
     }
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:background="#D0021B"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/layoutLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="7.2dp"
+            android:layout_height="16.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="10.8dp"
+            android:src="@mipmap/back_left" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@drawable/bg_15"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="12.2dp"
+            android:layout_height="11.6dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:src="@mipmap/zx_71" />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="18dp"
+            android:background="@null"
+            android:hint="请输入关键字..."
+            android:textColor="#999999"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.4dp"
+            android:text="不限"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="6.1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5.1dp"
+            android:src="@mipmap/zx_9" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="测试标题"
+        android:textColor="@color/color_white"
+        android:textSize="17sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvSearch"
+        android:layout_marginLeft="20.3dp"
+        android:layout_marginRight="7dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="28dp"
+        android:layout_height="17dp"
+        android:text="搜索"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp" />
+</LinearLayout>

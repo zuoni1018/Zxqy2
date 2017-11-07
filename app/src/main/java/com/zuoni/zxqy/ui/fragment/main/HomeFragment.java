@@ -26,7 +26,7 @@ import com.zuoni.zxqy.ui.activity.InvitationInterviewRecordActivity;
 import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
 import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
-import com.zuoni.zxqy.ui.activity.ResumeSearchActivity;
+import com.zuoni.zxqy.ui.activity.resumesearch.ResumeSearchActivity;
 import com.zuoni.zxqy.ui.activity.SettingsActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
 

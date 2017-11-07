@@ -68,6 +68,10 @@ public class HomePreviewActivity extends BaseTitleActivity {
         return R.layout.activity_home_preview;
     }
 
+
+   private List<EnterpriseInformation.JobsBean> jobs;
+    private LRecyclerViewAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,13 +81,14 @@ public class HomePreviewActivity extends BaseTitleActivity {
 
 
         setTitle("首页预览");
+        jobs=new ArrayList<>();
         List<String> mList = new ArrayList<>();
         mList.add("");
         mList.add("");
         mList.add("");
         mList.add("");
         mRecyclerView.setPullRefreshEnabled(false);
-        LRecyclerViewAdapter mAdapter = new LRecyclerViewAdapter(new RvHomePreviewAdapter(getContext(), mList));
+        mAdapter = new LRecyclerViewAdapter(new RvHomePreviewAdapter(getContext(), jobs));
         //禁止滑动
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
             @Override
@@ -123,6 +128,12 @@ public class HomePreviewActivity extends BaseTitleActivity {
                     address.setText(enterpriseInformation.getAddress());
                     cateName.setText(enterpriseInformation.getCateName());
                     tvinfo.setText(enterpriseInformation.getInfo());
+
+                    jobs.clear();
+                    if(enterpriseInformation.getJobs()!=null){
+                        jobs.addAll(enterpriseInformation.getJobs());
+                    }
+                    mAdapter.notifyDataSetChanged();
 
                     nestedScrollView.fullScroll(ScrollView.FOCUS_UP);//滚动到顶部
                 } else {

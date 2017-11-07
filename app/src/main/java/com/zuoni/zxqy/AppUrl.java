@@ -59,13 +59,20 @@ public class AppUrl {
 
     public static final String update_position=BASE_URL+"/Jobs/update_position";
 
-
     public static final String refresh_position=BASE_URL+"/Jobs/refresh_position";
 
     public static final String update_order=BASE_URL+"/Jobs/update_order";
 
     public static final String check_phone=BASE_URL+"/User/check_phone";
+
     public static final String alter_phone=BASE_URL+"/User/alter_phone";
+
+    public static final String search_resume=BASE_URL+"/Resume/search_resume/p/1/size/10";
+
+    public static final String resume_detail=BASE_URL+"/Resume/resume_detail";
+
+    public static final String interview_invite=BASE_URL+"/Resume/interview_invite";
+    public static final String get_hot_keyword=BASE_URL+"/QuickGet/get_hot_keyword";
 
 
 }

@@ -1,21 +1,23 @@
 package com.zuoni.zxqy.bean.model;
 
+import java.util.List;
+
 /**
  * Created by zangyi_shuai_ge on 2017/10/27
  */
 
 public class EnterpriseInformation  {
     /**
-     * cname : hjij
-     * title : fyuu
+     * cname : 臧艺
+     * title : 鸿鹄科技
      * email :
      * phone : 15168212330
      * web :
-     * info : 杭州晖鸿科技有限公司隶属于杭州鸿鹄电子有限公司，是公司专业从事软件技术开发、信息化建设的高新技术团队。公司研发团队坐落于中国杭州核心互联网区域未来科技城内，拥有行业内最顶尖的人才和软硬件基础，同时秉承着鸿鹄电子优良的企业传统，融合时下最新的互联网技术和概念，为各行各业的客户提供优质、高科技含量的产品和技术支持，满足不同客户在信息化时代的发展需要。      公司由80、90后中青年组成，涵盖JAVA、PHP、.NET、HTML5、Android、IOS、微信等市面主流技术和研发能力。由10年以上开发经验工程师带队，结合各大高校优质毕业生，结合打造一支年轻又富有潜力，全面又不失专精的高质量技术团队。jjjj
-     * address : 点击获取公司地址
-     * type : 私营企业
-     * logo : http://106.14.212.85:8080/52dyjob/Public/Uploads/company/
-     * jobs : null
+     * info : 公司简介童年up哦上YY是我我嘻嘻嘻嘻是我是休息我是是我是我是是我是我我我是我是我是我是我是我我是我是我是我是我是我是我是我是我是我是我/n \n
+     * address : 杭州市赛银国际广场龙
+     * type : 集体企业
+     * logo : http://106.14.212.85:8080/52dyjob/Public/Uploads/company/2017/11/04/59fd1bbe4da7d.jpg
+     * jobs : [{"id":"114491","job_name":"同","company_name":"鸿鹄科技","gender":"2","pay":"1000-1999元","nums":"88","update_time":"2017-11-03 15:47:07"}]
      */
 
     private String cname;
@@ -27,7 +29,8 @@ public class EnterpriseInformation  {
     private String address;
     private String type;
     private String logo;
-//    private String jobs;
+    private List<JobsBean> jobs;
+
     private String cateName;
 
     public String getCateName() {
@@ -110,11 +113,87 @@ public class EnterpriseInformation  {
         this.logo = logo;
     }
 
-//    public String getJobs() {
-//        return jobs;
-//    }
+    public List<JobsBean> getJobs() {
+        return jobs;
+    }
 
-//    public void setJobs(String  jobs) {
-//        this.jobs = jobs;
-//    }
+    public void setJobs(List<JobsBean> jobs) {
+        this.jobs = jobs;
+    }
+
+    public static class JobsBean {
+        /**
+         * id : 114491
+         * job_name : 同
+         * company_name : 鸿鹄科技
+         * gender : 2
+         * pay : 1000-1999元
+         * nums : 88
+         * update_time : 2017-11-03 15:47:07
+         */
+
+        private String id;
+        private String job_name;
+        private String company_name;
+        private String gender;
+        private String pay;
+        private String nums;
+        private String update_time;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getJob_name() {
+            return job_name;
+        }
+
+        public void setJob_name(String job_name) {
+            this.job_name = job_name;
+        }
+
+        public String getCompany_name() {
+            return company_name;
+        }
+
+        public void setCompany_name(String company_name) {
+            this.company_name = company_name;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public String getPay() {
+            return pay;
+        }
+
+        public void setPay(String pay) {
+            this.pay = pay;
+        }
+
+        public String getNums() {
+            return nums;
+        }
+
+        public void setNums(String nums) {
+            this.nums = nums;
+        }
+
+        public String getUpdate_time() {
+            return update_time;
+        }
+
+        public void setUpdate_time(String update_time) {
+            this.update_time = update_time;
+        }
+    }
 }

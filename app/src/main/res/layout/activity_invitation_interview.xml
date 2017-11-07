@@ -4,156 +4,221 @@
     android:layout_height="match_parent"
     android:background="#D0021B"
     android:orientation="vertical">
-
     <include layout="@layout/top_bar_style" />
 
-    <LinearLayout
-        android:layout_width="341dp"
-        android:layout_height="130dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="26dp"
-        android:background="@mipmap/zx_110"
-        android:orientation="vertical">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:overScrollMode="never"
-            android:id="@+id/mRecyclerView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center" />
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginTop="26dp"
+                android:layout_width="341dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/zx_110"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/mRecyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:overScrollMode="never" />
+
+                <TextView
+                    android:id="@+id/tv01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="选择面试职位"
+                    android:textColor="#FFD0021B"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="26dp"
+                android:layout_width="341dp"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0.5dp"
+                android:background="@mipmap/zx_109"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25.7dp"
+                    android:layout_marginRight="25.7dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="14.6dp"
+                        android:src="@mipmap/zx_17" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12.3dp"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:text="请选择联系人"
+                        android:textColor="#FF333333"
+                        android:textSize="11sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="7.2dp"
+                        android:layout_height="12.6dp"
+                        android:src="@mipmap/zx_11" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25.7dp"
+                    android:layout_marginRight="25.7dp"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="14.6dp"
+                        android:src="@mipmap/zx_18" />
+
+                    <EditText
+                        android:id="@+id/et03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12.3dp"
+                        android:background="@null"
+                        android:hint="请填写联系人"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25.7dp"
+                    android:layout_marginRight="25.7dp"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="14.6dp"
+                        android:src="@mipmap/zx_19" />
+
+                    <EditText
+                        android:id="@+id/et04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12.3dp"
+                        android:background="@null"
+                        android:hint="请填写联系方式"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25.7dp"
+                    android:layout_marginRight="25.7dp"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="14.6dp"
+                        android:src="@mipmap/zx_20" />
+
+                    <EditText
+                        android:id="@+id/et05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12.3dp"
+                        android:background="@null"
+                        android:hint="请填写地址"
+                        android:paddingBottom="4dp"
+                        android:paddingTop="4dp"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25.7dp"
+                    android:layout_marginRight="25.7dp"
+                    android:layout_marginTop="13dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="14.6dp"
+                        android:layout_gravity="top"
+                        android:src="@mipmap/zx_15" />
+
+                    <EditText
+                        android:id="@+id/et06"
+                        android:layout_width="264dp"
+                        android:layout_height="102dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="6.6dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_18"
+                        android:gravity="top"
+                        android:hint="请输入邀请内容"
+                        android:padding="5dp"
+                        android:textColor="#FF333333"
+                        android:textSize="11sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/btSure"
+                    android:layout_width="288dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="17dp"
+                    android:background="@drawable/bt_bg_red_clickable"
+                    android:gravity="center"
+                    android:text="发送面试邀请"
+                    android:textColor="@color/color_white"
+                    android:textSize="16sp" />
+            </LinearLayout>
 
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="26dp"
-        android:layout_marginTop="0.5dp"
-        android:background="@mipmap/zx_109"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25.7dp"
-            android:layout_marginRight="25.7dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14.6dp"
-                android:src="@mipmap/zx_17" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12.3dp"
-                android:text="陈先生 18842682580"
-                android:textColor="#FF333333"
-                android:textSize="11sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="7.2dp"
-                android:layout_height="12.6dp"
-                android:src="@mipmap/zx_11" />
         </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25.7dp"
-            android:layout_marginRight="25.7dp"
-            android:layout_marginTop="21dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14.6dp"
-                android:src="@mipmap/zx_18" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12.3dp"
-                android:text="请填写联系人"
-                android:textColor="#FF999999"
-                android:textSize="11sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25.7dp"
-            android:layout_marginRight="25.7dp"
-            android:layout_marginTop="18dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14.6dp"
-                android:src="@mipmap/zx_19" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12.3dp"
-                android:text="请填写联系方式"
-                android:textColor="#FF999999"
-                android:textSize="11sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25.7dp"
-            android:layout_marginRight="25.7dp"
-            android:layout_marginTop="21dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14.6dp"
-                android:src="@mipmap/zx_20" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12.3dp"
-                android:text="请填写地址"
-                android:textColor="#FF999999"
-                android:textSize="11sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25.7dp"
-            android:layout_marginRight="25.7dp"
-            android:layout_marginTop="21dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14.6dp"
-                android:src="@mipmap/zx_15" />
-
-
-        </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>
