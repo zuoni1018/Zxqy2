@@ -86,9 +86,7 @@
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.ForgetActivity" />
-        <activity android:name=".ui.activity.CheckPhoneActivity" />
         <activity android:name=".ui.activity.PaymentActivity" />
-        <activity android:name=".ui.activity.CardActivity" />
         <activity android:name=".ui.activity.MyMailboxActivity" />
         <activity android:name=".ui.activity.PostingPositionActivity" />
         <activity android:name=".ui.activity.InvitationInterviewRecordActivity" />

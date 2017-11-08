@@ -80,12 +80,12 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\nim_team_info_divider_item.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\nim_contacts_item.xml",
-        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\nim_contacts_item.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\design_navigation_menu.xml",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\20e74e26f73b3826feab140cffe569db6d7b7a3e\\output\\res\\layout\\design_navigation_menu.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\nim_contacts_item.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\nim_contacts_item.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\nim_contacts_abc_item.xml",
