@@ -1,4 +1,4 @@
-package com.zuoni.zxqy.ui.activity;
+package com.zuoni.zxqy.ui.activity.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +16,8 @@ import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
+import com.zuoni.zxqy.ui.activity.CompanyProfileActivity;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
-import com.zuoni.zxqy.ui.activity.settings.AccountInformationActivity;
-import com.zuoni.zxqy.ui.activity.settings.EssentialInformationActivity;
-import com.zuoni.zxqy.ui.activity.settings.OtherFunctionsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,28 +36,24 @@ public class SettingsActivity extends BaseTitleActivity {
     LinearLayout layout3;
     @BindView(R.id.tvInfo)
     TextView tvInfo;
-
     private Handler mHandler = new Handler();
-
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_settings;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("设置");
-
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         getCompanyInfo();
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_settings;
     }
 
     private void getCompanyInfo() {
@@ -125,23 +119,10 @@ public class SettingsActivity extends BaseTitleActivity {
 
     @OnClick(R.id.ivCompanyProfile)
     public void onViewClicked() {
+        //修改公司介绍
         Intent mIntent = new Intent(getContext(), CompanyProfileActivity.class);
         mIntent.putExtra("isSetPersonalInfo", false);
         mIntent.putExtra("text", tvInfo.getText().toString().trim());
         startActivityForResult(mIntent, 10086);
     }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 10086 && resultCode == 10087) {
-////            公司简介传回来的信息
-//            String text = data.getStringExtra("text");
-//            if (text != null) {
-//                tvInfo.setText(text);
-//                CacheUtils.setInfo(text, getContext());
-//            }
-//        }
-//    }
 }

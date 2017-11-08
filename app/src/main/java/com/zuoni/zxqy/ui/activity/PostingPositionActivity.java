@@ -165,7 +165,6 @@ public class PostingPositionActivity extends BaseTitleActivity {
         }, getContext());
     }
     private void get_position_detail(String jobId) {
-
         showLoading();
         HttpRequest httpRequest = new HttpRequest(get_position_detail);//职位详情
         httpRequest.add("jobId",jobId);
@@ -184,7 +183,6 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     tv03.setText(info.getData().getContactName());
                     tv04.setText(info.getData().getArea());
                     tv05.setText(info.getData().getEdu());
-
 
                     et06.setText(info.getData().getHukou());
                     tv08.setText(info.getData().getYears());
@@ -234,6 +232,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     builder.setOnDataSelectedListener(new OnDoubleDataSelectedListener() {
                         @Override
                         public void onDataSelectedLeft(String itemValue) {
+
                         }
 
                         @Override
@@ -244,7 +243,6 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     });
                     builder.setList(info.getData());
                     builder.create().show();
-
 
                 } else {
 //                    showToast(info.getMessage());
@@ -455,7 +453,6 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                         update_position(title, contactId, area, edu, hukou
                                                                                 , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
                                                                     }
-
                                                                 }
                                                             }
                                                         }

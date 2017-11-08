@@ -22,7 +22,6 @@ import butterknife.OnClick;
 
 public class AccountInformationActivity extends BaseTitleActivity {
 
-
     @BindView(R.id.tv01)
     TextView tv01;
     @BindView(R.id.layout1)
@@ -36,13 +35,8 @@ public class AccountInformationActivity extends BaseTitleActivity {
     @BindView(R.id.layout3)
     LinearLayout layout3;
 
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_settings_account_information;
-    }
-
-
     private CompanyInfo companyInfo;
+    private Intent mIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +47,22 @@ public class AccountInformationActivity extends BaseTitleActivity {
 
         tv01.setText(companyInfo.getCname());
 //        tv02.setText(companyInfo.getPhone());
-        tv03.setText(companyInfo.getEmail());
-
-        AppSetting.phone=companyInfo.getPhone();
+//        tv03.setText(companyInfo.getEmail());
+        AppSetting.phone = companyInfo.getPhone();
+        AppSetting.email = companyInfo.getEmail();
     }
 
-    private Intent mIntent;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv02.setText(AppSetting.phone);
+        tv03.setText(AppSetting.email);
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_settings_account_information;
+    }
 
     @OnClick({R.id.layout1, R.id.layout2, R.id.layout3})
     public void onViewClicked(View view) {
@@ -71,16 +75,13 @@ public class AccountInformationActivity extends BaseTitleActivity {
                 mIntent.putExtra("isFirstStep", true);
                 mIntent.putExtra("phone", companyInfo.getPhone());
                 startActivity(mIntent);
-
                 break;
             case R.id.layout3:
+                //修改email
+                mIntent = new Intent(getContext(), ModifyEmailActivity.class);
+                mIntent.putExtra("email", companyInfo.getEmail());
+                startActivity(mIntent);
                 break;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        tv02.setText(AppSetting.phone);
     }
 }

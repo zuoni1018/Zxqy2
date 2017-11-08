@@ -113,11 +113,6 @@ public class ResumeSearchActivity extends BaseTitleActivity {
     private RvHotSearchAdapter mAdapter;
 
     @Override
-    public int setLayoutId() {
-        return R.layout.activity_resume_search;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
@@ -127,6 +122,8 @@ public class ResumeSearchActivity extends BaseTitleActivity {
         mRecyclerView.setLayoutManager(flowLayoutManager);
         mAdapter=new RvHotSearchAdapter(getContext(),hotList);
         mRecyclerView.setAdapter(mAdapter);
+
+        etSearch.clearFocus();
 
         mAdapter.setItemOnClickListener(new ItemOnClickListener() {
             @Override
@@ -248,6 +245,11 @@ public class ResumeSearchActivity extends BaseTitleActivity {
         get_hot_keyword();
 
 
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_resume_search;
     }
 
     @OnClick({R.id.layoutRight, R.id.layout04, R.id.layout05, R.id.layout06, R.id.layout09, R.id.layout11, R.id.bt13})

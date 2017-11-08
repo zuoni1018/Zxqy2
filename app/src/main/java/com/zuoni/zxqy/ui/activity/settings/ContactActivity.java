@@ -25,7 +25,6 @@ import butterknife.OnClick;
 
 public class ContactActivity extends BaseTitleActivity {
 
-
     @BindView(R.id.et01)
     EditText et01;
     @BindView(R.id.et02)
@@ -39,20 +38,13 @@ public class ContactActivity extends BaseTitleActivity {
     @BindView(R.id.bt06)
     Button bt06;
     private boolean isAdd = false;//是否为添加联系人
-
     private Contact contact;
-
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_settings_contact;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         isAdd = getIntent().getBooleanExtra("isAdd", false);
-
 
         if (isAdd) {
             bt06.setText("增加");
@@ -69,14 +61,11 @@ public class ContactActivity extends BaseTitleActivity {
             et04.setText(contact.getFax());
             et05.setText(contact.getAddress());
         }
+    }
 
-
-//        List<String> mList = new ArrayList<>();
-//        mList.add("");
-//        mList.add("");
-//        LRecyclerViewAdapter mAdapter = new LRecyclerViewAdapter(new RvContactManagerAdapter(getContext(), mList));
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//        mRecyclerView.setAdapter(mAdapter);
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_settings_contact;
     }
 
     @OnClick(R.id.bt06)
@@ -108,13 +97,9 @@ public class ContactActivity extends BaseTitleActivity {
                     } else {
                         updateContact(contact.getContactId(), name, email, tele, fax, address);
                     }
-
-
                 }
             }
         }
-
-
     }
 
 
@@ -136,7 +121,6 @@ public class ContactActivity extends BaseTitleActivity {
                     showToast("添加成功");
                     setResult(10087);
                     myFinish();
-
                 } else {
                     showToast(info.getMessage());
                 }

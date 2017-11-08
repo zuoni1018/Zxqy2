@@ -13,7 +13,7 @@ public class AppSetting {
     public static List<Dictionaries> mList;
 
     public static  String phone="";
-
+    public static  String email="";
     public static String getDictionary(String key) {
 
         if (mList == null) {

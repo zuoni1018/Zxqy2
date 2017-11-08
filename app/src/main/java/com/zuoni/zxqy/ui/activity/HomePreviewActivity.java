@@ -62,31 +62,15 @@ public class HomePreviewActivity extends BaseTitleActivity {
     NestedScrollView nestedScrollView;
 
     private Handler mHandler = new Handler();
-
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_home_preview;
-    }
-
-
-   private List<EnterpriseInformation.JobsBean> jobs;
+    private List<EnterpriseInformation.JobsBean> jobs;
     private LRecyclerViewAdapter mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
         previewCompanyInfo();
-
-
         setTitle("首页预览");
-        jobs=new ArrayList<>();
-        List<String> mList = new ArrayList<>();
-        mList.add("");
-        mList.add("");
-        mList.add("");
-        mList.add("");
+        jobs = new ArrayList<>();
         mRecyclerView.setPullRefreshEnabled(false);
         mAdapter = new LRecyclerViewAdapter(new RvHomePreviewAdapter(getContext(), jobs));
         //禁止滑动
@@ -100,10 +84,14 @@ public class HomePreviewActivity extends BaseTitleActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_home_preview;
+    }
+
     private void previewCompanyInfo() {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.PREVIEW_COMPANY_INFO);//企业信息
-
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -130,7 +118,7 @@ public class HomePreviewActivity extends BaseTitleActivity {
                     tvinfo.setText(enterpriseInformation.getInfo());
 
                     jobs.clear();
-                    if(enterpriseInformation.getJobs()!=null){
+                    if (enterpriseInformation.getJobs() != null) {
                         jobs.addAll(enterpriseInformation.getJobs());
                     }
                     mAdapter.notifyDataSetChanged();

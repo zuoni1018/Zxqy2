@@ -36,7 +36,6 @@
             android:src="@mipmap/zx_71" />
 
         <EditText
-            android:imeOptions="actionSearch"
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,6 +44,7 @@
             android:layout_marginRight="18dp"
             android:background="@null"
             android:hint="请输入关键字..."
+            android:imeOptions="actionSearch"
             android:textColor="#999999"
             android:textSize="12sp" />
 

@@ -23,7 +23,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
-
     @BindView(R.id.viewPager)
     MyViewPager viewPager;
     @BindView(R.id.iv01)
@@ -35,14 +34,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv02)
     TextView tv02;
 
-
     private List<Fragment> mList;
     private FragmentPagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        StatusBarUtil.setTranslucent(this,0);
         ButterKnife.bind(this);
         mList = new ArrayList<>();
         mList.add(new HomeFragment());
@@ -66,13 +63,6 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
 
-    }
-
-
-    private void setTopView() {
-//        ViewGroup.LayoutParams layoutParams =  topView.getLayoutParams();
-//        layoutParams.height= ScreenUtils.getStatusHeight(getContext());
-//        topView.setLayoutParams(layoutParams);
     }
 
     @Override

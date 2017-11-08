@@ -41,27 +41,25 @@ public class ContactManagerActivity extends BaseTitleActivity {
     private boolean isChoose = false;
 
     @Override
-    public int setLayoutId() {
-        return R.layout.activity_settings_contact_manager;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("联系人管理");
         ButterKnife.bind(this);
+
+        //是否为选取联系人
         isChoose = getIntent().getBooleanExtra("isChoose", false);
-
-
         mList = new ArrayList<>();
 
         RvContactManagerAdapter mRvContactManagerAdapter = new RvContactManagerAdapter(getContext(), mList);
+
+        //删除联系人
         mRvContactManagerAdapter.setLayout01OnClickListener(new ContactManagerListener() {
             @Override
             public void onClickListener(Contact contact, int pos) {
                 deleteContact(contact.getContactId());
             }
         });
+        //修改联系人
         mRvContactManagerAdapter.setLayout02OnClickListener(new ContactManagerListener() {
             @Override
             public void onClickListener(Contact contact, int pos) {
@@ -72,6 +70,7 @@ public class ContactManagerActivity extends BaseTitleActivity {
             }
         });
 
+        //选择联系人
         if (isChoose) {
             mRvContactManagerAdapter.setLayoutMainOnClickListener(new ContactManagerListener() {
                 @Override
@@ -91,7 +90,6 @@ public class ContactManagerActivity extends BaseTitleActivity {
             });
         }
 
-
         mAdapter = new LRecyclerViewAdapter(mRvContactManagerAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mAdapter);
@@ -102,13 +100,17 @@ public class ContactManagerActivity extends BaseTitleActivity {
                 getContact();
             }
         });
-
         mRecyclerView.refresh();
+    }
 
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_settings_contact_manager;
     }
 
     @OnClick(R.id.layoutRight)
     public void onViewClicked() {
+        //添加联系人列表
         Intent mIntent = new Intent(getContext(), ContactActivity.class);
         mIntent.putExtra("isAdd", true);
         startActivityForResult(mIntent, 10086);
@@ -121,14 +123,12 @@ public class ContactManagerActivity extends BaseTitleActivity {
             //做了添加或者修改的操作需要更新列表
             getContact();
         }
-
-
     }
 
+    //获取联系人列表
     private void getContact() {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_CONTACT);//联系人列表
-
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -154,8 +154,6 @@ public class ContactManagerActivity extends BaseTitleActivity {
                 LogUtil.i("联系人列表" + exception);
             }
         }, getContext());
-
-
     }
 
     private void deleteContact(String contactId) {
@@ -171,7 +169,6 @@ public class ContactManagerActivity extends BaseTitleActivity {
                 if (info.getStatus().equals("true")) {
                     showToast("删除成功");
                     getContact();
-
                 } else {
                     showToast("删除失败");
                     getContact();

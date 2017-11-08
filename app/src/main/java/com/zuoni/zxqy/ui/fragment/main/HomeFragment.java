@@ -27,7 +27,7 @@ import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
 import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
 import com.zuoni.zxqy.ui.activity.resumesearch.ResumeSearchActivity;
-import com.zuoni.zxqy.ui.activity.SettingsActivity;
+import com.zuoni.zxqy.ui.activity.settings.SettingsActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
 
 import butterknife.BindView;
@@ -98,6 +98,18 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getUiInfo();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     private void getUiInfo() {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_UI_INFO);//获取主页
@@ -138,18 +150,6 @@ public class HomeFragment extends Fragment {
         }, getContext());
 
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getUiInfo();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5, R.id.menu_6})

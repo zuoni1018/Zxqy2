@@ -95,7 +95,7 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     private boolean isChangeHead = false;
     private File headFile;
     private String imagePath = "";
-    private Handler mHandler=new Handler();
+    private Handler mHandler = new Handler();
 
 
     private CompanyInfo companyInfo;
@@ -107,8 +107,10 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         getTakePhoto().onCreate(savedInstanceState);
         setTitle("基本信息");
 
+        //从缓存中获得基本信息
         companyInfo = CacheUtils.getCompanyInfo(getContext());
 
+        //头像
         RequestOptions requestOptions = new RequestOptions()
                 .centerCrop()
                 .placeholder(R.mipmap.zx_113)
@@ -137,13 +139,15 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
 
         tv08.setText(companyInfo.getType());
 
+
+        //修改公司地址
         et05.setFocusable(false);
 
         et05.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(),CompanyAddressActivity.class);
-                startActivityForResult(intent,10086);
+                Intent intent = new Intent(getContext(), CompanyAddressActivity.class);
+                startActivityForResult(intent, 10086);
             }
         });
 
@@ -165,16 +169,11 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         getTakePhoto().onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10086 && resultCode == 10087) {
-//            公司简介传回来的信息
             String text = data.getStringExtra("message");
             if (text != null) {
                 et05.setText(text);
             }
         }
-
-
-
-
     }
 
     @Override
@@ -255,17 +254,17 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                                     showToast("请选择公司性质");
                                 } else {
                                     showLoading();
-                                    int time=0;
+                                    int time = 0;
                                     if (isChangeHead && headFile != null) {
                                         uploadCompanyLogo();
-                                        time=2000;
+                                        time = 2000;
                                     }
                                     mHandler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            updateCompanyInfo(contactName,fax,tele,address,cateId,type,web,lawer);
+                                            updateCompanyInfo(contactName, fax, tele, address, cateId, type, web, lawer);
                                         }
-                                    },time);
+                                    }, time);
 
                                 }
                             }
@@ -313,10 +312,6 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 LogUtil.i("修改基本信息" + exception);
             }
         }, getContext());
-
-
-
-
 
 
     }
@@ -397,7 +392,6 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     @Override
     public void takeFail(TResult result, String msg) {
         showToast("图片选择失败,请重新选择");
-
     }
 
     @Override
@@ -494,8 +488,6 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         showLoading();
         industrys = new ArrayList<>();
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_COMPANY_CATE);//行业
-        httpRequest.add("passwd", "");
-
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -538,8 +530,5 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 LogUtil.i("行业" + exception);
             }
         }, getContext());
-
     }
-
-
 }

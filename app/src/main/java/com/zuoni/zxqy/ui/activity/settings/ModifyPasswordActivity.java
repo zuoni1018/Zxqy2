@@ -37,27 +37,24 @@ public class ModifyPasswordActivity extends BaseTitleActivity {
     Button bt05;
 
     @Override
-    public int setLayoutId() {
-        return R.layout.activity_settings_modify_password;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("修改密码");
         String userId = CacheUtils.getUserid(getContext());
-        LogUtil.i("获得UserId" + userId);
         tv01.setText(userId);
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_settings_modify_password;
     }
 
     @OnClick(R.id.bt05)
     public void onViewClicked() {
-
         String passwd = et02.getText().toString().trim();
         String passwd_new1 = et03.getText().toString().trim();
         String passwd_new2 = et04.getText().toString().trim();
-
         if (passwd.equals("")) {
             showToast("请输入旧密码");
         } else {
@@ -72,12 +69,9 @@ public class ModifyPasswordActivity extends BaseTitleActivity {
                     } else {
                         showToast("新密码与确认密码不一致");
                     }
-
                 }
             }
         }
-
-
     }
 
     private void alterPasswd(String passwd, String passwd_new1) {
@@ -105,7 +99,5 @@ public class ModifyPasswordActivity extends BaseTitleActivity {
                 LogUtil.i("修改密码" + exception);
             }
         }, getContext());
-
-
     }
 }

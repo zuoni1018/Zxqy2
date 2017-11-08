@@ -67,10 +67,6 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
     private String url="/Resume/search_resume/p/1/size/10";
     private LRecyclerViewAdapter mAdapter;
 private    List<SearchResume.DataBean> mList;
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_resume_search_result;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +116,11 @@ private    List<SearchResume.DataBean> mList;
 
         mRecyclerView.refresh();
 //        search_resume(searchType,key,hopepostion,workerId,jiguan,img,lastTime,sex,speciality,jobhistory,education,minAge,maxAge,hopelocation,name);
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_resume_search_result;
     }
 
     private boolean isChooseAll=false;

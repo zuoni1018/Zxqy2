@@ -93,7 +93,7 @@
         <activity android:name=".ui.activity.PostingPositionActivity" />
         <activity android:name=".ui.activity.InvitationInterviewRecordActivity" />
         <activity android:name=".ui.activity.PositionManagementActivity" />
-        <activity android:name=".ui.activity.SettingsActivity" />
+        <activity android:name=".ui.activity.settings.SettingsActivity" />
         <activity android:name=".ui.activity.settings.OtherFunctionsActivity" />
         <activity android:name=".ui.activity.settings.ModifyDataActivity" />
         <activity android:name=".ui.activity.settings.ModifyPasswordActivity" />
@@ -126,6 +126,7 @@
             android:exported="true" />
         <activity android:name=".ui.activity.resumesearch.ResumeSearchResultActivity" />
         <activity android:name=".ui.activity.ResumeDetailsActivity" />
+        <activity android:name=".ui.activity.settings.ModifyEmailActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
