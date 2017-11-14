@@ -5,7 +5,6 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
 
 
     <EditText

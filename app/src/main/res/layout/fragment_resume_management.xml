@@ -16,6 +16,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/bottom01"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -26,22 +27,23 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/bottom02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="#999999"
+            android:background="#666666"
             android:gravity="center"
             android:text="删除选中"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tvInvitationInterview"
+            android:id="@+id/bottom03"
             android:layout_width="137.5dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="#FFCB4F5E"
+            android:background="#D0021B"
             android:gravity="center"
             android:text="批量邀请面试"
             android:textColor="#FFFFFFFF"

@@ -69,7 +69,8 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("邀请面试");
-       peoples = new ArrayList<>();
+        setResult(101);//不成功
+         peoples = new ArrayList<>();
         Jobs = new ArrayList<>();
         peoples = (ArrayList<InvitationPeople>) getIntent().getSerializableExtra("peoples");
 
@@ -77,17 +78,24 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
         mRecyclerView.setAdapter(new RvInvitationInterviewAdapter(getContext(), peoples));
     }
 
-    private void interview_invite(String workerId, String id, String name, String tele, String address, String jobId) {
+    private void interview_invite( String workerId, String jobId, String name, String tele, String address, String info,String sendresumeId) {
 
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.interview_invite);//邀请面试
         httpRequest.add("workerId", workerId);
-        httpRequest.add("id", id);
+        httpRequest.add("info", info);
         httpRequest.add("name", name);
 
         httpRequest.add("tele", tele);
         httpRequest.add("address", address);
         httpRequest.add("jobId", jobId);
+
+
+        if(!sendresumeId.equals("")){
+            httpRequest.add("sendresumeId", sendresumeId);
+        }
+
+
 
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
@@ -99,6 +107,7 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
 
                 if (info.getStatus().equals("true")) {
                     showToast("发布成功");
+                    setResult(100);
                     myFinish();
                 } else {
                     showToast(info.getMessage());
@@ -141,12 +150,21 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
 //                info	字符串	M		邀请内容
 
                 String workerId="";
+                String sendresumeId="";
+
                 for (int i = 0; i <peoples.size() ; i++) {
                     workerId=workerId+peoples.get(i).getWorkId()+",";
+                    sendresumeId=sendresumeId+peoples.get(i).getSendresumeId()+",";
                 }
                 if(!workerId.equals("")){
                     workerId=workerId.substring(0,workerId.length()-1);
+                    sendresumeId=sendresumeId.substring(0,sendresumeId.length()-1);
                 }
+
+                if(peoples.get(0).getSendresumeId().equals("")){
+                    sendresumeId="";
+                }
+
 
                 String jobId=tv01.getText().toString();
                 if(jobId.equals("选择面试职位")){
@@ -178,7 +196,7 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
                             if(info.equals("")){
                                 showToast("请填写邀请内容");
                             }else {
-                                interview_invite(workerId,jobId,name,tele,address,info);
+                                interview_invite(workerId,jobId,name,tele,address,info,sendresumeId);
                             }
                         }
                     }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.zuoni.common.widget.MyViewPager;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.FragmentPagerAdapter;
@@ -70,7 +69,7 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    private IWXAPI api;
+//    private IWXAPI api;
 
 //    @OnClick(R.id.btTest)
 //    public void onViewClicked() {
@@ -120,6 +119,29 @@ public class MainActivity extends BaseActivity {
                 jumpToActivity(PostingPositionActivity.class);
                 break;
             case R.id.layoutMenu3:
+//                LoginInfo info = new LoginInfo("123456", "123456"); // config...
+//                RequestCallback<LoginInfo> callback =
+//                        new RequestCallback<LoginInfo>() {
+//                            @Override
+//                            public void onSuccess(LoginInfo param) {
+//                                LogUtil.i("onSuccess");
+//                                showToast("登陆成功");
+//                                jumpToActivity(MainActivity.class);
+//                            }
+//
+//                            @Override
+//                            public void onFailed(int code) {
+//                                LogUtil.i("onFailed");
+//                                showToast("登陆失败");
+//                            }
+//
+//                            @Override
+//                            public void onException(Throwable exception) {
+//
+//                            }
+//                        };
+//
+//                NIMClient.getService(AuthService.class).login(info).setCallback(callback);
                 jumpToActivity(ResumeManagementActivity.class);
                 break;
             case R.id.layoutMenu4:

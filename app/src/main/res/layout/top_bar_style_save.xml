@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:text="保存"
         android:textColor="#FFFFFFFF"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 
 </RelativeLayout>

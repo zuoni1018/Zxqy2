@@ -10,6 +10,9 @@ import java.util.List;
  */
 
 public class AppSetting {
+
+
+    //字典
     public static List<Dictionaries> mList;
 
     public static  String phone="";

@@ -42,6 +42,7 @@ import static com.zuoni.zxqy.AppUrl.update_order;
  */
 
 public class PositionManagementActivity extends BaseTitleActivity {
+
     @BindView(R.id.mRecyclerView)
     LRecyclerView mRecyclerView;
     @BindView(R.id.bt01)
@@ -54,15 +55,9 @@ public class PositionManagementActivity extends BaseTitleActivity {
     RelativeLayout layoutRight02;
 
     private LRecyclerViewAdapter mAdapter;
+
     private List<Job> mList;
-
-
     private List<Job> upDateList;
-
-    @Override
-    public int setLayoutId() {
-        return R.layout.activity_position_management;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +77,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
 
             @Override
             public void onClick02(Job job, int position) {
+                //本地改状态
                 String state = mList.get(position).getStatus();
                 if (state.equals("1")) {
                     mList.get(position).setStatus("0");
@@ -89,11 +85,13 @@ public class PositionManagementActivity extends BaseTitleActivity {
                     mList.get(position).setStatus("1");
                 }
                 mAdapter.notifyDataSetChanged();
+
                 alter_position_status(job.getJobId());
             }
 
             @Override
             public void onClick03(Job job, int position) {
+                //编辑职位
                 Intent mIntent = new Intent(getContext(), PostingPositionActivity.class);
                 mIntent.putExtra("isAdd", false);
                 mIntent.putExtra("jobId", job.getJobId());
@@ -102,6 +100,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
 
             @Override
             public void onClick04(Job job, int position) {
+                //删除职位
                 deletePosition(job.getJobId());
             }
         });
@@ -118,6 +117,11 @@ public class PositionManagementActivity extends BaseTitleActivity {
         });
         getPosition();
 
+    }
+
+    @Override
+    public int setLayoutId() {
+        return R.layout.activity_position_management;
     }
 
     //公司性质
@@ -149,8 +153,10 @@ public class PositionManagementActivity extends BaseTitleActivity {
         builder.create().show();
     }
 
+    /**
+     * 删除职位
+     */
     private void deletePosition(String jobId) {
-
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.DELETE_POSITION);//删除职位
         httpRequest.add("jobId", jobId);
@@ -159,16 +165,13 @@ public class PositionManagementActivity extends BaseTitleActivity {
             public void onSucceed(String response, Gson gson) {
                 closeLoading();
                 LogUtil.i("删除职位" + response);
-
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
-
                 if (info.getStatus().equals("true")) {
                     getPosition();
                     showToast("删除成功");
                 } else {
                     showToast(info.getMessage());
                 }
-
             }
 
             @Override
@@ -179,6 +182,10 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
+
+    /**
+     * 修改职位状态
+     */
     private void alter_position_status(String jobId) {
 
         HttpRequest httpRequest = new HttpRequest(alter_position_status);//修改职位状态
@@ -196,6 +203,9 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
+    /**
+     * 获取职位列表
+     */
     private void getPosition() {
 
         showLoading();
@@ -227,8 +237,11 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
-    private void update_order(String jobId, String ordid) {
 
+    /**
+     * 更改职位顺序
+     */
+    private void update_order(String jobId, String ordid) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(update_order);//职位显示顺序修改
         httpRequest.add("jobId", jobId);
@@ -244,9 +257,8 @@ public class PositionManagementActivity extends BaseTitleActivity {
                     upDateList.clear();
                     getPosition();
                 } else {
-//                    showToast(info.getMessage());
+                    showToast(info.getMessage());
                 }
-
             }
 
             @Override
@@ -258,8 +270,11 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
+    /**
+     * 刷新职位
+     * 将职位信息改为当前
+     */
     private void refresh_position() {
-
         showLoading();
         HttpRequest httpRequest = new HttpRequest(refresh_position);//刷新职位
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
@@ -274,7 +289,6 @@ public class PositionManagementActivity extends BaseTitleActivity {
                 } else {
                     showToast(info.getMessage());
                 }
-
             }
 
             @Override
@@ -316,6 +330,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //修改或者发布职位成功回来要刷新列表
         if (requestCode == 10086 && resultCode == 10087) {
             getPosition();
         }
@@ -331,15 +346,12 @@ public class PositionManagementActivity extends BaseTitleActivity {
                 }
                 String jobId = "";
                 String ordid = "";
-
                 for (int i = 0; i < upDateList.size(); i++) {
                     jobId = jobId + upDateList.get(i).getJobId() + ",";
                     ordid = ordid + upDateList.get(i).getOrdid() + ",";
                 }
-
                 jobId = jobId.substring(0, jobId.length() - 1);
                 ordid = ordid.substring(0, ordid.length() - 1);
-
                 update_order(jobId, ordid);
                 break;
             case R.id.layoutRight02:

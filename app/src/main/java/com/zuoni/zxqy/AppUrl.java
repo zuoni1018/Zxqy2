@@ -72,7 +72,24 @@ public class AppUrl {
     public static final String resume_detail=BASE_URL+"/Resume/resume_detail";
 
     public static final String interview_invite=BASE_URL+"/Resume/interview_invite";
+
     public static final String get_hot_keyword=BASE_URL+"/QuickGet/get_hot_keyword";
 
+    public static final String get_sendresume=BASE_URL+"/Resume/get_sendresume";
+
+    public static final String delete_sendresume=BASE_URL+"/Resume/delete_sendresume";
+
+    public static final String view_contact=BASE_URL+"/Resume/view_contact";
+
+
+    public static final String add_company_fav=BASE_URL+"/Resume/add_company_fav";
+
+    public static final String delete_favs=BASE_URL+"/Resume/delete_favs";
+
+    public static final String assign_fav_job=BASE_URL+"/Resume/assign_fav_job";
+
+    public static final String delete_invite=BASE_URL+"/Resume/delete_invite";
+
+    public static final String send_mess_admin=BASE_URL+"/User/send_mess_admin";
 
 }

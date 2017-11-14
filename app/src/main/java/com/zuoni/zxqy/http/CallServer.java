@@ -10,10 +10,13 @@ import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.RequestQueue;
 import com.yanzhenjie.nohttp.rest.Response;
 import com.yanzhenjie.nohttp.rest.SimpleResponseListener;
+import com.yanzhenjie.nohttp.tools.MultiValueMap;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.GlobalVariable;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.cache.CacheUtils;
+
+import java.util.Set;
 
 /**
  * Created by zangyi_shuai_ge on 2017/9/27
@@ -36,7 +39,7 @@ public class CallServer {
     private RequestQueue queue;
 
     private CallServer() {
-        queue = NoHttp.newRequestQueue(5);
+        queue = NoHttp.newRequestQueue(8);
     }
 
     public void request(final HttpRequest request, final HttpResponseListener httpResponseListener, final Context context) {
@@ -44,6 +47,17 @@ public class CallServer {
         request.add("token", CacheUtils.getToken(context));
         request.add("userid", CacheUtils.getUserid(context));
         request.add("siteId", CacheUtils.getSiteId(context));
+
+
+        //打印参数
+        LogUtil.i("访问参数","========================================");
+        LogUtil.i("访问参数","url=   "+request.url());
+        MultiValueMap<String, Object> map= request.getParamKeyValues();
+        Set<String> set=  map.keySet();
+        for (String str : set) {
+            LogUtil.i("访问参数",str+"  == "+map.getValue(str));
+        }
+        LogUtil.i("访问参数","========================================");
 
         SimpleResponseListener<String> listener = new SimpleResponseListener<String>() {
             @Override
@@ -64,8 +78,6 @@ public class CallServer {
                     LogUtil.i("手动报错"+e);
                     httpResponseListener.onFailed(e);
                 }
-
-
             }
 
             @Override

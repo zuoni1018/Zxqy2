@@ -139,13 +139,22 @@ public class ResumeDetail extends BaseHttpResponse {
         private String update_time;
         private String is_locks;
         private String is_hide;
-        private int age;
+        private String age;
+        private boolean permit;
 
-        public int getAge() {
+        public boolean isPermit() {
+            return permit;
+        }
+
+        public void setPermit(boolean permit) {
+            this.permit = permit;
+        }
+
+        public String getAge() {
             return age;
         }
 
-        public void setAge(int age) {
+        public void setAge(String age) {
             this.age = age;
         }
 

@@ -43,30 +43,30 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
     TextView tv02;
 
 
-    String searchType="normal";
-    String key="";
-    String hopepostion="不限";
-    String workerId="不限";
-    String jiguan="不限";
+    String searchType = "normal";
+    String key = "";
+    String hopepostion = "不限";
+    String workerId = "不限";
+    String jiguan = "不限";
 
-    String img="不限";
-    String lastTime="不限";
-    String sex="不限";
-    String speciality="不限";
-    String jobhistory="不限";
+    String img = "不限";
+    String lastTime = "不限";
+    String sex = "不限";
+    String speciality = "不限";
+    String jobhistory = "不限";
 
-    String education="不限";
-    String minAge="不限";
-    String maxAge="不限";
-    String hopelocation="不限";
-    String name="不限";
+    String education = "不限";
+    String minAge = "不限";
+    String maxAge = "不限";
+    String hopelocation = "不限";
+    String name = "不限";
 
     private int nowPage;
     private int allPage;
-    private boolean isFirst=true;
-    private String url="/Resume/search_resume/p/1/size/10";
+    private boolean isFirst = true;
+    private String url = "/Resume/search_resume/p/1/size/10";
     private LRecyclerViewAdapter mAdapter;
-private    List<SearchResume.DataBean> mList;
+    private List<SearchResume.DataBean> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,39 +74,39 @@ private    List<SearchResume.DataBean> mList;
         ButterKnife.bind(this);
         setTitle("简历搜索");
 
-        searchType=getIntent().getStringExtra("searchType");
-        key=getIntent().getStringExtra("key");
-        hopepostion=getIntent().getStringExtra("hopepostion");
-        workerId=getIntent().getStringExtra("workerId");
-        jiguan=getIntent().getStringExtra("jiguan");
+        searchType = getIntent().getStringExtra("searchType");
+        key = getIntent().getStringExtra("key");
+        hopepostion = getIntent().getStringExtra("hopepostion");
+        workerId = getIntent().getStringExtra("workerId");
+        jiguan = getIntent().getStringExtra("jiguan");
 
-        img=getIntent().getStringExtra("img");
-        lastTime=getIntent().getStringExtra("lastTime");
-        sex=getIntent().getStringExtra("sex");
-        speciality=getIntent().getStringExtra("speciality");
-        jobhistory=getIntent().getStringExtra("jobhistory");
+        img = getIntent().getStringExtra("img");
+        lastTime = getIntent().getStringExtra("lastTime");
+        sex = getIntent().getStringExtra("sex");
+        speciality = getIntent().getStringExtra("speciality");
+        jobhistory = getIntent().getStringExtra("jobhistory");
 
-        education=getIntent().getStringExtra("education");
-        minAge=getIntent().getStringExtra("minAge");
-        maxAge=getIntent().getStringExtra("maxAge");
-        hopelocation=getIntent().getStringExtra("hopelocation");
-        name=getIntent().getStringExtra("name");
+        education = getIntent().getStringExtra("education");
+        minAge = getIntent().getStringExtra("minAge");
+        maxAge = getIntent().getStringExtra("maxAge");
+        hopelocation = getIntent().getStringExtra("hopelocation");
+        name = getIntent().getStringExtra("name");
         mList = new ArrayList<>();
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-                isFirst=true;
+                isFirst = true;
                 mList.clear();
                 mAdapter.notifyDataSetChanged();
-                search_resume(searchType,key,hopepostion,workerId,jiguan,img,lastTime,sex,speciality,jobhistory,education,minAge,maxAge,hopelocation,name);
+                search_resume(searchType, key, hopepostion, workerId, jiguan, img, lastTime, sex, speciality, jobhistory, education, minAge, maxAge, hopelocation, name);
 
             }
         });
         mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                isFirst=false;
-                search_resume(searchType,key,hopepostion,workerId,jiguan,img,lastTime,sex,speciality,jobhistory,education,minAge,maxAge,hopelocation,name);
+                isFirst = false;
+                search_resume(searchType, key, hopepostion, workerId, jiguan, img, lastTime, sex, speciality, jobhistory, education, minAge, maxAge, hopelocation, name);
             }
         });
         mAdapter = new LRecyclerViewAdapter(new RvResumeSearchAdapter(getContext(), mList));
@@ -123,43 +123,41 @@ private    List<SearchResume.DataBean> mList;
         return R.layout.activity_resume_search_result;
     }
 
-    private boolean isChooseAll=false;
-
-
+    private boolean isChooseAll = false;
 
 
     @OnClick({R.id.tv01, R.id.tv02})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv01:
-                isChooseAll=!isChooseAll;
-                for (int i = 0; i <mList.size() ; i++) {
+                isChooseAll = !isChooseAll;
+                for (int i = 0; i < mList.size(); i++) {
                     mList.get(i).setChoose(isChooseAll);
                 }
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.tv02:
-                ArrayList<InvitationPeople> peoples=new ArrayList<>();
-                String workId="";
+                ArrayList<InvitationPeople> peoples = new ArrayList<>();
+                String workId = "";
 
-                for (int i = 0; i <mList.size() ; i++) {
-                    if(mList.get(i).isChoose()){
-                        InvitationPeople invitationPeople=new InvitationPeople();
+                for (int i = 0; i < mList.size(); i++) {
+                    if (mList.get(i).isChoose()) {
+                        InvitationPeople invitationPeople = new InvitationPeople();
                         invitationPeople.setHeadUrl(mList.get(i).getImg());
                         invitationPeople.setName(mList.get(i).getName());
                         invitationPeople.setWorkName(mList.get(i).getHopepostion());
                         invitationPeople.setWorkId(mList.get(i).getWorkerId());
                         peoples.add(invitationPeople);
-                        workId=workId+mList.get(i).getWorkerId()+",";
+                        workId = workId + mList.get(i).getWorkerId() + ",";
                     }
                 }
 
-                if(peoples.size()==0){
+                if (peoples.size() == 0) {
                     showToast("请先选择投递者");
-                }else {
-                    Intent mIntent=new Intent(getContext(), InvitationInterviewActivity.class);
-                    mIntent.putExtra("peoples",peoples);
-                    mIntent.putExtra("workId",workId);
+                } else {
+                    Intent mIntent = new Intent(getContext(), InvitationInterviewActivity.class);
+                    mIntent.putExtra("peoples", peoples);
+                    mIntent.putExtra("workId", workId);
                     startActivity(mIntent);
                 }
 
@@ -174,31 +172,33 @@ private    List<SearchResume.DataBean> mList;
                                String education, String minAge, String maxAge, String hopelocation, String name) {
 
         showLoading();
-        String url="/Resume/search_resume/p/1/size/10";
+        String url = "/Resume/search_resume/p/1/size/10";
 
-        if(!isFirst){
+        if (!isFirst) {
             nowPage++;
-            url="/Resume/search_resume/p/"+nowPage+"/size/10";
+            url = "/Resume/search_resume/p/" + nowPage + "/size/10";
         }
 
-        HttpRequest httpRequest = new HttpRequest(AppUrl.BASE_URL+url);//搜索
-        httpRequest.add("searchType",searchType);
-        httpRequest.add("key",key);
-        httpRequest.add("hopepostion",hopepostion);
-        httpRequest.add("workerId",workerId);
-        httpRequest.add("jiguan",jiguan);
+        LogUtil.i("搜索连接"+url);
 
-        httpRequest.add("img",img);
-        httpRequest.add("lastTime",lastTime);
-        httpRequest.add("sex",sex);
-        httpRequest.add("speciality",speciality);
-        httpRequest.add("jobhistory",jobhistory);
+        HttpRequest httpRequest = new HttpRequest(AppUrl.BASE_URL + url);//搜索
+        httpRequest.add("searchType", searchType);
+        httpRequest.add("key", key);
+        httpRequest.add("hopepostion", hopepostion);
+        httpRequest.add("workerId", workerId);
+        httpRequest.add("jiguan", jiguan);
 
-        httpRequest.add("education",education);
-        httpRequest.add("minAge",minAge);
-        httpRequest.add("maxAge",maxAge);
-        httpRequest.add("hopelocation",hopelocation);
-        httpRequest.add("name",name);
+        httpRequest.add("img", img);
+        httpRequest.add("lastTime", lastTime);
+        httpRequest.add("sex", sex);
+        httpRequest.add("speciality", speciality);
+        httpRequest.add("jobhistory", jobhistory);
+
+        httpRequest.add("education", education);
+        httpRequest.add("minAge", minAge);
+        httpRequest.add("maxAge", maxAge);
+        httpRequest.add("hopelocation", hopelocation);
+        httpRequest.add("name", name);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -206,21 +206,26 @@ private    List<SearchResume.DataBean> mList;
                 mRecyclerView.refreshComplete(1);
                 LogUtil.i("搜索" + response);
                 SearchResume info = gson.fromJson(response, SearchResume.class);
-                if(info.getStatus().equals("true")){
-                    nowPage=Integer.parseInt(info.getP());
+                if (info.getStatus().equals("true")) {
+                    nowPage = Integer.parseInt(info.getP());
                     mList.addAll(info.getData());
-                }else {
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    if (!isFirst) {
+                        nowPage--;
+                    }
                     showToast(info.getMessage());
                 }
-
             }
 
             @Override
             public void onFailed(Exception exception) {
+                if (!isFirst) {
+                    nowPage--;
+                }
                 mRecyclerView.refreshComplete(1);
                 closeLoading();
                 showToast("服务器异常");
-                myFinish();
             }
         }, getContext());
     }

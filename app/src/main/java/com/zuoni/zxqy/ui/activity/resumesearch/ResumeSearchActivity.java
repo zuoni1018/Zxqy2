@@ -16,13 +16,14 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
+import com.zuoni.common.utils.KeyBoardUtils;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppSetting;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvHotSearchAdapter;
+import com.zuoni.zxqy.bean.gson.GetHotKeyword;
 import com.zuoni.zxqy.bean.gson.GetSetting;
-import com.zuoni.zxqy.bean.gson.getHotKeyword;
 import com.zuoni.zxqy.callback.ItemOnClickListener;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
@@ -109,7 +110,7 @@ public class ResumeSearchActivity extends BaseTitleActivity {
     private int nowPageNum;
 
 
-    private List<String > hotList;
+    private List<String> hotList;
     private RvHotSearchAdapter mAdapter;
 
     @Override
@@ -118,12 +119,11 @@ public class ResumeSearchActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         getUserCompany();
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager(getContext());
-        hotList=new ArrayList<>();
+        hotList = new ArrayList<>();
         mRecyclerView.setLayoutManager(flowLayoutManager);
-        mAdapter=new RvHotSearchAdapter(getContext(),hotList);
+        mAdapter = new RvHotSearchAdapter(getContext(), hotList);
         mRecyclerView.setAdapter(mAdapter);
 
-        etSearch.clearFocus();
 
         mAdapter.setItemOnClickListener(new ItemOnClickListener() {
             @Override
@@ -176,6 +176,7 @@ public class ResumeSearchActivity extends BaseTitleActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    KeyBoardUtils.closeKeyboard(etSearch,getContext());
 
 //                    searchType	字符串	M		normal 关键词检索（只需要传key） advanced各类条件检索（全部都要传，未选传不限）
 //                    key	字符串	M		关键词 没填则传””空值
@@ -241,10 +242,19 @@ public class ResumeSearchActivity extends BaseTitleActivity {
             }
 
         });
-
         get_hot_keyword();
+        KeyBoardUtils.closeKeyboard(etSearch, getContext());
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 
+    @Override
+    protected void onDestroy() {
+        KeyBoardUtils.closeKeyboard(etSearch, getContext());
+        super.onDestroy();
     }
 
     @Override
@@ -364,25 +374,24 @@ public class ResumeSearchActivity extends BaseTitleActivity {
 
 
     private String initString(String str) {
-
         if (str.equals("") | str.equals("请选择")) {
             return "不限";
         }
         return str;
     }
-    private void get_hot_keyword() {
 
+    /**
+     * 获取热搜
+     */
+    private void get_hot_keyword() {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.get_hot_keyword);//热门
-
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
                 closeLoading();
                 LogUtil.i("热门" + response);
-
-                getHotKeyword info = gson.fromJson(response, getHotKeyword.class);
-
+                GetHotKeyword info = gson.fromJson(response, GetHotKeyword.class);
                 if (info.getStatus().equals("true")) {
                     hotList.clear();
                     hotList.addAll(info.getData());
@@ -390,7 +399,6 @@ public class ResumeSearchActivity extends BaseTitleActivity {
                 } else {
                     showToast(info.getMessage());
                 }
-
             }
 
             @Override
@@ -400,6 +408,7 @@ public class ResumeSearchActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
     private void getUserCompany() {
 
         showLoading();
@@ -435,13 +444,11 @@ public class ResumeSearchActivity extends BaseTitleActivity {
         if (data == null) {
             return;
         }
-
         String[] aa = data.split(",");
         if (aa.length == 0) {
             showToast("获取失败");
             return;
         }
-
         DataPickerSingleDialog.Builder builder = new DataPickerSingleDialog.Builder(getContext());
         List<String> list = new ArrayList<>();
         list.add("不限");
@@ -457,4 +464,5 @@ public class ResumeSearchActivity extends BaseTitleActivity {
         builder.setData(list);
         builder.create().show();
     }
+
 }

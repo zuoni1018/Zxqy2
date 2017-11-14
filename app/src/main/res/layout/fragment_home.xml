@@ -72,7 +72,6 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:text="杭州晖鸿科技有限公司"
                     android:textColor="#FFFFFFFF"
                     android:textSize="18sp" />
 
@@ -85,7 +84,6 @@
                         android:id="@+id/cname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dayday"
                         android:textColor="#FFFFFFFF"
                         android:textSize="14sp" />
                     <ImageView
@@ -116,12 +114,9 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="356335205@qq.com"
                     android:textColor="#FFFFD3D3"
                     android:textSize="14sp" />
             </LinearLayout>
-
-
         </LinearLayout>
     </LinearLayout>
 

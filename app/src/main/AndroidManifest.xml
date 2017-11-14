@@ -125,6 +125,8 @@
         <activity android:name=".ui.activity.resumesearch.ResumeSearchResultActivity" />
         <activity android:name=".ui.activity.ResumeDetailsActivity" />
         <activity android:name=".ui.activity.settings.ModifyEmailActivity" />
+        <activity android:name=".ui.activity.AssignPositionActivity" />
+        <activity android:name=".ui.activity.RemarksActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

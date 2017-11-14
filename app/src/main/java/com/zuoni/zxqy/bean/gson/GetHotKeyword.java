@@ -6,7 +6,7 @@ import java.util.List;
  * Created by zangyi_shuai_ge on 2017/11/7
  */
 
-public class getHotKeyword extends BaseHttpResponse {
+public class GetHotKeyword extends BaseHttpResponse {
 
 
     /**

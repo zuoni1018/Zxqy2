@@ -13,6 +13,7 @@ import com.netease.nimlib.sdk.StatusBarNotificationConfig;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
+import com.yanzhenjie.nohttp.Logger;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.zuoni.zxqy.ui.activity.MainActivity;
 import com.zuoni.zxqy.util.SystemUtil;
@@ -27,19 +28,19 @@ public class MainApplication extends Application {
         super.onCreate();
         //网络访问框架初始化
         NoHttp.initialize(this);
-        //百度地图初始化
+//        //百度地图初始化
         SDKInitializer.initialize(getApplicationContext());
-
-
-        //网易云信初始化
-        // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将完成自动登录）
+//
+//
+//        //网易云信初始化
+//        // SDK初始化（启动后台服务，若已经存在用户登录信息， SDK 将完成自动登录）
         NIMClient.init(this, loginInfo(), options());
-
+//
         // ... your codes
         if (inMainProcess()) {
             initUiKit();
         }
-
+        Logger.setDebug(true);
 //
     }
 
@@ -111,7 +112,8 @@ public class MainApplication extends Application {
 
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
-        return null;
+        LoginInfo info=new LoginInfo("123456","123456");
+        return info;
     }
 
     private void initUiKit() {

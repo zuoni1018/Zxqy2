@@ -1,6 +1,5 @@
 package com.zuoni.zxqy.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,14 +11,13 @@ import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvInvitationInterviewRecordAdapter;
-import com.zuoni.zxqy.ui.activity.InvitationInterviewActivity;
+import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -32,6 +30,11 @@ public class ResumeManagementFragment extends Fragment {
     LRecyclerView mRecyclerView;
     Unbinder unbinder;
     private View view;
+    private ResumeManagementActivity resumeManagementActivity;
+
+    public void setResumeManagementActivity(ResumeManagementActivity resumeManagementActivity) {
+        this.resumeManagementActivity = resumeManagementActivity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,9 +56,9 @@ public class ResumeManagementFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.tvInvitationInterview)
-    public void onViewClicked() {
-        Intent mIntent=new Intent(getContext(), InvitationInterviewActivity.class);
-        startActivity(mIntent);
-    }
+//    @OnClick(R.id.tvInvitationInterview)
+//    public void onViewClicked() {
+//        Intent mIntent=new Intent(getContext(), InvitationInterviewActivity.class);
+//        startActivity(mIntent);
+//    }
 }

@@ -44,8 +44,17 @@ public class SearchResume extends  BaseHttpResponse {
     }
 
     public static class DataBean {
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
         /**
          * workerId : 135176
+
          * name : 黄燕芳
          * birth : 1995-03-26
          * sex : 女
@@ -68,7 +77,7 @@ public class SearchResume extends  BaseHttpResponse {
         private String lastTime;
         private String img;
         private String education;
-        private int age;
+        private String age;
         private boolean isChoose=false;
 
         public boolean isChoose() {
@@ -159,12 +168,12 @@ public class SearchResume extends  BaseHttpResponse {
             this.education = education;
         }
 
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
+//        public int getAge() {
+//            return age;
+//        }
+//
+//        public void setAge(int age) {
+//            this.age = age;
+//        }
     }
 }

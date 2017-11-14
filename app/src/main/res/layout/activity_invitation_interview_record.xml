@@ -5,7 +5,7 @@
     android:background="@color/bg_color"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_save" />
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
         android:id="@+id/mRecyclerView"
@@ -19,6 +19,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/bottom01"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -29,6 +30,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/bottom02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

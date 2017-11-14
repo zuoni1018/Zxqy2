@@ -12,6 +12,15 @@ public class InvitationPeople implements Serializable {
     private String name="";
     private String workName="";
     private String workId="";
+    private String sendresumeId="";
+
+    public String getSendresumeId() {
+        return sendresumeId;
+    }
+
+    public void setSendresumeId(String sendresumeId) {
+        this.sendresumeId = sendresumeId;
+    }
 
     public String getWorkId() {
         return workId;
