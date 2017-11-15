@@ -160,8 +160,6 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
                     mIntent.putExtra("workId", workId);
                     startActivity(mIntent);
                 }
-
-
                 break;
         }
     }

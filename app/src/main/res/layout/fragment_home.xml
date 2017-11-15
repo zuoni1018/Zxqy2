@@ -204,7 +204,7 @@
                     android:id="@+id/msgSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FF333333"
+                    android:textColor="#D0021B"
                     android:textSize="20sp" />
 
                 <TextView
@@ -218,7 +218,7 @@
                     android:id="@+id/msgReceive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FF333333"
+                    android:textColor="#608C2E"
                     android:textSize="20sp" />
 
             </LinearLayout>

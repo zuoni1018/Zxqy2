@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D0021B"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+    <LinearLayout
+        android:layout_width="341dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="26dp"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/zx_16"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_marginTop="24dp"
+            android:id="@+id/layout02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25.7dp"
+            android:layout_marginRight="25.7dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="14.6dp"
+                android:src="@mipmap/zx_17" />
+
+            <TextView
+                android:id="@+id/tv01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12.3dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:text="请选择联系人"
+                android:textColor="#FF333333"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25.7dp"
+            android:layout_marginRight="25.7dp"
+            android:layout_marginTop="13dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="14.6dp"
+                android:src="@mipmap/zx_18" />
+
+            <TextView
+                android:id="@+id/tv02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12.3dp"
+                android:background="@null"
+                android:text="请填写联系人"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:textColor="#333333"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25.7dp"
+            android:layout_marginRight="25.7dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="14.6dp"
+                android:src="@mipmap/zx_2" />
+
+            <TextView
+                android:id="@+id/tv03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12.3dp"
+                android:background="@null"
+                android:text="请填写联系方式"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:textColor="#333333"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25.7dp"
+            android:layout_marginRight="25.7dp"
+            android:layout_marginTop="13dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="14.6dp"
+                android:layout_gravity="top"
+                android:src="@mipmap/zx_15" />
+
+            <TextView
+                android:id="@+id/tv04"
+                android:layout_width="264dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="6.6dp"
+                android:layout_marginRight="28dp"
+                android:gravity="top"
+                android:text="请输入邀请内容"
+                android:padding="5dp"
+                android:textColor="#FF333333"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -158,6 +158,6 @@ public class MainActivity extends BaseActivity {
         tv02.setTextColor(getResources().getColor(R.color.tab_color_01));
 
         iv01.setImageResource(R.mipmap.zx_60);
-        iv02.setImageResource(R.mipmap.zx_53);
+        iv02.setImageResource(R.mipmap.zx_6);
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <LinearLayout
+        android:id="@+id/layout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="21dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/zx_14" />
+
+        <TextView
+            android:id="@+id/tv01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="分配职位"
+            android:textColor="#FF999999"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="7.2dp"
+            android:layout_height="16.7dp"
+            android:layout_marginRight="13.8dp"
+            android:src="@mipmap/zx_44" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llayout02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="21dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/zx_13" />
+
+        <TextView
+            android:id="@+id/tv02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="备注"
+            android:textColor="#FF999999"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="7.2dp"
+            android:layout_height="16.7dp"
+            android:layout_marginRight="13.8dp"
+            android:src="@mipmap/zx_44" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt03"
+        android:layout_width="329dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/bt_bg_red_clickable"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="@color/color_white"
+        android:textSize="16sp" />
+</LinearLayout>

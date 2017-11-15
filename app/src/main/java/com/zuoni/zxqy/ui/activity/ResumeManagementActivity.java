@@ -42,16 +42,9 @@ public class ResumeManagementActivity extends BaseTitleActivity {
     @BindView(R.id.tvRight)
     TextView tvRight;
     private List<Fragment> mList;
-
     private List<Job> Jobs;
-
-
     private String positionType = "不限";
-
-
-
     private ResumeManagementFragment01 resumeManagementFragment01;
-
     private ResumeManagementFragment02 resumeManagementFragment02;
     private ResumeManagementFragment03 resumeManagementFragment03;
     private ResumeManagementFragment04 resumeManagementFragment04;
@@ -83,7 +76,6 @@ public class ResumeManagementActivity extends BaseTitleActivity {
 
         resumeManagementFragment01 = new ResumeManagementFragment01();
         resumeManagementFragment01.setResumeManagementActivity(this);
-
 
         resumeManagementFragment02 = new ResumeManagementFragment02();
         resumeManagementFragment02.setResumeManagementActivity(this);
@@ -168,13 +160,14 @@ public class ResumeManagementActivity extends BaseTitleActivity {
         builder.setOnDataSelectedListener(new OnSingleDataSelectedListener() {
             @Override
             public void onDataSelected(String itemValue) {
-                positionType = itemValue;
-                refresh();
+                if(!positionType.equals(itemValue)){
+                    positionType = itemValue;
+                    refresh();
+                }
             }
         });
 
         builder.setData(list);
         builder.create().show();
     }
-
 }

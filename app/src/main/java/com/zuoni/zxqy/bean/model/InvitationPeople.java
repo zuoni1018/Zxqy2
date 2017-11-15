@@ -15,6 +15,9 @@ public class InvitationPeople implements Serializable {
     private String sendresumeId="";
 
     public String getSendresumeId() {
+        if(sendresumeId==null){
+            return "";
+        }
         return sendresumeId;
     }
 

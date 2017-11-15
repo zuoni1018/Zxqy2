@@ -42,6 +42,7 @@ import butterknife.OnClick;
  */
 
 public class InvitationInterviewRecordActivity extends BaseTitleActivity {
+
     @BindView(R.id.mRecyclerView)
     LRecyclerView mRecyclerView;
     @BindView(R.id.tvRight)
@@ -50,9 +51,12 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
     TextView bottom01;
     @BindView(R.id.bottom02)
     TextView bottom02;
+
+    private List<Job> Jobs;
+    private String positionType = "不限";
     private LRecyclerViewAdapter mAdapter;
     private List<ResumeManager> mList;
-    ArrayList<InvitationPeople> peoples;
+    private ArrayList<InvitationPeople> peoples;
     private int nowPage;
     private boolean isFirst = true;
 
@@ -86,26 +90,19 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
             @Override
             public void onClick02(ResumeManager resume, int position) {
                 //邀请面试
-//                peoples.clear();
-//                InvitationPeople invitationPeople = new InvitationPeople();
-//                invitationPeople.setHeadUrl(resume.getImg());
-//                invitationPeople.setName(resume.getName());
-//                invitationPeople.setWorkName("");
-//                invitationPeople.setWorkId(resume.getWorkerId());
-//                invitationPeople.setSendresumeId(resume.getSendresumeId());
-//                peoples.add(invitationPeople);
-//                Intent mIntent = new Intent(getContext(), InvitationInterviewActivity.class);
-//                mIntent.putExtra("peoples", peoples);
-//                startActivityForResult(mIntent, INVITATION_TAG);
+                Intent mIntent = new Intent(getContext(), InterviewContentActivity.class);
+                mIntent.putExtra("inviteId", resume.getInviteId()+"");
+                startActivity(mIntent);
             }
 
             @Override
             public void onClick03(ResumeManager resume, int position) {
-//                删除简历
-                delete_invite(resume.getInviteId(), false);
-//                直接本地移除
+                //直接本地移除
                 mList.remove(position);
                 mAdapter.notifyDataSetChanged();
+                //删除简历
+                delete_invite(resume.getInviteId(), false);
+
             }
 
             @Override
@@ -122,6 +119,7 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
+                isChooseAll=false;
                 nowPage = 1;
                 isFirst = true;
                 mList.clear();
@@ -154,7 +152,7 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
             url = "/Resume/get_company_invite/p/" + nowPage + "/size/10";
         }
         showLoading();
-        HttpRequest httpRequest = new HttpRequest(AppUrl.BASE_URL + url);//获取收到的简历列表
+        HttpRequest httpRequest = new HttpRequest(AppUrl.BASE_URL + url);//邀请面试记录
 
         httpRequest.add("positionType", positionType);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
@@ -166,7 +164,7 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
                     return;
                 }
                 mRecyclerView.refreshComplete(1);
-                LogUtil.i("获取收到的简历列表" + response);
+                LogUtil.i("邀请面试记录" + response);
                 GetSendresume info = gson.fromJson(response, GetSendresume.class);
                 if (info.getStatus().equals("true")) {
                     mList.addAll(info.getData());
@@ -191,8 +189,6 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
         }, getContext());
     }
 
-    private List<Job> Jobs;
-    private String positionType = "不限";
 
     @OnClick(R.id.tvRight)
     public void onViewClicked() {
@@ -235,9 +231,10 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
         }, getContext());
     }
 
-    //公司性质
+    /**
+     * 选择器
+     */
     private void createPicker(List<Job> jobs) {
-
         DataPickerSingleDialog.Builder builder = new DataPickerSingleDialog.Builder(getContext());
         List<String> list = new ArrayList<>();
         list.add("不限");
@@ -248,11 +245,13 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
         builder.setOnDataSelectedListener(new OnSingleDataSelectedListener() {
             @Override
             public void onDataSelected(String itemValue) {
-                positionType = itemValue;
-                mRecyclerView.forceToRefresh();
+                //不相等再去刷
+                if(!positionType.equals(itemValue)){
+                    positionType = itemValue;
+                    mRecyclerView.forceToRefresh();//每次选完了去刷数据
+                }
             }
         });
-
         builder.setData(list);
         builder.create().show();
     }
@@ -289,8 +288,6 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
                     sendresumeId = sendresumeId.substring(0, sendresumeId.length() - 1);
                     delete_invite(sendresumeId, true);
                 }
-
-
                 break;
         }
     }

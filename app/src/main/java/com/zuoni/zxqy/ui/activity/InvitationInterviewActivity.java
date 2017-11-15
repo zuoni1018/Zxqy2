@@ -90,21 +90,15 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
         httpRequest.add("address", address);
         httpRequest.add("jobId", jobId);
 
-
         if(!sendresumeId.equals("")){
             httpRequest.add("sendresumeId", sendresumeId);
         }
-
-
-
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
                 closeLoading();
                 LogUtil.i("邀请面试" + response);
-
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
-
                 if (info.getStatus().equals("true")) {
                     showToast("发布成功");
                     setResult(100);
@@ -112,7 +106,6 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
                 } else {
                     showToast(info.getMessage());
                 }
-
             }
 
             @Override
@@ -201,10 +194,6 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
                         }
                     }
                 }
-
-
-
-
                 break;
         }
     }

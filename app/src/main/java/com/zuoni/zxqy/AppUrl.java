@@ -92,4 +92,10 @@ public class AppUrl {
 
     public static final String send_mess_admin=BASE_URL+"/User/send_mess_admin";
 
+
+    public static final String delete_mess=BASE_URL+"/User/delete_mess";
+
+    public static final String get_invite_detail=BASE_URL+"/Resume/get_invite_detail";
+
+
 }

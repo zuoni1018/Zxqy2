@@ -101,7 +101,7 @@
             android:layout_width="17.3dp"
             android:layout_height="17.3dp"
             android:layout_gravity="center"
-            android:src="@mipmap/zx_53" />
+            android:src="@mipmap/zx_6" />
 
         <TextView
             android:id="@+id/tv02"

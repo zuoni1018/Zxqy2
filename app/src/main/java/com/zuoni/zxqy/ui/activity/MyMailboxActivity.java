@@ -41,8 +41,13 @@ public class MyMailboxActivity extends BaseTitleActivity {
         titles.add("收到的信息");
         titles.add("发出的信息");
         mList = new ArrayList<>();
-        mList.add(new GetFragment());
-        mList.add(new SendFragment());
+
+        GetFragment getFragment=new GetFragment();
+        getFragment.setMyMailboxActivity(this);
+        SendFragment sendFragment=new SendFragment();
+        sendFragment.setMyMailboxActivity(this);
+        mList.add(getFragment);
+        mList.add(sendFragment);
         FragmentPagerAddTitlesAdapter   mPagerAdapter = new FragmentPagerAddTitlesAdapter(getSupportFragmentManager(), mList,titles);
         MyViewPager.setAdapter(mPagerAdapter);
         xTablayout.setupWithViewPager(MyViewPager);
