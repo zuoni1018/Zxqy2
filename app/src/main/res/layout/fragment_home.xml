@@ -92,6 +92,15 @@
                         android:src="@mipmap/zx_65"
                         android:layout_width="12dp"
                         android:layout_height="20dp" />
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/ivLeve2"
+                        android:layout_marginLeft="8dp"
+                        android:src="@mipmap/zx_63"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp" />
+
                     <TextView
                         android:id="@+id/tvhycz"
                         android:layout_marginLeft="7.3dp"
@@ -127,6 +136,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -156,6 +166,7 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -185,6 +196,7 @@
         </LinearLayout>
 
         <LinearLayout
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -249,6 +261,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/positionManagement01"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -278,6 +291,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/positionManagement02"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -307,6 +321,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/positionManagement03"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

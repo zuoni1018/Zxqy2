@@ -15,7 +15,9 @@ import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.yanzhenjie.nohttp.Logger;
 import com.yanzhenjie.nohttp.NoHttp;
+import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.ui.activity.MainActivity;
+import com.zuoni.zxqy.util.SessionHelper;
 import com.zuoni.zxqy.util.SystemUtil;
 
 /**
@@ -56,7 +58,7 @@ public class MainApplication extends Application {
         // 如果将新消息通知提醒托管给 SDK 完成，需要添加以下配置。否则无需设置。
         StatusBarNotificationConfig config = new StatusBarNotificationConfig();
         config.notificationEntrance = MainActivity.class; // 点击通知栏跳转到该Activity
-        config.notificationSmallIconId = R.mipmap.ic_launcher;
+        config.notificationSmallIconId = R.mipmap.applogo;
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
         config.ledOnMs = 1000;
@@ -88,7 +90,7 @@ public class MainApplication extends Application {
 
             @Override
             public int getDefaultIconResId() {
-                return R.drawable.ic_launcher;
+                return R.mipmap.applogo;
             }
 
             @Override
@@ -112,8 +114,7 @@ public class MainApplication extends Application {
 
     // 如果已经存在用户登录信息，返回LoginInfo，否则返回null即可
     private LoginInfo loginInfo() {
-        LoginInfo info=new LoginInfo("123456","123456");
-        return info;
+        return CacheUtils.getLoginInfo(getApplicationContext());
     }
 
     private void initUiKit() {
@@ -130,7 +131,7 @@ public class MainApplication extends Application {
         // 1.注册自定义消息附件解析器（可选）
         // 2.注册各种扩展消息类型的显示ViewHolder（可选）
         // 3.设置会话中点击事件响应处理（一般需要）
-//        SessionHelper.init();
+        SessionHelper.init();
 
         // 通讯录列表定制：示例代码可详见demo源码中的ContactHelper类。
         // 1.定制通讯录列表中点击事响应处理（一般需要，UIKit 提供默认实现为点击进入聊天界面)

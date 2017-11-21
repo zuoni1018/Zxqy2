@@ -142,6 +142,20 @@ public class ResumeDetail extends BaseHttpResponse {
         private String age;
         private boolean permit;
 
+        public String getAccid() {
+            if(accid==null){
+                return "";
+            }
+            return accid;
+        }
+
+        public void setAccid(String accid) {
+            this.accid = accid;
+        }
+
+        private String accid;
+
+
         public boolean isPermit() {
             return permit;
         }

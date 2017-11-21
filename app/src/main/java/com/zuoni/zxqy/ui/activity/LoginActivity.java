@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.zuoni.common.callback.SimpleTextWatcher;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
@@ -71,18 +75,17 @@ public class LoginActivity extends BaseTitleActivity {
         setTitle("登录");
 
         //自动填写手机号码
-        String phone=CacheUtils.getPhone(getContext());
-        if(!phone.equals("")){
+        String phone = CacheUtils.getPhone(getContext());
+        if (!phone.equals("")) {
             et1.setText(phone);
             iv01.setVisibility(View.VISIBLE);
-            isShow01=true;
+            isShow01 = true;
             et1.setSelection(et1.getText().length());
-            if(phone.equals("15168212330")){
-                et3.setText("672594");
+            if (phone.equals("15168212330")) {
+                et3.setText("612214");
                 et2.setText("123456");
             }
         }
-
 
 
         et1.addTextChangedListener(new SimpleTextWatcher() {
@@ -164,18 +167,18 @@ public class LoginActivity extends BaseTitleActivity {
                 String phone = et1.getText().toString();
                 String verify = et3.getText().toString();
 
-                if(!phone.equals("")){
-                    if(!passwd.equals("")){
-                        if(!verify.equals("")){
-                            login(phone,passwd,verify);
-                        }else {
-                            showToast( "请输入验证码");
+                if (!phone.equals("")) {
+                    if (!passwd.equals("")) {
+                        if (!verify.equals("")) {
+                            login(phone, passwd, verify);
+                        } else {
+                            showToast("请输入验证码");
                         }
-                    }else {
-                        showToast( "请输入手机密码");
+                    } else {
+                        showToast("请输入手机密码");
                     }
-                }else {
-                    showToast( "请输入手机号码");
+                } else {
+                    showToast("请输入手机号码");
                 }
 
                 break;
@@ -183,6 +186,8 @@ public class LoginActivity extends BaseTitleActivity {
     }
 
     private void login(String phone, String passwd, String verify) {
+
+
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.LOGIN);//登录
         httpRequest.add("passwd", passwd);
@@ -196,18 +201,19 @@ public class LoginActivity extends BaseTitleActivity {
                 LogUtil.i("登录" + response);
                 Login info = gson.fromJson(response, Login.class);
                 if (info.getStatus().equals("true")) {
-                    CacheUtils.setUserid(info.getData().getUserid(),getContext());
-                    CacheUtils.setToken(info.getToken(),getContext());
+                    login2(info.getData().getAccid(), info.getData().getAccToken());
+                    CacheUtils.setUserid(info.getData().getUserid(), getContext());
+                    CacheUtils.setToken(info.getToken(), getContext());
                     jumpToActivity(MainActivity.class);
                     myFinish();
-                    CacheUtils.setLogin(true,getContext());
+                    CacheUtils.setLogin(true, getContext());
                 } else {
                     showToast(info.getMessage());
-                    if(info.getStatus().equals("2")){
+                    if (info.getStatus().equals("2")) {
                         //更新下信息
-                        CacheUtils.setUserid(info.getData().getUserid(),getContext());
-                        CacheUtils.setSiteId(info.getData().getSiteId(),getContext());
-                        CacheUtils.setToken(info.getToken(),getContext());
+                        CacheUtils.setUserid(info.getData().getUserid(), getContext());
+                        CacheUtils.setSiteId(info.getData().getSiteId(), getContext());
+                        CacheUtils.setToken(info.getToken(), getContext());
                         jumpToActivity(PersonalInformationActivity.class);
                         finish();
                     }
@@ -221,6 +227,30 @@ public class LoginActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
+    private void login2(String accid, String accToken) {
+        LoginInfo info;
+        info = new LoginInfo(accid, accToken); // config...
+
+        NIMClient.getService(AuthService.class).login(info).setCallback(new RequestCallback() {
+            @Override
+            public void onSuccess(Object o) {
+                LogUtil.i("onSuccess");
+            }
+
+            @Override
+            public void onFailed(int i) {
+                LogUtil.i("onFailed");
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+
+            }
+        });
+        CacheUtils.setLoginInfo(info, getContext());
+    }
+
     private void getCode(String phone) {
         HttpRequest httpRequest = new HttpRequest(AppUrl.VERIFY);//获取验证码
         httpRequest.add("phone", phone);

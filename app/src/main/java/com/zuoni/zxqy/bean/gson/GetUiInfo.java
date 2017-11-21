@@ -60,6 +60,15 @@ public class GetUiInfo extends  BaseHttpResponse{
         private String viewResume;
         private String receiveResume;
         private String favs;
+        private String chatLast;
+
+        public String getChatLast() {
+            return chatLast;
+        }
+
+        public void setChatLast(String chatLast) {
+            this.chatLast = chatLast;
+        }
 
         public String getCname() {
             return cname;

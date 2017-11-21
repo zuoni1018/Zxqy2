@@ -17,16 +17,16 @@
 
         <ImageView
             android:id="@+id/buttonAudioMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/nim_message_button_bottom_audio_selector"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/zx_101"
             android:contentDescription="@string/empty"
             android:scaleType="center" />
 
         <ImageView
             android:id="@+id/buttonTextMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/nim_message_button_bottom_text_selector"
             android:contentDescription="@string/empty"

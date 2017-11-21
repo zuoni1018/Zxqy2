@@ -48,11 +48,14 @@ public class ResumeManagementActivity extends BaseTitleActivity {
     private ResumeManagementFragment02 resumeManagementFragment02;
     private ResumeManagementFragment03 resumeManagementFragment03;
     private ResumeManagementFragment04 resumeManagementFragment04;
+
+    private int pos=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("简历管理");
+        pos=getIntent().getIntExtra("pos",-1);
         Jobs = new ArrayList<>();
         tvRight.setText("职位分类");
         tvRight.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +98,10 @@ public class ResumeManagementActivity extends BaseTitleActivity {
         MyViewPager.setAdapter(mPagerAdapter);
         xTablayout.setupWithViewPager(MyViewPager);
         MyViewPager.setOffscreenPageLimit(4);//设置缓存最大
+
+        if(pos!=-1){
+            MyViewPager.setCurrentItem(pos,false);
+        }
     }
 
     /**

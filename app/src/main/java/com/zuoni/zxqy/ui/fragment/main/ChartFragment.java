@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
@@ -30,6 +33,12 @@ public class ChartFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.et1)
     EditText et1;
+    @BindView(R.id.layoutLeft)
+    RelativeLayout layoutLeft;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.bt1)
+    Button bt1;
 
     private View view;
     private MainActivity mainActivity;
@@ -46,6 +55,12 @@ public class ChartFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         mList = new ArrayList<>();
 
+
+        tvTitle.setText("约聊");
+        layoutLeft.setVisibility(View.INVISIBLE);
+
+        et1.setVisibility(View.GONE);
+        bt1.setVisibility(View.GONE);
 
         return view;
     }
@@ -72,6 +87,6 @@ public class ChartFragment extends Fragment {
     @OnClick(R.id.bt1)
     public void onViewClicked() {
 
-        NimUIKit.startP2PSession(getContext(), et1.getText().toString().trim(),null);
+        NimUIKit.startP2PSession(getContext(), et1.getText().toString().trim(), null);
     }
 }

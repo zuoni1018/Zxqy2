@@ -46,6 +46,18 @@ public class Job {
     private String status;
     private String update_time;
 
+    public String getChatStatus() {
+        if(chatStatus==null){
+            return "0";
+        }
+        return chatStatus;
+    }
+
+    public void setChatStatus(String chatStatus) {
+        this.chatStatus = chatStatus;
+    }
+
+    private String chatStatus;
     public String getJobId() {
         return jobId;
     }

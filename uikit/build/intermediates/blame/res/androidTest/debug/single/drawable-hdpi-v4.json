@@ -68,6 +68,10 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\nim_team_admin_icon.png"
     },
     {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\zx_95.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\zx_95.png"
+    },
+    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\nim_message_plus_video_normal.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\nim_message_plus_video_normal.png"
     },
@@ -102,6 +106,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\nim_loading_small_white.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\nim_loading_small_white.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\zx_101.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\zx_101.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_ic_star_black_48dp.png",
@@ -304,6 +312,10 @@
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-hdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\zx_94.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\zx_94.png"
+    },
+    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\admin_icon.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\admin_icon.png"
     },
@@ -326,6 +338,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\nim_message_input_plus_pressed.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\nim_message_input_plus_pressed.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\zx_104.9.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\zx_104.9.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\explosion_three.png",
@@ -494,6 +510,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\nim_actionbar_search_dark_icon.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\nim_actionbar_search_dark_icon.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\zx_1111.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\zx_1111.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\abc_list_pressed_holo_light.9.png",

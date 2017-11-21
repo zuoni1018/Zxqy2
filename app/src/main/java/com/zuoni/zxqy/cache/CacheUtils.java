@@ -15,18 +15,18 @@ import com.zuoni.zxqy.bean.model.EnterpriseInformation;
 public class CacheUtils {
 
 
-    public void setLoginInfo(LoginInfo loginInfo, Context context) {
-
+    public static void setLoginInfo(LoginInfo loginInfo, Context context) {
         SPUtils.put(context, "wyAccount", loginInfo.getAccount());
         SPUtils.put(context, "wyToken", loginInfo.getToken());
-        SPUtils.put(context, "wyAppKey", loginInfo.getAppKey());
+//        SPUtils.put(context, "wyAppKey", loginInfo.getAppKey());
     }
-
-    public LoginInfo getLoginInfo(Context context) {
+    public static void setAccount(String   Account, Context context) {
+        SPUtils.put(context, "wyAccount", Account);
+    }
+    public static  LoginInfo getLoginInfo(Context context) {
         String wyAccount = (String) SPUtils.get(context, "wyAccount", "");
         String wyToken = (String) SPUtils.get(context, "wyToken", "");
         String wyAppKey = (String) SPUtils.get(context, "wyAppKey", "");
-
         if ("".equals(wyAccount)) {
             return null;
         } else {
@@ -96,6 +96,10 @@ public class CacheUtils {
         boolean isLogin = (boolean) SPUtils.get(context, "isLogin", false);
         return isLogin;
     }
+
+
+
+
 
     public static void setEnterpriseInformation(EnterpriseInformation data,Context context) {
         //10个字段

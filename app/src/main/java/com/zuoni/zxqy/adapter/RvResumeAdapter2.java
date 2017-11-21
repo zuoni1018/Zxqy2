@@ -103,7 +103,7 @@ public class RvResumeAdapter2 extends RecyclerView.Adapter<RvResumeAdapter2.MyVi
             holder.time2.setText("");
         }
 
-        if(mList.get(position).getIs_hide().equals("1")){
+        if(mList.get(position).getIs_hide()!=null&&mList.get(position).getIs_hide().equals("1")){
             holder.is_hide.setVisibility(View.VISIBLE);
         }else {
             holder.is_hide.setVisibility(View.GONE);

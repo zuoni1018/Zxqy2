@@ -72,6 +72,11 @@ public class StartActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
+
     /**
      * Rationale支持，这里自定义对话框。
      */

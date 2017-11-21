@@ -16,6 +16,10 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\nim_message_item_picture.xml"
     },
     {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\top_bar_style.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\top_bar_style.xml"
+    },
+    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\nim_preview_image_layout_zoom_control.xml",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\layout\\nim_preview_image_layout_zoom_control.xml"
     },

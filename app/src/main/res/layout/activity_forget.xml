@@ -61,6 +61,8 @@
         </RelativeLayout>
 
         <EditText
+            android:maxLength="20"
+            android:singleLine="true"
             android:inputType="phone"
             android:id="@+id/et01"
             android:layout_width="0dp"
@@ -105,6 +107,8 @@
         </RelativeLayout>
 
         <EditText
+            android:singleLine="true"
+            android:maxLength="20"
             android:inputType="textPassword"
             android:id="@+id/et02"
             android:layout_width="0dp"
@@ -148,6 +152,8 @@
         </RelativeLayout>
 
         <EditText
+            android:singleLine="true"
+            android:maxLength="20"
             android:inputType="number"
             android:id="@+id/et03"
             android:layout_width="0dp"
@@ -158,7 +164,6 @@
             android:background="@null"
             android:hint="请输验证码"
             android:textSize="13sp" />
-
 
         <TextView
             android:id="@+id/tv03"

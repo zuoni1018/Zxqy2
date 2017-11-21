@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.ui.activity.LoginActivity;
@@ -38,6 +40,10 @@ public class OtherFunctionsActivity extends BaseTitleActivity {
                 jumpToActivity(ModifyDataActivity.class);
                 break;
             case R.id.layout2:
+                //登出
+                NIMClient.getService(AuthService.class).logout();
+                CacheUtils.setAccount("",getContext());
+                //销毁界面
                 ActivityCollector.finishAll();
                 CacheUtils.setLogin(false,getContext());
                 Intent mIntent=new Intent(getContext(), LoginActivity.class);

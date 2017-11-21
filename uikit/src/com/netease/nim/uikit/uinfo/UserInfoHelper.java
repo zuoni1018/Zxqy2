@@ -15,8 +15,6 @@ public class UserInfoHelper {
     public static String getUserTitleName(String id, SessionTypeEnum sessionType) {
         if (sessionType == SessionTypeEnum.P2P) {
 
-
-
             if ("2".equals(id)) {
                 return "我的电脑";
             } else {

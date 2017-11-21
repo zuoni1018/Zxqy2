@@ -112,6 +112,9 @@ public class ResumeManager {
     }
 
     public String getAge() {
+        if(age.equals("false")){
+            return "0";
+        }
         return age;
     }
 
@@ -178,6 +181,9 @@ public class ResumeManager {
     }
 
     public String getIs_hide() {
+        if(is_hide==null){
+            return "1";
+        }
         return is_hide;
     }
 

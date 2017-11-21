@@ -1,6 +1,7 @@
 package com.zuoni.zxqy.util;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.common.ui.popupmenu.NIMPopupMenu;
@@ -18,8 +19,12 @@ import com.netease.nimlib.sdk.avchat.constant.AVChatType;
 import com.netease.nimlib.sdk.avchat.model.AVChatAttachment;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
+import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
+import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
+import com.zuoni.common.utils.LogUtil;
+import com.zuoni.zxqy.ui.activity.ResumeDetailsActivity;
 
 import java.util.List;
 
@@ -140,14 +145,38 @@ public class SessionHelper {
         SessionEventListener listener = new SessionEventListener() {
             @Override
             public void onAvatarClicked(Context context, IMMessage message) {
+                LogUtil.i("点我了");
+
                 // 一般用于打开用户资料页面
-//                if (message.getMsgType() == MsgTypeEnum.robot && message.getDirect() == MsgDirectionEnum.In) {
+                if (message.getMsgType() == MsgTypeEnum.robot && message.getDirect() == MsgDirectionEnum.In) {
 //                    RobotAttachment attachment = (RobotAttachment) message.getAttachment();
 //                    if (attachment.isRobotSend()) {
 //                        RobotProfileActivity.start(context, attachment.getFromRobotAccount());
 //                        return;
 //                    }
-//                }
+                }
+                if(message.getDirect() == MsgDirectionEnum.Out){
+                    //发出的
+                    LogUtil.i("发出的");
+                }else  if(message.getDirect() == MsgDirectionEnum.In){
+                    //收到的
+                    LogUtil.i("收到的","昵称："+message.getFromNick()+"账号："+message.getFromAccount());
+                    String workId="";
+                    if(message.getFromAccount().length()>5&&message.getFromAccount().substring(0,5).equals("comp_")){
+                        workId=message.getFromAccount().substring(5,message.getFromAccount().length());
+                        LogUtil.i("收到的workId",workId);
+                    }
+
+                    String name="";
+
+                    if(message.getFromNick()!=null&&!message.getFromNick().equals("")){
+                        name=message.getFromNick();
+                    }
+                    Intent mIntent = new Intent(context, ResumeDetailsActivity.class);
+                    mIntent.putExtra("name",name);
+                    mIntent.putExtra("workId", workId);
+                    context.startActivity(mIntent);
+                }
 //                UserProfileActivity.start(context, message.getFromAccount());
             }
 

@@ -68,6 +68,8 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入手机号"
+            android:maxLength="20"
+            android:singleLine="true"
             android:textSize="13sp" />
 
         <ImageView
@@ -103,7 +105,6 @@
         </RelativeLayout>
 
         <EditText
-            android:inputType="textPassword"
             android:id="@+id/et2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -112,6 +113,9 @@
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:singleLine="true"
             android:textSize="13sp" />
 
         <ImageView
@@ -156,18 +160,20 @@
             android:hint="请输验证码"
             android:inputType="number"
             android:maxLength="10"
+            android:maxLines="20"
+            android:singleLine="true"
             android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv03"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
             android:background="@drawable/bg_get_code_01"
             android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:text="获取验证码"
             android:textColor="@color/get_code_text_01"
             android:textSize="11sp" />
@@ -214,6 +220,4 @@
             android:textColor="@color/color_white"
             android:textSize="12sp" />
     </LinearLayout>
-
-
 </LinearLayout>

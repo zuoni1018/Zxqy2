@@ -3,6 +3,9 @@ package com.netease.nim.uikit.session.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -37,6 +40,9 @@ public class P2PMessageActivity extends BaseMessageActivity {
 
     private boolean isResume = false;
 
+    private RelativeLayout layoutLeft;
+    private TextView tvTitle2;
+
     public static void start(Context context, String contactId, SessionCustomization customization, IMMessage anchor) {
         Intent intent = new Intent();
         intent.putExtra(Extras.EXTRA_ACCOUNT, contactId);
@@ -54,11 +60,25 @@ public class P2PMessageActivity extends BaseMessageActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        layoutLeft= (RelativeLayout) findViewById(R.id.layoutLeft);
+        tvTitle2= (TextView) findViewById(R.id.tvTitle);
+        setMyTitle("约聊详情");
+        layoutLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 onBackPressed();
+            }
+        });
+
         // 单聊特例话数据，包括个人信息，
         requestBuddyInfo();
         displayOnlineState();
         registerObservers(true);
         registerOnlineStateChangeListener(true);
+    }
+
+    private void setMyTitle(String title){
+        tvTitle2.setText(title);
     }
 
     @Override
@@ -81,7 +101,15 @@ public class P2PMessageActivity extends BaseMessageActivity {
     }
 
     private void requestBuddyInfo() {
-        setTitle("==");
+        String title="";
+        if(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P)!=null){
+            title=UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P);
+        }else {
+           title="约聊详情";
+        }
+//        setTitle("");//设置标题
+        setTitle(title);
+        setMyTitle(title);
     }
 
     private void registerObservers(boolean register) {
@@ -98,21 +126,25 @@ public class P2PMessageActivity extends BaseMessageActivity {
         @Override
         public void onAddedOrUpdatedFriends(List<String> accounts) {
             setTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
+//            setMyTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
         }
 
         @Override
         public void onDeletedFriends(List<String> accounts) {
             setTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
+//            setMyTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
         }
 
         @Override
         public void onAddUserToBlackList(List<String> account) {
             setTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
+//            setMyTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
         }
 
         @Override
         public void onRemoveUserFromBlackList(List<String> account) {
             setTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
+//            setMyTitle(UserInfoHelper.getUserTitleName(sessionId, SessionTypeEnum.P2P));
         }
     };
 

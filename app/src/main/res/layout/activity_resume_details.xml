@@ -443,6 +443,7 @@
                     android:textSize="14sp" />
 
                 <Button
+
                     android:id="@+id/btBottomMenu02"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -451,7 +452,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bt_bg_red_clickable"
                     android:gravity="center"
-                    android:text="立即沟通"
+                    android:text="发送留言"
                     android:textColor="@color/color_white"
                     android:textSize="14sp" />
 

@@ -67,6 +67,10 @@ public abstract class PickImageAction extends BaseAction {
         PickImageHelper.pickImage(getActivity(), requestCode, option);
     }
 
+
+    /**
+     * 选图片
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

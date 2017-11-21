@@ -168,15 +168,18 @@ public class ForgetActivity extends BaseTitleActivity {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.FORGET_PASSWD);//忘记密码
         httpRequest.add("phone", phone);
-        httpRequest.add("passwd_new", passwd_new);
+        httpRequest.add("passwdNew", passwd_new);
         httpRequest.add("verify", verify);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
                 LogUtil.i("忘记密码" + response);
                 BaseHttpResponse baseHttpResponse = gson.fromJson(response, BaseHttpResponse.class);
-                showToast(baseHttpResponse.getMessage());
-
+                if(baseHttpResponse.getStatus().equals("true")){
+                    showToast("修改成功");
+                }else {
+                    showToast(baseHttpResponse.getMessage());
+                }
             }
 
             @Override

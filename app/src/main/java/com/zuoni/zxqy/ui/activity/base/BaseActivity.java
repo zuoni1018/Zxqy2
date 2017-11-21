@@ -119,11 +119,15 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Loading
      */
     public void showLoading() {
-        loadingDialog.show();
-    }
+        if(loadingDialog!=null){
+            loadingDialog.show();
+        }
 
+    }
     public void closeLoading() {
-        loadingDialog.dismiss();
+        if(loadingDialog!=null){
+            loadingDialog.dismiss();
+        }
     }
 
     /**

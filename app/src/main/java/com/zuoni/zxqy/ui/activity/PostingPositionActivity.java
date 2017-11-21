@@ -1,7 +1,9 @@
 package com.zuoni.zxqy.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 import com.zuoni.zxqy.ui.activity.settings.ContactManagerActivity;
+import com.zuoni.zxqy.ui.fragment.main.HomeFragment;
 import com.zuoni.zxqy.view.DataPickerLinkageDialog;
 
 import java.util.ArrayList;
@@ -110,8 +113,8 @@ public class PostingPositionActivity extends BaseTitleActivity {
     @BindView(R.id.bt17)
     Button bt17;
 
-    private boolean isAdd=true;
-    private String jobId="";
+    private boolean isAdd = true;
+    private String jobId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,15 +123,12 @@ public class PostingPositionActivity extends BaseTitleActivity {
         setTitle("发布新职位");
         getUserCompany();
 
-        isAdd=getIntent().getBooleanExtra("isAdd",true);
-
-        if(!isAdd){
-             jobId=getIntent().getStringExtra("jobId");
-
+        isAdd = getIntent().getBooleanExtra("isAdd", true);
+        if (!isAdd) {
+            jobId = getIntent().getStringExtra("jobId");
+            setTitle("修改职位");
             get_position_detail(jobId);
         }
-
-
     }
 
     @Override
@@ -164,10 +164,11 @@ public class PostingPositionActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
     private void get_position_detail(String jobId) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(get_position_detail);//职位详情
-        httpRequest.add("jobId",jobId);
+        httpRequest.add("jobId", jobId);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -175,7 +176,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                 LogUtil.i("职位详情" + response);
                 getPositionDetail info = gson.fromJson(response, getPositionDetail.class);
                 if (info.getStatus().equals("true")) {
-                    contact=new Contact();
+                    contact = new Contact();
                     contact.setContactId(info.getData().getContactId());
 
                     et01.setText(info.getData().getTitle());
@@ -209,6 +210,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
     private void getJobsCate() {
 
         showLoading();
@@ -383,23 +385,23 @@ public class PostingPositionActivity extends BaseTitleActivity {
 //        cateName	字符串			职业类型
 
 
-        String title = et01.getText().toString().trim();
+        final String title = et01.getText().toString().trim();
         String contactId = "";
-        String area = tv04.getText().toString().trim();
-        String edu = tv05.getText().toString().trim();
-        String hukou = et06.getText().toString().trim();
+        final String area = tv04.getText().toString().trim();
+        final String edu = tv05.getText().toString().trim();
+        final String hukou = et06.getText().toString().trim();
 
-        String jobs = tv07.getText().toString().trim();
-        String years = tv08.getText().toString().trim();
-        String pay = tv09.getText().toString().trim();
-        String gender = tv10.getText().toString().trim();
-        String ages = et11.getText().toString().trim();
+        final String jobs = tv07.getText().toString().trim();
+        final String years = tv08.getText().toString().trim();
+        final String pay = tv09.getText().toString().trim();
+        final String gender = tv10.getText().toString().trim();
+        final String ages = et11.getText().toString().trim();
 
-        String house = tv12.getText().toString().trim();
-        String tele = tv13.getText().toString().trim();
-        String nums = et14.getText().toString().trim();
-        String info = et16.getText().toString().trim();
-        String cateName = tv02.getText().toString().trim();
+        final String house = tv12.getText().toString().trim();
+        final String tele = tv13.getText().toString().trim();
+        final String nums = et14.getText().toString().trim();
+        final String info = et16.getText().toString().trim();
+        final String cateName = tv02.getText().toString().trim();
         if (isInPut(title)) {
             showToast("请填写职位名称");
         } else {
@@ -446,10 +448,38 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                 if (isInPut(info)) {
                                                                     showToast("请输入岗位要求");
                                                                 } else {
-                                                                    if(isAdd){
-                                                                        postPosition(title, contactId, area, edu, hukou
-                                                                                , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
-                                                                    }else {
+                                                                    if (isAdd) {
+                                                                        AlertDialog.Builder builder =new AlertDialog.Builder(getContext());
+                                                                        if(HomeFragment.chatLast.equals("0")){
+                                                                            builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?")     ;
+                                                                            final String finalContactId = contactId;
+                                                                            builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    postPosition(title, finalContactId, area, edu, hukou
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"0");
+                                                                                }
+                                                                            });
+                                                                        }else {
+                                                                            final String finalContactId = contactId;
+                                                                            builder.setMessage("剩余可发布约聊岗位"+HomeFragment.chatLast+"次 是否发布可约聊岗位?") ;
+                                                                            builder.setPositiveButton("可约聊", new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    postPosition(title, finalContactId, area, edu, hukou
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"1");
+                                                                                }
+                                                                            });
+                                                                            builder.setNegativeButton("不可约聊", new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    postPosition(title, finalContactId, area, edu, hukou
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"0");
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                        builder.create().show();
+                                                                    } else {
                                                                         update_position(title, contactId, area, edu, hukou
                                                                                 , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
                                                                     }
@@ -476,7 +506,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
 
     private void postPosition(String title, String contactId, String area, String edu, String hukou,
                               String jobs, String years, String pay, String gender, String ages,
-                              String house, String tele, String nums, String info, String cateName) {
+                              String house, String tele, String nums, String info, String cateName,String  chat) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.POST_POSITION);//发布
         httpRequest.add("title", title);
@@ -496,6 +526,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
         httpRequest.add("nums", nums);
         httpRequest.add("info", info);
         httpRequest.add("cateName", cateName);
+        httpRequest.add("chat", chat);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -520,8 +551,8 @@ public class PostingPositionActivity extends BaseTitleActivity {
     }
 
     private void update_position(String title, String contactId, String area, String edu, String hukou,
-                              String jobs, String years, String pay, String gender, String ages,
-                              String house, String tele, String nums, String info, String cateName) {
+                                 String jobs, String years, String pay, String gender, String ages,
+                                 String house, String tele, String nums, String info, String cateName) {
 
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.update_position);//修改

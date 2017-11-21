@@ -8,11 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.netease.nim.uikit.NimUIKit;
-import com.netease.nim.uikit.core.NimUIKitImpl;
-import com.netease.nim.uikit.plugin.OnlineStateChangeListener;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.cache.FriendDataCache;
 import com.netease.nim.uikit.cache.TeamDataCache;
@@ -22,12 +19,13 @@ import com.netease.nim.uikit.common.ui.dialog.CustomAlertDialog;
 import com.netease.nim.uikit.common.ui.drop.DropCover;
 import com.netease.nim.uikit.common.ui.drop.DropManager;
 import com.netease.nim.uikit.common.ui.recyclerview.listener.SimpleClickListener;
+import com.netease.nim.uikit.core.NimUIKitImpl;
+import com.netease.nim.uikit.plugin.OnlineStateChangeListener;
 import com.netease.nim.uikit.recent.adapter.RecentContactAdapter;
 import com.netease.nim.uikit.uinfo.UserInfoHelper;
 import com.netease.nim.uikit.uinfo.UserInfoObservable;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
-import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.RequestCallbackWrapper;
 import com.netease.nimlib.sdk.ResponseCode;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -238,6 +236,7 @@ public class RecentContactsFragment extends TFragment {
     }
 
     private void showLongClickMenu(final RecentContact recent, final int position) {
+        //item长按事件
         CustomAlertDialog alertDialog = new CustomAlertDialog(getActivity());
         alertDialog.setTitle(UserInfoHelper.getUserTitleName(recent.getContactId(), recent.getSessionType()));
         String title = getString(R.string.main_msg_list_delete_chatting);
@@ -273,29 +272,29 @@ public class RecentContactsFragment extends TFragment {
             }
         });
 
-        alertDialog.addItem("删除该聊天（仅服务器）", new onSeparateItemClickListener() {
-            @Override
-            public void onClick() {
-                NIMClient.getService(MsgService.class)
-                        .deleteRoamingRecentContact(recent.getContactId(), recent.getSessionType())
-                        .setCallback(new RequestCallback<Void>() {
-                            @Override
-                            public void onSuccess(Void param) {
-                                Toast.makeText(getActivity(), "delete success", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onFailed(int code) {
-                                Toast.makeText(getActivity(), "delete failed, code:" + code, Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onException(Throwable exception) {
-
-                            }
-                        });
-            }
-        });
+//        alertDialog.addItem("删除该聊天（仅服务器）", new onSeparateItemClickListener() {
+//            @Override
+//            public void onClick() {
+//                NIMClient.getService(MsgService.class)
+//                        .deleteRoamingRecentContact(recent.getContactId(), recent.getSessionType())
+//                        .setCallback(new RequestCallback<Void>() {
+//                            @Override
+//                            public void onSuccess(Void param) {
+//                                Toast.makeText(getActivity(), "delete success", Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            @Override
+//                            public void onFailed(int code) {
+//                                Toast.makeText(getActivity(), "delete failed, code:" + code, Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                            @Override
+//                            public void onException(Throwable exception) {
+//
+//                            }
+//                        });
+//            }
+//        });
         alertDialog.show();
     }
 

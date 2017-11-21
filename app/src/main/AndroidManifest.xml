@@ -141,7 +141,7 @@
         如果 SDKOptions 中提供了，取 SDKOptions 中的值。 -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="dd74dc0ef4984916d8229dc47e0c3fe1" />
+            android:value="a99978b70ffcf627c58dcada5eb78921" />
 
         <!-- 声明网易云通信后台服务，如需保持后台推送，使用独立进程效果会更好。 -->
         <service

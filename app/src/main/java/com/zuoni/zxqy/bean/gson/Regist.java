@@ -40,6 +40,24 @@ public class Regist extends BaseHttpResponse {
 
         private String userid;
         private String siteId;
+        private String accid;
+        private String accToken;
+
+        public String getAccid() {
+            return accid;
+        }
+
+        public void setAccid(String accid) {
+            this.accid = accid;
+        }
+
+        public String getAccToken() {
+            return accToken;
+        }
+
+        public void setAccToken(String accToken) {
+            this.accToken = accToken;
+        }
 
         public String getUserid() {
             return userid;

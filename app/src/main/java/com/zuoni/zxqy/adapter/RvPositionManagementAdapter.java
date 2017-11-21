@@ -105,6 +105,12 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
                 onPositionManagementListener.onClick04(mList.get(position), position);
             }
         });
+
+        if(mList.get(position).getChatStatus().equals("1")){
+            holder.ivChatStatus.setVisibility(View.VISIBLE);
+        }else {
+            holder.ivChatStatus.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -116,7 +122,7 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
 
         TextView title, hits, status, update_time, ordid;
         RelativeLayout layoutChoose;
-        ImageView menu01, menu02, ivChoose;
+        ImageView menu01, menu02, ivChoose,ivChatStatus;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -130,6 +136,7 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
             menu01 = (ImageView) itemView.findViewById(R.id.menu01);
             menu02 = (ImageView) itemView.findViewById(R.id.menu02);
             ivChoose = (ImageView) itemView.findViewById(R.id.ivChoose);
+            ivChatStatus = (ImageView) itemView.findViewById(R.id.ivChatStatus);
         }
     }
 }

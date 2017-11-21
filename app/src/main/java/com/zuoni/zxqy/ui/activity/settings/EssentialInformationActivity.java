@@ -24,6 +24,10 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.uinfo.UserService;
+import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum;
 import com.zuoni.common.dialog.choice.BottomGetPhotoDialog;
 import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
@@ -46,7 +50,9 @@ import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -278,7 +284,8 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
 
     }
 
-    private void updateCompanyInfo(String contactName, String fax, String tele, String address, String cateId, String type, String web, String lawer) {
+    private void updateCompanyInfo(final String contactName, String fax, String tele, String address, String cateId, String type, String web, String lawer) {
+
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.UPDATE_COMPANY_INFO);
         httpRequest.add("contactName", contactName);
@@ -300,6 +307,7 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
                 if (info.getStatus().equals("true")) {
                     showToast("修改成功");
+//                    upDateYX(contactName,"");
                     myFinish();
                 } else {
                     showToast(info.getMessage());
@@ -328,6 +336,7 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 UploadCompanyLogo info = gson.fromJson(response, UploadCompanyLogo.class);
                 if (info.getStatus().equals("true")) {
                     imagePath = info.getImg();
+                    upDateYX("",imagePath);
 //                    CacheUtils
                 } else {
                     showToast(info.getMessage());
@@ -339,6 +348,38 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 LogUtil.i("上传头像" + exception);
             }
         }, getContext());
+    }
+
+    /**
+     * 更新云信资料
+     */
+    private void upDateYX(String name,String headUrl) {
+
+        Map<UserInfoFieldEnum, Object> fields = new HashMap<>();
+        if(!name.equals("")){
+            fields.put(UserInfoFieldEnum.Name, name);
+        }
+
+        if(!headUrl.equals("")){
+            fields.put(UserInfoFieldEnum.AVATAR, headUrl);
+        }
+
+
+        NIMClient.getService(UserService.class).updateUserInfo(fields)
+                .setCallback(new RequestCallback<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+
+                    @Override
+                    public void onFailed(int i) {
+                    }
+
+                    @Override
+                    public void onException(Throwable throwable) {
+                    }
+                });
     }
 
 

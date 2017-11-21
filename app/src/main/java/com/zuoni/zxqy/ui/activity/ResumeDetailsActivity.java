@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.joooonho.SelectableRoundedImageView;
+import com.netease.nim.uikit.NimUIKit;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
@@ -153,6 +154,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 
     }
 
+    private String iddd="123456";
+
 
     private void resume_detail(String workerId) {
         showLoading();
@@ -170,6 +173,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                 ResumeDetail info = gson.fromJson(response, ResumeDetail.class);
                 if (info.getStatus().equals("true")) {
 
+//                    iddd=info.getData().getId();
+                    iddd=info.getData().getAccid();
                     //头像
                     RequestOptions requestOptions = new RequestOptions()
                             .centerCrop()
@@ -184,6 +189,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 
                     //姓名
                     name.setText(info.getData().getName());
+                    setTitle(info.getData().getName() + "的简历");
                     invitationPeople.setName(info.getData().getName());
                     //info01  性别+年龄+身高+体重 男I26岁I175cmI63kg
 
@@ -335,6 +341,30 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                 break;
             case R.id.btBottomMenu02:
                 //立即沟通
+
+//                int a= (int) (Math.random()*10);
+//
+//                int b=a%5;
+//
+//                switch (b){
+//                    case 0:
+//                        NimUIKit.startP2PSession(getContext(), "test2", null);
+//                        break;
+//                    case 1:
+//                        NimUIKit.startP2PSession(getContext(), "000000002", null);
+//                        break;
+//                    case 2:
+//                        NimUIKit.startP2PSession(getContext(), "000000003", null);
+//                        break;
+//                    case 3:
+//                        NimUIKit.startP2PSession(getContext(), "000000004", null);
+//                        break;
+//                    case 4:
+//                        NimUIKit.startP2PSession(getContext(), "15168212330", null);
+//                        break;
+//                }
+                NimUIKit.startP2PSession(getContext(), "comp_21790", null);
+
                 break;
             case R.id.btBottomMenu03:
                 //加入收藏

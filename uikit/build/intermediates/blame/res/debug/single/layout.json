@@ -12,24 +12,24 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_preview_image_from_local_activity.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\nim_contacts_count_item.xml",
-        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_contacts_count_item.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\nim_ait_contact_label_item.xml",
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_ait_contact_label_item.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\nim_contacts_count_item.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_contacts_count_item.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\nim_picker_images_fragment.xml",
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_picker_images_fragment.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\nim_team_info_activity.xml",
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\nim_team_info_activity.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\layout\\abc_screen_simple.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
@@ -470,6 +470,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\20e74e26f73b3826feab140cffe569db6d7b7a3e\\output\\res\\layout\\design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\top_bar_style.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\layout\\top_bar_style.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",

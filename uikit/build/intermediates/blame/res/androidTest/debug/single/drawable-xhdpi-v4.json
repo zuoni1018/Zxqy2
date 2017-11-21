@@ -32,6 +32,10 @@
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\zx_40.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\zx_40.png"
+    },
+    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\nim_message_input_emotion.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\nim_message_input_emotion.png"
     },
@@ -118,6 +122,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\nim_avatar_default.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\nim_avatar_default.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\nim_contact_checkbox_unchecked.png",

@@ -236,6 +236,10 @@
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\nim_avatar_default.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-xhdpi\\nim_avatar_default.png"
+    },
+    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_normal.9.png",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
     },
@@ -298,6 +302,10 @@
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\zx_40.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-xhdpi\\zx_40.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\nim_g_ic_failed_small.png",

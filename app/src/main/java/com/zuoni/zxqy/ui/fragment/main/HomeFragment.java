@@ -3,6 +3,7 @@ package com.zuoni.zxqy.ui.fragment.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.joooonho.SelectableRoundedImageView;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.uinfo.UserService;
+import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
@@ -26,9 +31,13 @@ import com.zuoni.zxqy.ui.activity.InvitationInterviewRecordActivity;
 import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
 import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
+import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
+import com.zuoni.zxqy.ui.activity.YlzpActivity;
 import com.zuoni.zxqy.ui.activity.resumesearch.ResumeSearchActivity;
 import com.zuoni.zxqy.ui.activity.settings.SettingsActivity;
-import com.zuoni.zxqy.ui.activity.YlzpActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,12 +98,25 @@ public class HomeFragment extends Fragment {
     LinearLayout menu6;
     @BindView(R.id.ivHead)
     SelectableRoundedImageView ivHead;
+    @BindView(R.id.ivLeve2)
+    ImageView ivLeve2;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
+
+        tvhycz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("您已成功通知客服");
+                builder.setPositiveButton("知道了", null);
+                builder.create().show();
+            }
+        });
+
         return view;
     }
 
@@ -110,6 +132,10 @@ public class HomeFragment extends Fragment {
         unbinder.unbind();
     }
 
+    private boolean isFirstUpDateYX = true;//是否第一次去更新云信资料
+
+    public static String chatLast = "0";
+
     private void getUiInfo() {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_UI_INFO);//获取主页
@@ -123,7 +149,7 @@ public class HomeFragment extends Fragment {
                     title.setText(info.getData().getTitle() + "");
                     email.setText(info.getData().getEmail() + "");
                     msgSend.setText(info.getData().getMsgSend() + "");
-
+                    chatLast = info.getData().getChatLast();
                     msgReceive.setText(info.getData().getMsgReceive() + "");
                     viewResume.setText(info.getData().getViewResume() + "");
                     resumeLeft.setText(info.getData().getResumeLeft() + "");
@@ -140,6 +166,26 @@ public class HomeFragment extends Fragment {
                             .load(info.getData().getImg())
                             .apply(requestOptions)
                             .into(ivHead);
+
+                    if (info.getData().getVipLevel().equals("1")) {
+                        //绿色会员
+                        ivLevel.setImageResource(R.mipmap.zx_64);
+                        ivLevel.setVisibility(View.VISIBLE);
+                        ivLeve2.setVisibility(View.GONE);
+                    } else if (info.getData().getVipLevel().equals("2")) {
+                        ivLevel.setImageResource(R.mipmap.zx_65);
+                        ivLevel.setVisibility(View.VISIBLE);
+                        ivLeve2.setVisibility(View.GONE);
+                    } else {
+                        ivLevel.setVisibility(View.GONE);
+                        ivLeve2.setVisibility(View.VISIBLE);
+                    }
+
+                    if (isFirstUpDateYX) {
+                        upDateYX(info.getData().getCname() + "", info.getData().getImg());
+                    }
+
+
                 }
             }
 
@@ -150,6 +196,34 @@ public class HomeFragment extends Fragment {
         }, getContext());
 
 
+    }
+
+    /**
+     * 更新云信资料
+     */
+    private void upDateYX(String name, String headUrl) {
+
+        Map<UserInfoFieldEnum, Object> fields = new HashMap<>();
+        fields.put(UserInfoFieldEnum.Name, name);
+        fields.put(UserInfoFieldEnum.AVATAR, headUrl);
+        NIMClient.getService(UserService.class).updateUserInfo(fields)
+                .setCallback(new RequestCallback<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        isFirstUpDateYX = false;
+                    }
+
+                    @Override
+                    public void onFailed(int i) {
+                        isFirstUpDateYX = true;
+                    }
+
+                    @Override
+                    public void onException(Throwable throwable) {
+                        isFirstUpDateYX = true;
+                    }
+                });
     }
 
     @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5, R.id.menu_6})
@@ -186,7 +260,8 @@ public class HomeFragment extends Fragment {
         Intent mIntent = new Intent(getContext(), cls);
         startActivity(mIntent);
     }
-    @OnClick({R.id.ivSettings,R.id.ivHead})
+
+    @OnClick({R.id.ivSettings, R.id.ivHead})
     public void onViewClicked2(View view) {
         jumpToActivity(SettingsActivity.class);
     }
@@ -194,5 +269,23 @@ public class HomeFragment extends Fragment {
     @OnClick(R.id.ivHomePreview)
     public void onViewClicked2() {
         jumpToActivity(HomePreviewActivity.class);
+    }
+
+
+    @OnClick({R.id.positionManagement01, R.id.positionManagement02, R.id.positionManagement03})
+    public void onPositionManagementClicked(View view) {
+        Intent mIntent=new Intent(getContext(),ResumeManagementActivity.class);
+        switch (view.getId()) {
+            case R.id.positionManagement01:
+                mIntent.putExtra("pos",0);
+                break;
+            case R.id.positionManagement02:
+                mIntent.putExtra("pos",1);
+                break;
+            case R.id.positionManagement03:
+                mIntent.putExtra("pos",3);
+                break;
+        }
+        startActivity(mIntent);
     }
 }

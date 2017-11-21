@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.jaeger.library.StatusBarUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.zuoni.common.callback.SimpleTextWatcher;
 import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
@@ -189,13 +193,18 @@ public class RegisterActivity extends BaseTitleActivity {
                 LogUtil.i("注册" + response);
                 Regist info = gson.fromJson(response, Regist.class);
                 if (info.getStatus().equals("true")) {
+                    login2(info.getData().getAccid(),info.getData().getAccToken());
                     CacheUtils.setToken(info.getToken(), getContext());
                     CacheUtils.setUserid(info.getData().getUserid(), getContext());
                     CacheUtils.setSiteId(info.getData().getSiteId(), getContext());
                     CacheUtils.setPhone(et02.getText().toString().trim(), getContext());
                     showToast("注册成功");
                     jumpToActivity(PersonalInformationActivity.class);
-                } else {
+                }else if(info.getStatus().equals("4")){
+                    showToast(info.getMessage());
+                    myFinish();
+                }
+                else {
                     showToast(info.getMessage());
                 }
             }
@@ -208,6 +217,29 @@ public class RegisterActivity extends BaseTitleActivity {
         }, getContext());
 
 
+    }
+
+    private void login2(String accid, String accToken) {
+        LoginInfo info;
+        info = new LoginInfo(accid, accToken); // config...
+
+        NIMClient.getService(AuthService.class).login(info).setCallback(new RequestCallback() {
+            @Override
+            public void onSuccess(Object o) {
+                LogUtil.i("onSuccess");
+            }
+
+            @Override
+            public void onFailed(int i) {
+                LogUtil.i("onFailed");
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+
+            }
+        });
+        CacheUtils.setLoginInfo(info, getContext());
     }
 
     private boolean isShow01 = false;
