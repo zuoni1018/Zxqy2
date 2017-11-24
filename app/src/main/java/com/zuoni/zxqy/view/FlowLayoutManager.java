@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zuoni.zxqy.callback.OnRowsCallbackListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,13 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private int totalHeight = 0;
     private Row row = new Row();
     private int margin;
+
+
+    private OnRowsCallbackListener onRowsCallbackListener;
+
+    public void setOnRowsCallbackListener(OnRowsCallbackListener onRowsCallbackListener) {
+        this.onRowsCallbackListener = onRowsCallbackListener;
+    }
 
     public FlowLayoutManager(Context context) {
         this.context = context;
@@ -79,8 +88,10 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
         return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    private int rows=0;
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        rows=0;
         if (state.isPreLayout()) {
             return;
         }
@@ -128,6 +139,8 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
                 row.setMaxHeight(maxHeightItem);
             } else {
                 //换行
+                rows++;
+
                 formatAboveRow();
                 cuLineTop += maxHeightItem;
                 totalHeight += maxHeightItem;
@@ -148,6 +161,9 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
 
         }
         totalHeight = Math.max(totalHeight, getVerticalSpace());
+        if(onRowsCallbackListener!=null){
+            onRowsCallbackListener.onRowsCallback(rows);
+        }
     }
 
     /**

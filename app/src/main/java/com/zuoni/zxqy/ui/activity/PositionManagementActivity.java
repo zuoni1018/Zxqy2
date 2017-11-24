@@ -103,6 +103,12 @@ public class PositionManagementActivity extends BaseTitleActivity {
                 //删除职位
                 deletePosition(job.getJobId());
             }
+
+            @Override
+            public void onClick05(Job job, int position) {
+                //刷新
+                refresh_position(job.getJobId());
+            }
         });
 
         mAdapter = new LRecyclerViewAdapter(rvPositionManagementAdapter);
@@ -274,9 +280,10 @@ public class PositionManagementActivity extends BaseTitleActivity {
      * 刷新职位
      * 将职位信息改为当前
      */
-    private void refresh_position() {
+    private void refresh_position(String jobId) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(refresh_position);//刷新职位
+        httpRequest.add("jobId",jobId);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -355,7 +362,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
                 update_order(jobId, ordid);
                 break;
             case R.id.layoutRight02:
-                refresh_position();
+
                 break;
         }
     }

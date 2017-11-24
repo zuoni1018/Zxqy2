@@ -31,7 +31,7 @@
     <RelativeLayout
         android:id="@+id/layoutRight01"
         android:layout_width="24dp"
-        android:layout_marginRight="41dp"
+        android:layout_marginRight="12dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true">
 
@@ -44,6 +44,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:layout_marginRight="12dp"
         android:id="@+id/layoutRight02"
         android:layout_width="18dp"

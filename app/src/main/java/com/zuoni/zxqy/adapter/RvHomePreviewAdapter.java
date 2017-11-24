@@ -45,6 +45,7 @@ public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdap
         holder.company_name.setText(mList.get(position).getCompany_name());
         holder.update_time.setText(mList.get(position).getUpdate_time());
         holder.pay.setText(mList.get(position).getPay());
+        holder.area.setText(mList.get(position).getArea());
 
     }
 
@@ -55,7 +56,7 @@ public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView job_name,company_name,pay,update_time;
+        TextView job_name,company_name,pay,update_time,area;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +64,7 @@ public class RvHomePreviewAdapter extends RecyclerView.Adapter<RvHomePreviewAdap
             company_name=itemView.findViewById(R.id.company_name);
             update_time=itemView.findViewById(R.id.update_time);
             pay=itemView.findViewById(R.id.pay);
+            area=itemView.findViewById(R.id.area);
         }
     }
 }

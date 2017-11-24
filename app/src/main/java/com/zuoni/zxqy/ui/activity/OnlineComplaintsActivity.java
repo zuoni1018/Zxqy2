@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zuoni.common.utils.LogUtil;
@@ -39,6 +40,12 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
     EditText et01;
     @BindView(R.id.bt)
     Button bt;
+    @BindView(R.id.tvPeople)
+    TextView tvPeople;
+
+    private String workId;
+    private String name;
+    private boolean isAdmin = true;
 
     @Override
     public int setLayoutId() {
@@ -51,6 +58,16 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         setTitle("在线投诉留言");
 
+        name = getIntent().getStringExtra("name");
+        workId = getIntent().getStringExtra("workId");
+
+        if (workId == null) {
+            isAdmin = true;
+        } else {
+            isAdmin = false;
+            setTitle("发送留言");
+            tvPeople.setText("收信人："+name);
+        }
 
     }
 
@@ -124,9 +141,41 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
         if (info.equals("")) {
             showToast("请输入留言");
         } else {
-            send_mess_admin(type, info);
+            if (isAdmin) {
+                send_mess_admin(type, info);
+            } else {
+                send_mess_to(type, info);
+            }
+
         }
 
 
+    }
+
+    private void send_mess_to(String type, String info) {
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(AppUrl.send_mess_to);//发送消息
+        httpRequest.add("type", type);
+        httpRequest.add("info", info);
+        httpRequest.add("toid", workId);
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                LogUtil.i("发送消息" + response);
+                closeLoading();
+                BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
+                if (info.getStatus().equals("true")) {
+                    myFinish();
+                } else {
+                    showToast(info.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                closeLoading();
+                showToast("服务器异常");
+            }
+        }, getContext());
     }
 }

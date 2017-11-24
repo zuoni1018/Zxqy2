@@ -94,6 +94,8 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     LinearLayout layout08;
     @BindView(R.id.btChange)
     Button btChange;
+    @BindView(R.id.iv05)
+    ImageView iv05;
 
 
     private TakePhoto takePhoto;
@@ -147,9 +149,9 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
 
 
         //修改公司地址
-        et05.setFocusable(false);
+//        et05.setFocusable(false);
 
-        et05.setOnClickListener(new View.OnClickListener() {
+        iv05.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CompanyAddressActivity.class);
@@ -336,7 +338,7 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 UploadCompanyLogo info = gson.fromJson(response, UploadCompanyLogo.class);
                 if (info.getStatus().equals("true")) {
                     imagePath = info.getImg();
-                    upDateYX("",imagePath);
+                    upDateYX("", imagePath);
 //                    CacheUtils
                 } else {
                     showToast(info.getMessage());
@@ -353,14 +355,14 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     /**
      * 更新云信资料
      */
-    private void upDateYX(String name,String headUrl) {
+    private void upDateYX(String name, String headUrl) {
 
         Map<UserInfoFieldEnum, Object> fields = new HashMap<>();
-        if(!name.equals("")){
+        if (!name.equals("")) {
             fields.put(UserInfoFieldEnum.Name, name);
         }
 
-        if(!headUrl.equals("")){
+        if (!headUrl.equals("")) {
             fields.put(UserInfoFieldEnum.AVATAR, headUrl);
         }
 
@@ -571,5 +573,9 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
                 LogUtil.i("行业" + exception);
             }
         }, getContext());
+    }
+
+    @OnClick(R.id.iv05)
+    public void onViewClicked() {
     }
 }

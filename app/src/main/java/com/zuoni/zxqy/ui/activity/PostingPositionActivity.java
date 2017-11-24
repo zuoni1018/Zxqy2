@@ -3,7 +3,9 @@ package com.zuoni.zxqy.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,15 +16,18 @@ import com.google.gson.Gson;
 import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnDoubleDataSelectedListener;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
+import com.zuoni.common.utils.DensityUtils;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppSetting;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.adapter.RvPostingTagAdapter;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.bean.gson.GetJobsCate;
 import com.zuoni.zxqy.bean.gson.GetSetting;
 import com.zuoni.zxqy.bean.gson.getPositionDetail;
 import com.zuoni.zxqy.bean.model.Contact;
+import com.zuoni.zxqy.callback.OnRowsCallbackListener;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
@@ -30,8 +35,10 @@ import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 import com.zuoni.zxqy.ui.activity.settings.ContactManagerActivity;
 import com.zuoni.zxqy.ui.fragment.main.HomeFragment;
 import com.zuoni.zxqy.view.DataPickerLinkageDialog;
+import com.zuoni.zxqy.view.FlowLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -112,15 +119,50 @@ public class PostingPositionActivity extends BaseTitleActivity {
     TextView textView;
     @BindView(R.id.bt17)
     Button bt17;
+    @BindView(R.id.tv18)
+    TextView tv18;
+    @BindView(R.id.rv18)
+    RecyclerView rv18;
+    @BindView(R.id.layout18)
+    LinearLayout layout18;
 
     private boolean isAdd = true;
     private String jobId = "";
-
+    private ArrayList<String> tags;
+    private RvPostingTagAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("发布新职位");
+        tv18.setVisibility(View.VISIBLE);
+        rv18.setVisibility(View.GONE);
+        tags=new ArrayList<>();
+        FlowLayoutManager flowLayoutManager = new FlowLayoutManager(getContext());
+        flowLayoutManager.setOnRowsCallbackListener(new OnRowsCallbackListener() {
+            @Override
+            public void onRowsCallback(int row) {
+                LogUtil.i("行号回调"+row);
+                if(needDo){
+                    needDo=false;
+                    final LinearLayout.LayoutParams para1;
+                    para1 = (LinearLayout.LayoutParams) rv18.getLayoutParams();
+                    para1.height = DensityUtils.dp2px(getContext(),27)*(row+1);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rv18.setLayoutParams(para1);
+                        }
+                    },50);
+                }
+//                rv18.setLayoutParams(para1);
+//                mAdapter.notifyDataSetChanged();
+            }
+        });
+        rv18.setLayoutManager(flowLayoutManager);
+        mAdapter = new RvPostingTagAdapter(getContext(), tags);
+
+        rv18.setAdapter(mAdapter);
         getUserCompany();
 
         isAdd = getIntent().getBooleanExtra("isAdd", true);
@@ -196,6 +238,22 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     tv13.setText(info.getData().getTele());
                     et14.setText(info.getData().getNums());
                     et16.setText(info.getData().getInfo());
+
+                    if(!info.getData().getTag().equals("")){
+
+                        String[] a = info.getData().getTag().split(",");
+                        tags.clear();
+                        tags.addAll(Arrays.asList(a));
+
+                        if(tags.size()>0){
+                            tv18.setVisibility(View.GONE);
+                            rv18.setVisibility(View.VISIBLE);
+                        }else {
+                            tv18.setVisibility(View.VISIBLE);
+                            rv18.setVisibility(View.GONE);
+                        }
+                        mAdapter.notifyDataSetChanged();
+                    }
                 } else {
                     showToast(info.getMessage());
                     myFinish();
@@ -363,6 +421,26 @@ public class PostingPositionActivity extends BaseTitleActivity {
             //做了添加或者修改的操作需要更新列表
             contact = (Contact) data.getSerializableExtra("Contact");
             tv03.setText(contact.getName() + "   " + contact.getTele());
+        }else if(requestCode == 666&& resultCode == 777){
+
+            String result=data.getStringExtra("result");
+            LogUtil.i("标签选择回调",result);
+            if(result!=null){
+                String[] a = result.split(",");
+                tags.clear();
+                tags.addAll(Arrays.asList(a));
+                if(result.equals("")){
+                    tags.clear();
+                }
+                if(tags.size()>0){
+                    tv18.setVisibility(View.GONE);
+                    rv18.setVisibility(View.VISIBLE);
+                }else {
+                    tv18.setVisibility(View.VISIBLE);
+                    rv18.setVisibility(View.GONE);
+                }
+                mAdapter.notifyDataSetChanged();
+            }
         }
     }
 
@@ -449,32 +527,34 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                     showToast("请输入岗位要求");
                                                                 } else {
                                                                     if (isAdd) {
-                                                                        AlertDialog.Builder builder =new AlertDialog.Builder(getContext());
-                                                                        if(HomeFragment.chatLast.equals("0")){
-                                                                            builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?")     ;
+                                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                                        if (HomeFragment.chatLast.equals("0")) {
+                                                                            builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?");
                                                                             final String finalContactId = contactId;
                                                                             builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"0");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "0");
+
                                                                                 }
                                                                             });
-                                                                        }else {
+                                                                            builder.setNegativeButton("否", null);
+                                                                        } else {
                                                                             final String finalContactId = contactId;
-                                                                            builder.setMessage("剩余可发布约聊岗位"+HomeFragment.chatLast+"次 是否发布可约聊岗位?") ;
+                                                                            builder.setMessage("剩余可发布约聊岗位" + HomeFragment.chatLast + "次 是否发布可约聊岗位?");
                                                                             builder.setPositiveButton("可约聊", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"1");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "1");
                                                                                 }
                                                                             });
                                                                             builder.setNegativeButton("不可约聊", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName,"0");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "0");
                                                                                 }
                                                                             });
                                                                         }
@@ -506,7 +586,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
 
     private void postPosition(String title, String contactId, String area, String edu, String hukou,
                               String jobs, String years, String pay, String gender, String ages,
-                              String house, String tele, String nums, String info, String cateName,String  chat) {
+                              String house, String tele, String nums, String info, String cateName, String chat) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.POST_POSITION);//发布
         httpRequest.add("title", title);
@@ -527,6 +607,16 @@ public class PostingPositionActivity extends BaseTitleActivity {
         httpRequest.add("info", info);
         httpRequest.add("cateName", cateName);
         httpRequest.add("chat", chat);
+
+        String tag="";
+        for (int i = 0; i <tags.size(); i++) {
+            tag=tag+tags.get(i)+",";
+        }
+        if(!tag.equals("")){
+            tag=tag.substring(0,tag.length()-1);
+        }
+        httpRequest.add("tag", tag);
+
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -575,6 +665,18 @@ public class PostingPositionActivity extends BaseTitleActivity {
         httpRequest.add("cateName", cateName);
 
         httpRequest.add("jobId", jobId);
+
+        //
+        String tag="";
+        for (int i = 0; i <tags.size(); i++) {
+            tag=tag+tags.get(i)+",";
+        }
+        if(!tag.equals("")){
+            tag=tag.substring(0,tag.length()-1);
+        }
+        httpRequest.add("tag", tag);
+
+
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -596,5 +698,16 @@ public class PostingPositionActivity extends BaseTitleActivity {
                 showToast("服务器异常");
             }
         }, getContext());
+    }
+
+
+
+    private boolean needDo=true;
+    @OnClick({R.id.rv18,R.id.layout18})
+    public void onlayout18Clicked() {
+        needDo=true;
+        Intent mIntent =new Intent(getContext(),TagSelectionActivity.class);
+        mIntent.putStringArrayListExtra("list",tags);
+        startActivityForResult(mIntent,666);
     }
 }

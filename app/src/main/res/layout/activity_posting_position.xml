@@ -44,24 +44,24 @@
 
                 <EditText
                     android:id="@+id/et01"
-                    android:singleLine="true"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@null"
                     android:hint="请填写"
+                    android:singleLine="true"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
 
                 <ImageView
-                    android:visibility="invisible"
                     android:layout_width="6.2dp"
                     android:layout_height="11.7dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/zx_44" />
+                    android:src="@mipmap/zx_44"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -109,6 +109,67 @@
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
+
+                <ImageView
+                    android:layout_width="6.2dp"
+                    android:layout_height="11.7dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@mipmap/zx_44" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white"
+                android:orientation="horizontal"
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:text="标签选择"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv18"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="请选择"
+                    android:textColor="#151515"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv18"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:layout_width="6.2dp"
@@ -286,28 +347,30 @@
                     android:text="户口要求"
                     android:textColor="#333333"
                     android:textSize="14sp" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
+
                 <EditText
-                    android:background="@null"
                     android:id="@+id/et06"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@null"
                     android:hint="请填写"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
                 <ImageView
-                    android:visibility="invisible"
                     android:layout_width="6.2dp"
                     android:layout_height="11.7dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/zx_44" />
+                    android:src="@mipmap/zx_44"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -440,6 +503,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
+
                 <TextView
                     android:id="@+id/tv09"
                     android:layout_width="200dp"
@@ -537,25 +601,25 @@
                     android:layout_weight="1" />
 
                 <EditText
-                    android:singleLine="true"
-                    android:background="@null"
                     android:id="@+id/et11"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@null"
                     android:hint="请填写"
+                    android:singleLine="true"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
 
                 <ImageView
-                    android:visibility="invisible"
                     android:layout_width="6.2dp"
                     android:layout_height="11.7dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/zx_44" />
+                    android:src="@mipmap/zx_44"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -700,26 +764,26 @@
                     android:layout_weight="1" />
 
                 <EditText
-                    android:inputType="number"
-                    android:background="@null"
-                    android:maxLength="5"
-                    android:singleLine="true"
                     android:id="@+id/et14"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@null"
                     android:hint="请填写"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:singleLine="true"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
                 <ImageView
-                    android:visibility="invisible"
                     android:layout_width="6.2dp"
                     android:layout_height="11.7dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/zx_44" />
+                    android:src="@mipmap/zx_44"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 
@@ -734,12 +798,12 @@
                 android:textSize="11sp" />
 
             <LinearLayout
-                android:minHeight="50dp"
                 android:id="@+id/layout15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/bg_white"
+                android:minHeight="50dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -757,33 +821,34 @@
                     android:layout_weight="1" />
 
                 <EditText
-                    android:background="@null"
                     android:id="@+id/et16"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@null"
                     android:hint="请填写"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
 
                 <ImageView
-                    android:visibility="invisible"
                     android:layout_width="6.2dp"
                     android:layout_height="11.7dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@mipmap/zx_44" />
+                    android:src="@mipmap/zx_44"
+                    android:visibility="invisible" />
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/bt17"
                 android:layout_width="329dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="31dp"
                 android:layout_marginBottom="17dp"
+                android:layout_marginTop="31dp"
                 android:background="@drawable/bt_bg_red_clickable"
                 android:gravity="center"
                 android:text="发布"

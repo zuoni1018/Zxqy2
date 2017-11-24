@@ -8,6 +8,7 @@
     <include layout="@layout/top_bar_style" />
 
     <TextView
+        android:id="@+id/tvPeople"
         android:layout_width="144dp"
         android:layout_height="19dp"
         android:layout_marginLeft="29dp"
@@ -132,7 +133,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
     <EditText
         android:id="@+id/et01"

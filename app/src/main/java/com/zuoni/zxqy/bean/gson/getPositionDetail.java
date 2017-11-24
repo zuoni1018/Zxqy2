@@ -66,6 +66,19 @@ public class getPositionDetail extends  BaseHttpResponse {
         private String cateName;
         private String contactName;
 
+        public String getTag() {
+            if(tag==null){
+                return "";
+            }
+            return tag;
+        }
+
+        public void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        private String tag;
+
         public String getId() {
             return id;
         }

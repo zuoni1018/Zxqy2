@@ -165,20 +165,41 @@
                 android:textColor="#FF666666"
                 android:textSize="14sp" />
 
-
-            <EditText
-                android:id="@+id/et05"
+            <LinearLayout
+                android:id="@+id/layout05"
                 android:layout_width="331dp"
                 android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:background="@mipmap/zx_112"
-                android:gravity="left|center_vertical"
-                android:hint="请填写公司地址"
-                android:paddingLeft="20dp"
-                android:paddingRight="10dp"
-                android:textColor="#FF333333"
-                android:textSize="13sp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et05"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:gravity="left|center_vertical"
+                    android:hint="请填写公司地址"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#FF333333"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv05"
+                    android:layout_width="16.7dp"
+                    android:layout_height="16.7dp"
+                    android:layout_marginRight="14.8dp"
+                    android:src="@mipmap/zx_36" />
+
+            </LinearLayout>
+
+
+
 
             <TextView
                 android:layout_width="331dp"

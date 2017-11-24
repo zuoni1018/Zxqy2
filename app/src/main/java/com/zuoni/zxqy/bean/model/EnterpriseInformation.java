@@ -140,6 +140,20 @@ public class EnterpriseInformation  {
         private String nums;
         private String update_time;
 
+        public String getArea() {
+            if(area==null){
+                return "";
+            }
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
+        private String area;
+
+
         public String getId() {
             return id;
         }

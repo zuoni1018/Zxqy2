@@ -38,6 +38,28 @@ public class ResumeManager {
     private String hopepostion;
     private String inviteId;
 
+    public String getRequestsalary() {
+        if(requestsalary==null){
+            return "";
+        }
+        return requestsalary;
+    }
+
+    public void setRequestsalary(String requestsalary) {
+        this.requestsalary = requestsalary;
+    }
+
+    private String requestsalary;
+    private String userChatId;
+
+    public String getUserChatId() {
+        return userChatId;
+    }
+
+    public void setUserChatId(String userChatId) {
+        this.userChatId = userChatId;
+    }
+
     public String getInviteStatus() {
         return inviteStatus;
     }

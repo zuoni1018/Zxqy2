@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.joooonho.SelectableRoundedImageView;
-import com.netease.nim.uikit.NimUIKit;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
@@ -363,7 +362,13 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 //                        NimUIKit.startP2PSession(getContext(), "15168212330", null);
 //                        break;
 //                }
-                NimUIKit.startP2PSession(getContext(), "comp_21790", null);
+//                NimUIKit.startP2PSession(getContext(), "comp_21790", null);
+
+                Intent mIntent2=new Intent(getContext(),OnlineComplaintsActivity.class);
+                mIntent2.putExtra("workId",invitationPeople.getWorkId());
+                mIntent2.putExtra("name",invitationPeople.getName());
+                startActivity(mIntent2);
+
 
                 break;
             case R.id.btBottomMenu03:

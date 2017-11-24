@@ -31,6 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.zuoni.zxqy.GlobalVariable.CountTime;
+
 
 /**
  * Created by zangyi_shuai_ge on 2017/10/17
@@ -82,7 +84,7 @@ public class LoginActivity extends BaseTitleActivity {
             isShow01 = true;
             et1.setSelection(et1.getText().length());
             if (phone.equals("15168212330")) {
-                et3.setText("612214");
+                et3.setText("452167");
                 et2.setText("123456");
             }
         }
@@ -101,7 +103,7 @@ public class LoginActivity extends BaseTitleActivity {
         });
 
 
-        timer = new CountDownTimer(20000, 1000) {
+        timer = new CountDownTimer(CountTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int nowTime = (int) (millisUntilFinished / 1000);
@@ -187,7 +189,6 @@ public class LoginActivity extends BaseTitleActivity {
 
     private void login(String phone, String passwd, String verify) {
 
-
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.LOGIN);//登录
         httpRequest.add("passwd", passwd);
@@ -214,6 +215,7 @@ public class LoginActivity extends BaseTitleActivity {
                         CacheUtils.setUserid(info.getData().getUserid(), getContext());
                         CacheUtils.setSiteId(info.getData().getSiteId(), getContext());
                         CacheUtils.setToken(info.getToken(), getContext());
+                        login2(info.getData().getAccid(), info.getData().getAccToken());
                         jumpToActivity(PersonalInformationActivity.class);
                         finish();
                     }

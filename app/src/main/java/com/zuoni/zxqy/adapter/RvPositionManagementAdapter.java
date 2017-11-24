@@ -54,6 +54,12 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
         holder.title.setText(mList.get(position).getTitle());
         holder.hits.setText(mList.get(position).getHits());
         holder.ordid.setText(mList.get(position).getOrdid());
+
+        String time=mList.get(position).getUpdate_time();
+
+        String[]a= time.split("\\s+");
+
+        holder.update_time.setText(a[0]);
         holder.update_time.setText(mList.get(position).getUpdate_time());
 //        holder.title.setText(mList.get(position).getTitle());
 
@@ -111,6 +117,13 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
         }else {
             holder.ivChatStatus.setVisibility(View.GONE);
         }
+
+        holder.refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPositionManagementListener.onClick05(mList.get(position), position);
+            }
+        });
     }
 
     @Override
@@ -120,7 +133,7 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title, hits, status, update_time, ordid;
+        TextView title, hits, status, update_time, ordid,refresh;
         RelativeLayout layoutChoose;
         ImageView menu01, menu02, ivChoose,ivChatStatus;
 
@@ -137,6 +150,7 @@ public class RvPositionManagementAdapter extends RecyclerView.Adapter<RvPosition
             menu02 = (ImageView) itemView.findViewById(R.id.menu02);
             ivChoose = (ImageView) itemView.findViewById(R.id.ivChoose);
             ivChatStatus = (ImageView) itemView.findViewById(R.id.ivChatStatus);
+            refresh = (TextView) itemView.findViewById(R.id.refresh);
         }
     }
 }

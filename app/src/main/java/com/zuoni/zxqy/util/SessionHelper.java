@@ -1,7 +1,6 @@
 package com.zuoni.zxqy.util;
 
 import android.content.Context;
-import android.content.Intent;
 
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.common.ui.popupmenu.NIMPopupMenu;
@@ -24,7 +23,6 @@ import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.zuoni.common.utils.LogUtil;
-import com.zuoni.zxqy.ui.activity.ResumeDetailsActivity;
 
 import java.util.List;
 
@@ -49,28 +47,17 @@ public class SessionHelper {
     public static void init() {
         // 注册自定义消息附件解析器
 //        NIMClient.getService(MsgService.class).registerCustomAttachmentParser(new CustomAttachParser());
-
         // 注册各种扩展消息类型的显示ViewHolder
         registerViewHolders();
-
         // 设置会话中点击事件响应处理
         setSessionListener();
-
-
-
-
-
         // 注册消息撤回监听器
         registerMsgRevokeObserver();
-
         NimUIKit.setCommonP2PSessionCustomization(null);
         NimUIKit.setCommonTeamSessionCustomization(null);
 
         NimUIKit.setRecentCustomization(getRecentCustomization());
     }
-
-
-
 
     public static void startTeamSession(Context context, String tid) {
         startTeamSession(context, tid, null);
@@ -79,9 +66,6 @@ public class SessionHelper {
     public static void startTeamSession(Context context, String tid, IMMessage anchor) {
         NimUIKit.startTeamSession(context, tid, anchor);
     }
-
-
-
 
     private static RecentCustomization getRecentCustomization() {
         if (recentCustomization == null) {
@@ -122,10 +106,8 @@ public class SessionHelper {
                 }
             };
         }
-
         return recentCustomization;
     }
-
 
     private static void registerViewHolders() {
 //        NimUIKit.registerMsgItemViewHolder(FileAttachment.class, MsgViewHolderFile.class);
@@ -138,8 +120,6 @@ public class SessionHelper {
 //        NimUIKit.registerTipMsgViewHolder(MsgViewHolderTip.class);
 //        registerRedPacketViewHolder();
     }
-
-
 
     private static void setSessionListener() {
         SessionEventListener listener = new SessionEventListener() {
@@ -155,27 +135,29 @@ public class SessionHelper {
 //                        return;
 //                    }
                 }
-                if(message.getDirect() == MsgDirectionEnum.Out){
+                if (message.getDirect() == MsgDirectionEnum.Out) {
                     //发出的
                     LogUtil.i("发出的");
-                }else  if(message.getDirect() == MsgDirectionEnum.In){
+                } else if (message.getDirect() == MsgDirectionEnum.In) {
                     //收到的
-                    LogUtil.i("收到的","昵称："+message.getFromNick()+"账号："+message.getFromAccount());
-                    String workId="";
-                    if(message.getFromAccount().length()>5&&message.getFromAccount().substring(0,5).equals("comp_")){
-                        workId=message.getFromAccount().substring(5,message.getFromAccount().length());
-                        LogUtil.i("收到的workId",workId);
-                    }
-
-                    String name="";
-
-                    if(message.getFromNick()!=null&&!message.getFromNick().equals("")){
-                        name=message.getFromNick();
-                    }
-                    Intent mIntent = new Intent(context, ResumeDetailsActivity.class);
-                    mIntent.putExtra("name",name);
-                    mIntent.putExtra("workId", workId);
-                    context.startActivity(mIntent);
+                    LogUtil.i("收到的", "昵称：" + message.getFromNick() + "账号：" + message.getFromAccount());
+//                    String workId = "";
+//                    if (message.getFromAccount().length() > 5 && message.getFromAccount().substring(0, 5).equals("user_")) {
+//                        workId = message.getFromAccount().substring(5, message.getFromAccount().length());
+//                        LogUtil.i("收到的workId", workId);
+//                    } else {
+//                        return;
+//                    }
+//
+//                    String name = "";
+//
+//                    if (message.getFromNick() != null && !message.getFromNick().equals("")) {
+//                        name = message.getFromNick();
+//                    }
+//                    Intent mIntent = new Intent(context, ResumeDetailsActivity.class);
+//                    mIntent.putExtra("name", name);
+//                    mIntent.putExtra("workId", workId);
+//                    context.startActivity(mIntent);
                 }
 //                UserProfileActivity.start(context, message.getFromAccount());
             }
@@ -189,11 +171,6 @@ public class SessionHelper {
         NimUIKit.setSessionListener(listener);
     }
 
-
-
-
-
-
     private static void registerMsgRevokeObserver() {
         NIMClient.getService(MsgServiceObserve.class).observeRevokeMessage(new Observer<IMMessage>() {
             @Override
@@ -206,11 +183,4 @@ public class SessionHelper {
             }
         }, true);
     }
-
-
-
-
-
-
-
 }

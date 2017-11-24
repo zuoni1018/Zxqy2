@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
 import com.zuoni.common.utils.LogUtil;
@@ -76,6 +78,14 @@ public class PersonalInformationActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         setTitle("个人信息");
         industrys = new ArrayList<>();
+        setBackOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NIMClient.getService(AuthService.class).logout();
+                CacheUtils.setAccount("",getContext());
+                myFinish();
+            }
+        });
     }
 
     @OnClick({R.id.tvGetAddress, R.id.layout02, R.id.layout03, R.id.layout04, R.id.btSure})
@@ -202,6 +212,18 @@ public class PersonalInformationActivity extends BaseTitleActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        //登出
+        NIMClient.getService(AuthService.class).logout();
+        CacheUtils.setAccount("",getContext());
+        myFinish();
+    }
+
+
+
 
     private void getUserCompany() {
         //获取企业信息

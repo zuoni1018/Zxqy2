@@ -91,11 +91,14 @@ public class AppUrl {
     public static final String delete_invite=BASE_URL+"/Resume/delete_invite";
 
     public static final String send_mess_admin=BASE_URL+"/User/send_mess_admin";
-
+    public static final String send_mess_to=BASE_URL+"/User/send_mess_to";
 
     public static final String delete_mess=BASE_URL+"/User/delete_mess";
 
     public static final String get_invite_detail=BASE_URL+"/Resume/get_invite_detail";
+
+    public static final String get_tags=BASE_URL+"/QuickGet/get_tags";
+    public static final String get_chat_resume=BASE_URL+"/Chat/get_chat_resume";
 
 
 }

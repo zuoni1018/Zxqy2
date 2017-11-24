@@ -12,4 +12,5 @@ public interface OnPositionManagementListener {
     void onClick02(Job job ,int position);
     void onClick03(Job job ,int position);
     void onClick04(Job job ,int position);
+    void onClick05(Job job ,int position);
 }
