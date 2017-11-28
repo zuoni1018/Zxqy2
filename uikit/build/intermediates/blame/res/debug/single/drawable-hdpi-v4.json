@@ -36,12 +36,12 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-hdpi\\nim_dialog_toast_bg.png"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nim_message_input_edittext_box.9.png",
-        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-hdpi\\nim_message_input_edittext_box.9.png"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nim_team_member_delete_pressed.png",
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-hdpi\\nim_team_member_delete_pressed.png"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\nim_message_input_edittext_box.9.png",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable-hdpi\\nim_message_input_edittext_box.9.png"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",

@@ -989,6 +989,13 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="permission_cancel">Cancel</string>
+    <string name="permission_message_permission_failed">We need some permissions are you refuse or system error, would you please go to Settings page manual authorization, otherwise the function to use!</string>
+    <string name="permission_message_permission_rationale">You have rejected us for authorization, would you please authorize, otherwise the function to use!</string>
+    <string name="permission_resume">Resume</string>
+    <string name="permission_setting">Setting</string>
+    <string name="permission_title_permission_failed">Permission apply failure</string>
+    <string name="permission_title_permission_rationale">Permission denied</string>
     <string name="pic_and_video">图片和视频</string>
     <string name="picker_image_album_empty">相册中没有图片！</string>
     <string name="picker_image_album_loading">相册加载中…</string>
@@ -2746,6 +2753,9 @@
         <item name="android:minWidth">0dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="permission_PermissionActivity" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:statusBarColor" ns1:targetApi="lollipop">@android:color/transparent</item>
     </style>
     <style name="recycler_view" parent="scroll_view">
         <item name="android:fadingEdge">none</item>

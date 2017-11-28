@@ -769,7 +769,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请填写"
+                    android:hint="若干"
                     android:inputType="number"
                     android:maxLength="5"
                     android:singleLine="true"

@@ -1,12 +1,16 @@
 package com.netease.nim.uikit.session.fragment;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.ait.AitManager;
@@ -36,6 +40,12 @@ import com.netease.nimlib.sdk.msg.model.MessageReceipt;
 import com.netease.nimlib.sdk.robot.model.NimRobotInfo;
 import com.netease.nimlib.sdk.robot.model.RobotAttachment;
 import com.netease.nimlib.sdk.robot.model.RobotMsgType;
+import com.yanzhenjie.alertdialog.AlertDialog;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.PermissionListener;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RationaleListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +84,72 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.nim_message_fragment, container, false);
+        //拿权限
+        getPermission();
+
+
         return rootView;
+    }
+
+    private static final int REQUEST_CODE_SETTING = 300;
+
+    /**
+     * 6.0 语音权限获取
+     * Permission.CAMERA 照相机
+     * Permission.STORAGE 存储卡
+     * Permission.MICROPHONE 录音
+     */
+    private void getPermission() {
+        // 申请权限。
+        AndPermission.with(getContext())
+                .requestCode(100)
+                .permission(Permission.CAMERA, Permission.STORAGE, Permission.MICROPHONE)
+                .callback(new PermissionListener() {
+                    @Override
+                    public void onSucceed(int requestCode, @NonNull List<String> deniedPermissions) {
+                        //权限申请成功
+                    }
+
+                    @Override
+                    public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+                        switch (requestCode) {
+                            case 100: {
+                                Toast.makeText(getContext(),"获取权限失败",Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                        }
+                        // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
+                        if (AndPermission.hasAlwaysDeniedPermission(getContext(), deniedPermissions)) {
+                            // 第一种：用默认的提示语。
+                            AndPermission.defaultSettingDialog((Activity) getContext(), REQUEST_CODE_SETTING).show();
+                        }
+                    }
+                })
+                .rationale(new RationaleListener() {
+                    @Override
+                    public void showRequestPermissionRationale(int i, final Rationale rationale) {
+
+                        // 自定义对话框。
+                        AlertDialog.newBuilder(getContext())
+                                .setTitle("提示")
+                                .setMessage("我们需要的一些必要权限被禁止，请授权给我们。")
+                                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                        rationale.resume();
+                                    }
+                                })
+                                .setNegativeButton("就不", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                        rationale.cancel();
+                                    }
+                                }).show();
+                    }
+                })
+                .start();
     }
 
     /**

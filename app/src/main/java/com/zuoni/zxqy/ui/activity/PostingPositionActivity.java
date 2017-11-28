@@ -236,9 +236,12 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     et11.setText(info.getData().getAges());
                     tv12.setText(info.getData().getHouse());
                     tv13.setText(info.getData().getTele());
-                    et14.setText(info.getData().getNums());
+                    if(info.getData().getNums().equals("0")){
+                        et14.setHint("若干");
+                    }else {
+                        et14.setText(info.getData().getNums());
+                    }
                     et16.setText(info.getData().getInfo());
-
                     if(!info.getData().getTag().equals("")){
 
                         String[] a = info.getData().getTag().split(",");
@@ -477,9 +480,15 @@ public class PostingPositionActivity extends BaseTitleActivity {
 
         final String house = tv12.getText().toString().trim();
         final String tele = tv13.getText().toString().trim();
-        final String nums = et14.getText().toString().trim();
+        String nums = et14.getText().toString().trim();//招聘人数
         final String info = et16.getText().toString().trim();
         final String cateName = tv02.getText().toString().trim();
+
+        //0为若干
+        if(nums.equals("")){
+            nums="0";
+        }
+
         if (isInPut(title)) {
             showToast("请填写职位名称");
         } else {
@@ -520,9 +529,9 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                         if (isInPut(tele)) {
                                                             showToast("请选择应聘方式");
                                                         } else {
-                                                            if (isInPut(nums)) {
-                                                                showToast("请输入招聘人数");
-                                                            } else {
+//                                                            if (isInPut(nums)) {
+//                                                                showToast("请输入招聘人数");
+//                                                            } else {
                                                                 if (isInPut(info)) {
                                                                     showToast("请输入岗位要求");
                                                                 } else {
@@ -531,11 +540,12 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                         if (HomeFragment.chatLast.equals("0")) {
                                                                             builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?");
                                                                             final String finalContactId = contactId;
+                                                                            final String finalNums1 = nums;
                                                                             builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "0");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums1, info, cateName, "0");
 
                                                                                 }
                                                                             });
@@ -543,18 +553,20 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                         } else {
                                                                             final String finalContactId = contactId;
                                                                             builder.setMessage("剩余可发布约聊岗位" + HomeFragment.chatLast + "次 是否发布可约聊岗位?");
+                                                                            final String finalNums = nums;
                                                                             builder.setPositiveButton("可约聊", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "1");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums, info, cateName, "1");
                                                                                 }
                                                                             });
+                                                                            final String finalNums2 = nums;
                                                                             builder.setNegativeButton("不可约聊", new DialogInterface.OnClickListener() {
                                                                                 @Override
                                                                                 public void onClick(DialogInterface dialog, int which) {
                                                                                     postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, "0");
+                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums2, info, cateName, "0");
                                                                                 }
                                                                             });
                                                                         }
@@ -564,7 +576,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                                                                                 , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
                                                                     }
                                                                 }
-                                                            }
+//                                                            }
                                                         }
                                                     }
                                                 }

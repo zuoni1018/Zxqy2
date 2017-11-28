@@ -41,6 +41,6 @@ dependencies {
 
     compile "me.leolin:ShortcutBadger:1.1.17@aar"
 
-
+    compile 'com.yanzhenjie:permission:1.1.0'
 
 }
