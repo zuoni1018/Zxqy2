@@ -84,7 +84,7 @@ public class LoginActivity extends BaseTitleActivity {
             isShow01 = true;
             et1.setSelection(et1.getText().length());
             if (phone.equals("15168212330")) {
-                et3.setText("452167");
+                et3.setText("822445");
                 et2.setText("123456");
             }
         }
@@ -161,7 +161,7 @@ public class LoginActivity extends BaseTitleActivity {
                 break;
             case R.id.tv2:
                 //忘记密码
-                jumpToActivity(ForgetActivity.class);
+                jumpToActivity(ForgetActivity2.class);
                 break;
             case R.id.btSure:
                 //登录按钮

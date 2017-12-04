@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zuoni.common.widget.SwipeMenuView
-    android:id="@+id/swipeMenuView"
-    android:layout_marginTop="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/layoutMain"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:background="@drawable/bg_white"
         android:gravity="center"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +73,6 @@
 
             <TextView
                 android:id="@+id/add_time"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -79,7 +80,8 @@
                 android:gravity="center"
                 android:text="2015-08-29"
                 android:textColor="#FF999999"
-                android:textSize="11sp" />
+                android:textSize="11sp"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -117,11 +119,11 @@
 
         <LinearLayout
             android:id="@+id/layout01"
-            android:gravity="center_vertical"
             android:layout_width="84dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/bg_06"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <View
@@ -137,10 +139,10 @@
                 android:src="@mipmap/zx_31" />
 
             <TextView
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="删除"
                 android:textColor="#FFD0021B"
                 android:textSize="14sp" />
@@ -174,10 +176,10 @@
                 android:src="@mipmap/zx_43" />
 
             <TextView
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="修改"
                 android:textColor="#FFD0021B"
                 android:textSize="14sp" />
@@ -189,4 +191,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</com.zuoni.common.widget.SwipeMenuView>
+</LinearLayout>

@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.auth.AuthService;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
@@ -17,6 +19,9 @@ import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.CompanyProfileActivity;
+import com.zuoni.zxqy.ui.activity.LoginActivity;
+import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
+import com.zuoni.zxqy.ui.activity.base.ActivityCollector;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
 import butterknife.BindView;
@@ -99,7 +104,7 @@ public class SettingsActivity extends BaseTitleActivity {
 
 
 
-    @OnClick({R.id.layout1, R.id.layout2, R.id.layout3})
+    @OnClick({R.id.layout1, R.id.layout2, R.id.layout3, R.id.layout4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout1:
@@ -111,8 +116,19 @@ public class SettingsActivity extends BaseTitleActivity {
                 jumpToActivity(EssentialInformationActivity.class);
                 break;
             case R.id.layout3:
-                //其他功能
-                jumpToActivity(OtherFunctionsActivity.class);
+                //投诉建议
+//                jumpToActivity(OtherFunctionsActivity.class);
+                jumpToActivity(OnlineComplaintsActivity.class);
+                break;
+            case R.id.layout4:
+                //退出登录
+                NIMClient.getService(AuthService.class).logout();
+                CacheUtils.setAccount("",getContext());
+                //销毁界面
+                ActivityCollector.finishAll();
+                CacheUtils.setLogin(false,getContext());
+                Intent mIntent=new Intent(getContext(), LoginActivity.class);
+                startActivity(mIntent);
                 break;
         }
     }

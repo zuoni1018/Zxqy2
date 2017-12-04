@@ -62,7 +62,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@color/color_white"
         android:orientation="vertical">
@@ -103,24 +103,19 @@
             android:layout_marginRight="10dp"
             android:background="@color/bg_color" />
 
-        <ScrollView
-            android:overScrollMode="never"
-            android:layout_width="333.8dp"
-            android:layout_height="261dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:fadingEdge="none"
-            android:paddingBottom="10dp"
-            android:scrollbars="none">
 
-            <TextView
-                android:id="@+id/tvInfo"
-                android:layout_width="333.8dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:textColor="#FF999999"
-                android:textSize="14sp" />
-        </ScrollView>
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textColor="#FF999999"
+            android:textSize="14sp" />
+
 
     </LinearLayout>
 
@@ -133,7 +128,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:text="其他功能"
+            android:text="投诉建议"
+            android:textColor="#FF333333"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="7.2dp"
+            android:layout_height="16.7dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/zx_44" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        style="@style/settings_item_layout_style">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="退出登录"
             android:textColor="#FF333333"
             android:textSize="17sp" />
 

@@ -10,13 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.joooonho.SelectableRoundedImageView;
 import com.zuoni.common.utils.ToastUtils;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.model.ResumeManager;
 import com.zuoni.zxqy.callback.OnResumeManagerListener;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,15 +53,7 @@ public class RvResumeAdapter3 extends RecyclerView.Adapter<RvResumeAdapter3.MyVi
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        RequestOptions requestOptions = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.zx_113)
-                .error(R.mipmap.zx_113);
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mList.get(position).getImg())
-                .apply(requestOptions)
-                .into(holder.img);
+        GlideUtils.setHead(mContext,mList.get(position).getImg(),holder.img);
 
         holder.name.setText(mList.get(position).getName());
         holder.jobName.setText(mList.get(position).getViewJobName());

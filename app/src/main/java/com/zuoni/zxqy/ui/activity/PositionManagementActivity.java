@@ -107,7 +107,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
             @Override
             public void onClick05(Job job, int position) {
                 //刷新
-                refresh_position(job.getJobId());
+//                refresh_position(job.getJobId());
             }
         });
 
@@ -283,7 +283,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
     private void refresh_position(String jobId) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(refresh_position);//刷新职位
-        httpRequest.add("jobId",jobId);
+//        httpRequest.add("jobId",jobId);
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
@@ -307,7 +307,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
-    @OnClick({R.id.bt01, R.id.bt02})
+    @OnClick({R.id.bt01, R.id.bt02,R.id.bt03})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt01:
@@ -330,6 +330,9 @@ public class PositionManagementActivity extends BaseTitleActivity {
             case R.id.bt02:
                 Intent mIntent = new Intent(getContext(), PostingPositionActivity.class);
                 startActivityForResult(mIntent, 10086);
+                break;
+            case R.id.bt03:
+                refresh_position("");
                 break;
         }
     }

@@ -28,8 +28,8 @@ import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.HomePreviewActivity;
 import com.zuoni.zxqy.ui.activity.InvitationInterviewRecordActivity;
+import com.zuoni.zxqy.ui.activity.MainActivity;
 import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
-import com.zuoni.zxqy.ui.activity.OnlineComplaintsActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
 import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
@@ -102,6 +102,12 @@ public class HomeFragment extends Fragment {
     ImageView ivLeve2;
     private View view;
 
+    private MainActivity mainActivity;
+
+    public void setMainActivity(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, null);
@@ -110,6 +116,7 @@ public class HomeFragment extends Fragment {
         tvhycz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                company_upgrade();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("您已成功通知客服");
                 builder.setPositiveButton("知道了", null);
@@ -119,7 +126,21 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+    private void company_upgrade() {
+        HttpRequest httpRequest = new HttpRequest(AppUrl.company_upgrade);//会员申请
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                LogUtil.i("会员申请" + response);
 
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+
+            }
+        }, getContext());
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -142,6 +163,7 @@ public class HomeFragment extends Fragment {
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
             @Override
             public void onSucceed(String response, Gson gson) {
+                mainActivity.closeLoading();
                 LogUtil.i("获取主页" + response);
                 GetUiInfo info = gson.fromJson(response, GetUiInfo.class);
                 if (info.getStatus().equals("true")) {
@@ -191,6 +213,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailed(Exception exception) {
+                mainActivity.closeLoading();
                 LogUtil.i("获取主页" + exception);
             }
         }, getContext());
@@ -226,7 +249,7 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5, R.id.menu_6})
+    @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5,R.id.menu_7})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.menu_1:
@@ -249,9 +272,15 @@ public class HomeFragment extends Fragment {
                 //我的信息
                 jumpToActivity(MyMailboxActivity.class);
                 break;
-            case R.id.menu_6:
-                //在线投诉留言
-                jumpToActivity(OnlineComplaintsActivity.class);
+//            case R.id.menu_6:
+//                //在线投诉留言
+////                jumpToActivity(OnlineComplaintsActivity.class);
+//                break;
+            case R.id.menu_7:
+                //一键刷新
+                mainActivity.showLoading();
+                getUiInfo();
+//                jumpToActivity(OnlineComplaintsActivity.class);
                 break;
         }
     }

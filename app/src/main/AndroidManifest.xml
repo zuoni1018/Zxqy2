@@ -130,6 +130,7 @@
         <activity android:name=".ui.activity.MailDetailsActivity" />
         <activity android:name=".ui.activity.InterviewContentActivity" />
         <activity android:name=".ui.activity.TagSelectionActivity" />
+        <activity android:name=".ui.activity.ForgetActivity2" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

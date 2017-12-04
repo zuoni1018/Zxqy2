@@ -41,7 +41,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mList = new ArrayList<>();
-        mList.add(new HomeFragment());
+        HomeFragment homeFragment=new HomeFragment();
+        homeFragment.setMainActivity(this);
+        mList.add(homeFragment);
         mList.add(new ChartFragment());
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), mList);
         viewPager.setAdapter(mPagerAdapter);

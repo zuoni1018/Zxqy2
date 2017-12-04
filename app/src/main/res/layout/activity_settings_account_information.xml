@@ -74,7 +74,9 @@
 
     <LinearLayout
         android:id="@+id/layout3"
-        style="@style/settings_item_layout_style">
+        style="@style/settings_item_layout_style"
+        android:layout_marginTop="1dp"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,6 +94,42 @@
 
         <TextView
             android:id="@+id/tv03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:textColor="#FF333333"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="7.2dp"
+            android:layout_height="16.7dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/zx_44" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout4"
+        style="@style/settings_item_layout_style"
+        android:layout_marginTop="1dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="修改密码"
+            android:textColor="#FF333333"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

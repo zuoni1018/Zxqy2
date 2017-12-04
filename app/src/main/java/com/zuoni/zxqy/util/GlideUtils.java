@@ -17,8 +17,8 @@ public class GlideUtils {
     public static  void setHead(Context context, String url, ImageView imageView){
         RequestOptions requestOptions = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.mipmap.zx_113)
-                .error(R.mipmap.zx_113);
+                .placeholder(R.mipmap.zx_666)
+                .error(R.mipmap.zx_666);
         Glide.with(context)
                 .asBitmap()
                 .load(url)

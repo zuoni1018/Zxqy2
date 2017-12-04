@@ -81,7 +81,6 @@ public class AppUrl {
 
     public static final String view_contact=BASE_URL+"/Resume/view_contact";
 
-
     public static final String add_company_fav=BASE_URL+"/Resume/add_company_fav";
 
     public static final String delete_favs=BASE_URL+"/Resume/delete_favs";
@@ -98,7 +97,12 @@ public class AppUrl {
     public static final String get_invite_detail=BASE_URL+"/Resume/get_invite_detail";
 
     public static final String get_tags=BASE_URL+"/QuickGet/get_tags";
+
     public static final String get_chat_resume=BASE_URL+"/Chat/get_chat_resume";
+
+    public static final String company_upgrade=BASE_URL+"/User/company_upgrade";
+
+
 
 
 }

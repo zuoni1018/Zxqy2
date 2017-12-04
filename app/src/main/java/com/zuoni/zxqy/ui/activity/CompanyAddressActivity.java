@@ -79,7 +79,7 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         onBMapLocationListener = this;
-        tvTitle.setText("查找门店");
+        tvTitle.setText("公司地址");
         layoutLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,15 +192,15 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
             case R.id.tvRight:
                 //保存
                 String door=etSearch.getText().toString().trim();
-                if(door.equals("")|tvSearch01.getText().toString().equals("")){
-                    showToast("请输入门牌号码或选择地址");
-                }else {
+//                if(door.equals("")|tvSearch01.getText().toString().equals("")){
+//                    showToast("请输入门牌号码或选择地址");
+//                }else {
                     String message=tv01.getText().toString()+tvSearch01.getText().toString()+door;
                     Intent mIntent=new Intent();
                     mIntent.putExtra("message",message);
                     setResult(10087,mIntent);
                     myFinish();
-                }
+//                }
                 break;
             case R.id.layoutSearch:
                 //搜索框
@@ -208,10 +208,10 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
                     showToast("定位失败");
                     return;
                 }
-                Intent mIntent = new Intent(getContext(), MapSearchActivity.class);
-                mIntent.putExtra("latitude", latLng.latitude);
-                mIntent.putExtra("longitude", latLng.longitude);
-                startActivityForResult(mIntent, 10086);
+                Intent mIntent2 = new Intent(getContext(), MapSearchActivity.class);
+                mIntent2.putExtra("latitude", latLng.latitude);
+                mIntent2.putExtra("longitude", latLng.longitude);
+                startActivityForResult(mIntent2, 10086);
                 break;
         }
     }

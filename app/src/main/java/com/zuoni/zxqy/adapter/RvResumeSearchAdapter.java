@@ -11,12 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.joooonho.SelectableRoundedImageView;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.gson.SearchResume;
 import com.zuoni.zxqy.ui.activity.ResumeDetailsActivity;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,15 +68,7 @@ public class RvResumeSearchAdapter extends RecyclerView.Adapter<RvResumeSearchAd
         holder.jiguan.setText(mList.get(position).getJiguan());
         holder.age.setText(mList.get(position).getAge() + "");
 
-        RequestOptions requestOptions = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.zx_113)
-                .error(R.mipmap.zx_113);
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mList.get(position).getImg())
-                .apply(requestOptions)
-                .into(holder.img);
+        GlideUtils.setHead(mContext,mList.get(position).getImg(),holder.img);
 
         if (mList.get(position).getSex().equals("女")) {
             holder.sex.setBackgroundResource(R.mipmap.zx_8);

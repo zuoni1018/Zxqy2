@@ -42,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏
         mContext = BaseActivity.this;
         LoadingDialog.Builder builder = new LoadingDialog.Builder(BaseActivity.this);
-        builder.setMessage("载入中...");
+        builder.setMessage("加载中...");
         loadingDialog = builder.create();
     }
     public abstract int setLayoutId();

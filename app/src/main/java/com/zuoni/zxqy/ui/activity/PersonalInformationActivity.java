@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,7 +41,7 @@ import butterknife.OnClick;
 
 public class PersonalInformationActivity extends BaseTitleActivity {
     @BindView(R.id.tvGetAddress)
-    TextView tvGetAddress;
+    EditText tvGetAddress;
     @BindView(R.id.layout02)
     LinearLayout layout02;
     @BindView(R.id.layout03)
@@ -61,6 +62,10 @@ public class PersonalInformationActivity extends BaseTitleActivity {
     TextView tv06;
     @BindView(R.id.tv07)
     TextView tv07;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.ivGetAddress)
+    ImageView ivGetAddress;
 
 
     private List<Industry> industrys;
@@ -82,7 +87,7 @@ public class PersonalInformationActivity extends BaseTitleActivity {
             @Override
             public void onClick(View v) {
                 NIMClient.getService(AuthService.class).logout();
-                CacheUtils.setAccount("",getContext());
+                CacheUtils.setAccount("", getContext());
                 myFinish();
             }
         });
@@ -92,8 +97,7 @@ public class PersonalInformationActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvGetAddress:
-                Intent intent=new Intent(getContext(),CompanyAddressActivity.class);
-                startActivityForResult(intent,10086);
+
                 break;
             case R.id.layout02:
                 //所属行业
@@ -176,7 +180,7 @@ public class PersonalInformationActivity extends BaseTitleActivity {
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
                 if (info.getStatus().equals("true")) {
                     jumpToActivity(MainActivity.class);
-                    CacheUtils.setLogin(true,getContext());
+                    CacheUtils.setLogin(true, getContext());
                     myFinish();
                 } else {
                     showToast(info.getMessage());
@@ -196,15 +200,15 @@ public class PersonalInformationActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10086 ) {
+        if (requestCode == 10086) {
 
-            if(resultCode==10087){
+            if (resultCode == 10087) {
                 //            公司简介传回来的信息
                 String text = data.getStringExtra("message");
                 if (text != null) {
                     tvGetAddress.setText(text);
                 }
-            }else if(resultCode==10088){
+            } else if (resultCode == 10088) {
                 String text = data.getStringExtra("text");
                 if (text != null) {
                     tv07.setText(text);
@@ -218,11 +222,9 @@ public class PersonalInformationActivity extends BaseTitleActivity {
 //        super.onBackPressed();
         //登出
         NIMClient.getService(AuthService.class).logout();
-        CacheUtils.setAccount("",getContext());
+        CacheUtils.setAccount("", getContext());
         myFinish();
     }
-
-
 
 
     private void getUserCompany() {
@@ -334,6 +336,12 @@ public class PersonalInformationActivity extends BaseTitleActivity {
             }
         }, getContext());
 
+    }
+
+    @OnClick(R.id.ivGetAddress)
+    public void onViewClicked() {
+        Intent intent = new Intent(getContext(), CompanyAddressActivity.class);
+        startActivityForResult(intent, 10086);
     }
 
 //    @OnClick({R.id.tvGetAddress, R.id.btSure})

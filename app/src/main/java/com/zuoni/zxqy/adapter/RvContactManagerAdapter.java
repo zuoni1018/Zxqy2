@@ -64,7 +64,6 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
             @Override
             public void onClick(View v) {
              layoutMainOnClickListener.onClickListener(mList.get(position),position);
-                holder.swipeMenuView.smoothClose();
             }
         });
 
@@ -78,14 +77,12 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
             @Override
             public void onClick(View v) {
                 layout01OnClickListener.onClickListener(mList.get(position),position);
-                holder.swipeMenuView.smoothClose();
             }
         });
         holder.layout02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 layout02OnClickListener.onClickListener(mList.get(position),position);
-                holder.swipeMenuView.smoothClose();
             }
         });
     }
@@ -98,10 +95,6 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
     class MyViewHolder extends RecyclerView.ViewHolder {
         LinearLayout layoutMain,layout01,layout02;
         TextView name,tele,fax,email,address,add_time;
-        SwipeMenuView swipeMenuView;
-
-
-
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -115,7 +108,6 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
 //            address= (TextView) itemView.findViewById(R.id.address);
 
             add_time= (TextView) itemView.findViewById(R.id.add_time);
-            swipeMenuView= (SwipeMenuView) itemView.findViewById(R.id.swipeMenuView);
         }
     }
 

@@ -56,7 +56,7 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle("在线投诉留言");
+        setTitle("投诉建议");
 
         name = getIntent().getStringExtra("name");
         workId = getIntent().getStringExtra("workId");

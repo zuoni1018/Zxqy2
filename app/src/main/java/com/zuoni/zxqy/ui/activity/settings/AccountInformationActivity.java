@@ -64,7 +64,7 @@ public class AccountInformationActivity extends BaseTitleActivity {
         return R.layout.activity_settings_account_information;
     }
 
-    @OnClick({R.id.layout1, R.id.layout2, R.id.layout3})
+    @OnClick({R.id.layout1, R.id.layout2, R.id.layout3, R.id.layout4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.layout1:
@@ -81,6 +81,10 @@ public class AccountInformationActivity extends BaseTitleActivity {
                 mIntent = new Intent(getContext(), ModifyEmailActivity.class);
                 mIntent.putExtra("email", companyInfo.getEmail());
                 startActivity(mIntent);
+                break;
+            case R.id.layout4:
+                //修改密码
+                jumpToActivity(ModifyPasswordActivity.class);
                 break;
         }
     }

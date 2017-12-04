@@ -29,6 +29,7 @@
             android:textSize="14sp" />
 
         <LinearLayout
+            android:layout_marginRight="10dp"
             android:id="@+id/layoutSearch"
             android:layout_width="0dp"
             android:layout_height="30dp"
@@ -50,10 +51,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="24dp"
                 android:singleLine="true"
                 android:text="查找写字楼等"
                 android:textColor="#FF999999"
                 android:textSize="14sp" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +66,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="11dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_17">
+            android:background="@drawable/bg_17"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="11.5dp"

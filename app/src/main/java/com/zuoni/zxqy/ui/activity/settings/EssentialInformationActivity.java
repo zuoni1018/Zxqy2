@@ -96,6 +96,10 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
     Button btChange;
     @BindView(R.id.iv05)
     ImageView iv05;
+    @BindView(R.id.tv666)
+    TextView tv666;
+    @BindView(R.id.layout05)
+    LinearLayout layout05;
 
 
     private TakePhoto takePhoto;
@@ -113,7 +117,7 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         getTakePhoto().onCreate(savedInstanceState);
-        setTitle("基本信息");
+        setTitle("编辑基本信息");
 
         //从缓存中获得基本信息
         companyInfo = CacheUtils.getCompanyInfo(getContext());
@@ -575,7 +579,10 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         }, getContext());
     }
 
-    @OnClick(R.id.iv05)
-    public void onViewClicked() {
+
+    @OnClick(R.id.tv666)
+    public void onViewClicked6() {
+        //联系人管理
+        jumpToActivity(ContactManagerActivity.class);
     }
 }
