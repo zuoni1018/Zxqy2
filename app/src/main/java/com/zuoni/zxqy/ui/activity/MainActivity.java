@@ -1,6 +1,7 @@
 package com.zuoni.zxqy.ui.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
@@ -47,6 +48,13 @@ public class MainActivity extends BaseActivity {
         mList.add(new ChartFragment());
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), mList);
         viewPager.setAdapter(mPagerAdapter);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showToast("记得刷新职位哦");
+            }
+        },1000);
 
 //        api = WXAPIFactory.createWXAPI(this, GlobalVariable.WX_APP_ID);
 //        HttpRequest  mHttpRequest=new HttpRequest("");

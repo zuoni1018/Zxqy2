@@ -5,7 +5,7 @@
     android:background="@color/bg_color"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_save" />
 
 
     <EditText
@@ -14,13 +14,14 @@
         android:layout_height="329dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:background="@drawable/et_edit_text"
+        android:background="@drawable/et_edit_text66"
         android:gravity="top"
         android:padding="5dp"
         android:textColor="#FF151515"
         android:textSize="14sp" />
 
     <Button
+        android:visibility="invisible"
         android:id="@+id/bt01"
         android:layout_width="329dp"
         android:layout_height="40dp"

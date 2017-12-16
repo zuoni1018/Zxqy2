@@ -285,6 +285,12 @@ public class ResumeManagementFragment01 extends Fragment {
                 peoples.clear();
                 for (int i = 0; i < mList.size(); i++) {
                     if (mList.get(i).isChoose()) {
+
+                        if(mList.get(i).getIs_hide().equals("1")){
+                            resumeManagementActivity.showToast("选择的简历中存在隐藏简历");
+                            return;
+                        }
+
                         InvitationPeople invitationPeople = new InvitationPeople();
                         invitationPeople.setHeadUrl(mList.get(i).getImg());
                         invitationPeople.setName(mList.get(i).getName());

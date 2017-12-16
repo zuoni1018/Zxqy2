@@ -3,6 +3,7 @@ package com.zuoni.zxqy.ui.activity.settings;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zuoni.common.utils.LogUtil;
@@ -28,13 +29,16 @@ public class ModifyEmailActivity extends BaseTitleActivity {
     EditText et01;
     @BindView(R.id.bt02)
     Button bt02;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
     private String email = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle("设置邮箱");
+        setTitle("修改邮箱");
+        tvRight.setText("提交");
         email = getIntent().getStringExtra("email");
         et01.setText(email);
     }
@@ -44,7 +48,7 @@ public class ModifyEmailActivity extends BaseTitleActivity {
         return R.layout.activity_settings_email;
     }
 
-    @OnClick(R.id.bt02)
+    @OnClick(R.id.tvRight)
     public void onViewClicked() {
         email = et01.getText().toString().trim();
         if (email.equals("")) {
@@ -89,4 +93,6 @@ public class ModifyEmailActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
+
 }

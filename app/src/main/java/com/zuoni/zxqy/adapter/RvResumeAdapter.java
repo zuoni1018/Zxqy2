@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.joooonho.SelectableRoundedImageView;
 import com.zuoni.common.utils.ToastUtils;
 import com.zuoni.zxqy.R;
@@ -56,7 +54,7 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        GlideUtils.setHead(mContext,mList.get(position).getImg(),holder.img);
+        GlideUtils.setHead(mContext, mList.get(position).getImg(), holder.img);
 
 
         holder.name.setText(mList.get(position).getName());
@@ -65,7 +63,7 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
         holder.education.setText(mList.get(position).getEducation());
         holder.speciality.setText(mList.get(position).getSpeciality());
 
-        holder.age.setText(mList.get(position).getAge()+"");
+        holder.age.setText(mList.get(position).getAge() + "");
 
         if (mList.get(position).getSex().equals("女")) {
             holder.sex.setBackgroundResource(R.mipmap.zx_8);
@@ -87,47 +85,48 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
             }
         });
 
-        String time=mList.get(position).getAddTime();
+        String time = mList.get(position).getAddTime();
 
-        String[]a= time.split("\\s+");
+        String[] a = time.split("\\s+");
 
         holder.time1.setText(a[0]);
-        if(a[1]!=null){
+        if (a[1] != null) {
             holder.time2.setText(a[1]);
-        }else {
+        } else {
             holder.time2.setText("");
         }
 
-        if(mList.get(position).getIs_hide().equals("1")){
+        if (mList.get(position).getIs_hide().equals("1")) {
             holder.is_hide.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.is_hide.setVisibility(View.GONE);
         }
-        holder.layoutMenu01.setOnClickListener(new View.OnClickListener() {
+        holder.layoutMenu02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mList.get(position).getIs_hide().equals("1")){
-                    ToastUtils.showToast(mContext,"该简历已被隐藏");
-                }else {
-                    onResumeManagerListener.onClick03(mList.get(position),position);
+                if (mList.get(position).getIs_hide().equals("1")) {
+                    ToastUtils.showToast(mContext, "该简历已被隐藏");
+                } else {
+                    onResumeManagerListener.onClick03(mList.get(position), position);
                 }
             }
         });
 
-        holder.layoutMenu02.setOnClickListener(new View.OnClickListener() {
+        holder.layoutMenu01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(!mList.get(position).getJobstatus().equals("3")){
-                    onResumeManagerListener.onClick02(mList.get(position),position);
-                }
+                onResumeManagerListener.onClick03(mList.get(position), position);
             }
         });
 
         holder.layoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onResumeManagerListener.onClick01(mList.get(position),position);
+                if (mList.get(position).getIs_hide().equals("1")) {
+                    ToastUtils.showToast(mContext, "该简历已被隐藏");
+                } else {
+                    onResumeManagerListener.onClick01(mList.get(position), position);
+                }
             }
         });
 
@@ -135,13 +134,13 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
         holder.tv02.setText("邀请面试");
 
         // 2 已查看 1未查看 3已查看并已邀请
-        if(mList.get(position).getJobstatus().equals("1")){
+        if (mList.get(position).getJobstatus().equals("1")) {
             holder.jobstatus.setVisibility(View.VISIBLE);
             holder.tv02.setText("邀请面试");
-        }else if(mList.get(position).getJobstatus().equals("2")){
+        } else if (mList.get(position).getJobstatus().equals("2")) {
             holder.tv02.setText("邀请面试");
             holder.jobstatus.setVisibility(View.GONE);
-        }else if(mList.get(position).getJobstatus().equals("3")){
+        } else if (mList.get(position).getJobstatus().equals("3")) {
             //3已查看并已邀请
             holder.tv02.setText("已邀请");
             holder.jobstatus.setVisibility(View.GONE);
@@ -156,14 +155,14 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         SelectableRoundedImageView img;
-        TextView name, jobName, education, speciality,age,time1,time2;
-        RelativeLayout sex,layoutChoose;
-        ImageView ivChoose,jobstatus;
+        TextView name, jobName, education, speciality, age, time1, time2;
+        RelativeLayout sex, layoutChoose;
+        ImageView ivChoose, jobstatus;
 
 
-        LinearLayout  layoutMenu02,layoutMenu01,layoutMain;
-        ImageView iv01,iv02,is_hide;
-        TextView tv01,tv02;
+        LinearLayout layoutMenu02, layoutMenu01, layoutMain;
+        ImageView iv01, iv02, is_hide;
+        TextView tv01, tv02;
 
         MyViewHolder(View itemView) {
             super(itemView);

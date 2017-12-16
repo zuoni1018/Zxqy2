@@ -37,6 +37,7 @@ import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.bean.gson.GetCompanyCate;
+import com.zuoni.zxqy.bean.gson.GetCompanyInfo;
 import com.zuoni.zxqy.bean.gson.GetSetting;
 import com.zuoni.zxqy.bean.gson.UploadCompanyLogo;
 import com.zuoni.zxqy.bean.model.CompanyInfo;
@@ -47,6 +48,7 @@ import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.CompanyAddressActivity;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -119,37 +121,9 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         getTakePhoto().onCreate(savedInstanceState);
         setTitle("编辑基本信息");
 
-        //从缓存中获得基本信息
-        companyInfo = CacheUtils.getCompanyInfo(getContext());
+        //获取基本信息
 
-        //头像
-        RequestOptions requestOptions = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.zx_113)
-                .error(R.mipmap.zx_113);
-        Glide.with(getContext().getApplicationContext())
-                .asBitmap()
-                .load(companyInfo.getLogo())
-                .apply(requestOptions)
-                .into(ivHead);
-
-        tvName.setText(companyInfo.getTitle());
-
-        et01.setText(companyInfo.getName());
-
-        et02.setText(companyInfo.getLawer());
-
-        et03.setText(companyInfo.getPhone());
-
-        et04.setText(companyInfo.getFax());
-
-        et05.setText(companyInfo.getAddress());
-
-        et06.setText(companyInfo.getWeb());
-
-        tv07.setText(companyInfo.getCateName());
-
-        tv08.setText(companyInfo.getType());
+        getCompanyInfo();
 
 
         //修改公司地址
@@ -164,6 +138,72 @@ public class EssentialInformationActivity extends BaseTitleActivity implements T
         });
 
     }
+    private void getCompanyInfo() {
+
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(AppUrl.GET_COMPANY_INFO);//企业信息2
+
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                closeLoading();
+                LogUtil.i("企业信息2" + response);
+                GetCompanyInfo info = gson.fromJson(response, GetCompanyInfo.class);
+                if (info.getStatus().equals("true")) {
+                    CacheUtils.setCompanyInfo(info.getData(),getContext());
+                    //从缓存中获得基本信息
+                    companyInfo = info.getData();
+
+                    //头像
+                    GlideUtils.setHead(getContext(),companyInfo.getLogo(),ivHead);
+
+                    tvName.setText(companyInfo.getTitle());
+
+                    et01.setText(companyInfo.getName());
+
+                    et02.setText(companyInfo.getLawer());
+
+                    et03.setText(companyInfo.getPhone());
+
+                    et04.setText(companyInfo.getFax());
+
+                    et05.setText(companyInfo.getAddress());
+
+                    et06.setText(companyInfo.getWeb());
+
+                    tv07.setText(companyInfo.getCateName());
+
+                    tv08.setText(companyInfo.getType());
+
+
+                } else {
+                    showToast("获取信息失败");
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            myFinish();
+                        }
+                    },500);
+                }
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                closeLoading();
+                LogUtil.i("企业信息2" + exception);
+                showToast("获取信息失败");
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        myFinish();
+                    }
+                }, 500);
+            }
+        }, getContext());
+
+    }
+
+
 
     @Override
     public int setLayoutId() {

@@ -359,7 +359,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请填写"
+                    android:hint="请填写(选填)"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 
@@ -606,7 +606,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请填写"
+                    android:text="不限"
                     android:singleLine="true"
                     android:textColor="#151515"
                     android:textSize="12sp" />
@@ -826,7 +826,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@null"
-                    android:hint="请填写"
+                    android:hint="请填写(选填)"
                     android:textColor="#151515"
                     android:textSize="12sp" />
 

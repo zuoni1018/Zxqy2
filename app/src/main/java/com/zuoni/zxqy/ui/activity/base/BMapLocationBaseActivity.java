@@ -1,5 +1,6 @@
 package com.zuoni.zxqy.ui.activity.base;
 
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -106,14 +107,27 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
                 mBaiduMap.animateMapStatus(u);
                 mBaiduMap.setMyLocationEnabled(true); // 开启定位图层
                 mLocClient = new LocationClient(getContext());
-
                 LocationClientOption option = new LocationClientOption();
                 option.setOpenGps(true); // 打开gps
                 option.setCoorType("bd09ll"); // 设置坐标类型
                 option.setScanSpan(1000);
                 option.setIsNeedLocationPoiList(true);
                 option.setIsNeedAddress(true);
+//
+//                mBaiduMap.getMapStatus()
+//                latLng = mBaiduMap.getMapStatus().target;
 
+                //自定义定位图标
+//new MyLocationConfiguration(
+//                         mCurrentMode
+//                         , true
+//                         ,BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)
+//                         , Color.parseColor("#0fCCCFE7")
+//                         ,Color.parseColor("#0fCCCFE7")
+//                 );
+
+
+//                new MyLocationConfiguration(mCurrentMode, true, BitmapDescriptorFactory.fromResource(R.mipmap.zx_86), Color.parseColor("#0fCCCFE7"),Color.parseColor("#0fCCCFE7")
                 mLocClient.setLocOption(option);
                 mLocClient.start();
 
@@ -212,8 +226,18 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
     }
 
     public void setLocationMode(MyLocationConfiguration.LocationMode var1) {
+//        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(
+//                mCurrentMode
+//                , true
+//                ,BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)
+//                , Color.parseColor("#0fCCCFE7")
+//                ,Color.parseColor("#0fCCCFE7")
+//        ));
         mCurrentMode = var1;
-        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, null));
+        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(mCurrentMode, true, BitmapDescriptorFactory.fromResource(R.mipmap.zx_68),
+                Color.parseColor("#1fD0021B"),
+                Color.parseColor("#1fD0021B")));
+
         //我也不知道为什么罗盘不需要以下属性
         if (var1 != LocationMode.COMPASS) {
             MapStatus.Builder builder = new MapStatus.Builder();

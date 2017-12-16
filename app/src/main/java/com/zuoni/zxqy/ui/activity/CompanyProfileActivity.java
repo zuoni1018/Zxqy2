@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zuoni.common.utils.LogUtil;
@@ -28,6 +29,8 @@ public class CompanyProfileActivity extends BaseTitleActivity {
     EditText et01;
     @BindView(R.id.bt01)
     Button bt01;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
 
     private boolean isSetPersonalInfo = false;
 
@@ -39,8 +42,9 @@ public class CompanyProfileActivity extends BaseTitleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("公司简介");
+        setTitle("公司介绍");
         ButterKnife.bind(this);
+        tvRight.setText("提交");
 
 
         isSetPersonalInfo = getIntent().getBooleanExtra("isSetPersonalInfo", false);
@@ -50,7 +54,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
 
     }
 
-    @OnClick(R.id.bt01)
+    @OnClick(R.id.tvRight)
     public void onViewClicked() {
 
         if (isSetPersonalInfo) {
@@ -59,10 +63,10 @@ public class CompanyProfileActivity extends BaseTitleActivity {
             setResult(10088, mIntent);
             myFinish();
         } else {
-            String info=et01.getText().toString().trim();
-            if(info.equals("")){
+            String info = et01.getText().toString().trim();
+            if (info.equals("")) {
                 showToast("请输入公司简介");
-            }else {
+            } else {
                 editInfo(info);
             }
         }
@@ -79,13 +83,13 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                 closeLoading();
                 LogUtil.i("修改公司信息" + response);
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
-                if(info.getStatus().equals("true")){
+                if (info.getStatus().equals("true")) {
                     showToast("修改成功");
                     Intent mIntent = new Intent();
                     mIntent.putExtra("text", et01.getText().toString());
                     setResult(10088, mIntent);
                     myFinish();
-                }else {
+                } else {
                     showToast(info.getMessage());
                 }
             }

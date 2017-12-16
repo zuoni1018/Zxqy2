@@ -1,18 +1,22 @@
 package com.zuoni.zxqy.ui.activity;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
@@ -23,6 +27,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.zuoni.common.utils.DensityUtils;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvNearbyPositionAdapter;
@@ -58,6 +63,8 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
     EditText etSearch;
     @BindView(R.id.layoutMap)
     LinearLayout layoutMap;
+    @BindView(R.id.ivLalala)
+    ImageView ivLalala;
     private BaiduMap baiduMap;
 
 
@@ -112,9 +119,44 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
                 setLocationMode(MyLocationConfiguration.LocationMode.FOLLOWING);
                 setLocationMode(MyLocationConfiguration.LocationMode.NORMAL);
                 closeLoading();
+//                baiduMap.setOnm
+                baiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
+                    @Override
+                    public void onMapStatusChangeStart(MapStatus mapStatus) {
+
+                    }
+
+                    @Override
+                    public void onMapStatusChangeStart(MapStatus mapStatus, int i) {
+
+                    }
+
+                    @Override
+                    public void onMapStatusChange(MapStatus mapStatus) {
+
+                    }
+
+                    @Override
+                    public void onMapStatusChangeFinish(MapStatus mapStatus) {
+                        LogUtil.i("地图移动结束");
+                        //跳一下
+                        mapMoveFinish();
+
+                    }
+                });
             }
         }, 2000);
 
+    }
+
+    private void mapMoveFinish() {
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(ivLalala, "translationY", -DensityUtils.dp2px(getContext(), 32),0 );
+        objectAnimator.setInterpolator(new BounceInterpolator());
+        objectAnimator.setDuration(700).start();
+
+        LogUtil.i("地图中心坐标",baiduMap.getMapStatus().target.latitude+"======="+baiduMap.getMapStatus().target.longitude);
+
+        onGetLatLng(baiduMap.getMapStatus().target);
     }
 
     @Override
@@ -191,15 +233,15 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
         switch (view.getId()) {
             case R.id.tvRight:
                 //保存
-                String door=etSearch.getText().toString().trim();
+                String door = etSearch.getText().toString().trim();
 //                if(door.equals("")|tvSearch01.getText().toString().equals("")){
 //                    showToast("请输入门牌号码或选择地址");
 //                }else {
-                    String message=tv01.getText().toString()+tvSearch01.getText().toString()+door;
-                    Intent mIntent=new Intent();
-                    mIntent.putExtra("message",message);
-                    setResult(10087,mIntent);
-                    myFinish();
+                String message = tv01.getText().toString() + tvSearch01.getText().toString() + door;
+                Intent mIntent = new Intent();
+                mIntent.putExtra("message", message);
+                setResult(10087, mIntent);
+                myFinish();
 //                }
                 break;
             case R.id.layoutSearch:

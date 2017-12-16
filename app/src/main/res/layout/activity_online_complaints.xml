@@ -5,7 +5,7 @@
     android:background="@color/bg_color"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_save" />
 
     <TextView
         android:id="@+id/tvPeople"
@@ -147,6 +147,7 @@
         android:textSize="14sp" />
 
     <Button
+        android:visibility="invisible"
         android:id="@+id/bt"
         android:layout_width="329dp"
         android:layout_height="40dp"

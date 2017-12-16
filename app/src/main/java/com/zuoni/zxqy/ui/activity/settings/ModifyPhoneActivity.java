@@ -53,7 +53,7 @@ public class ModifyPhoneActivity extends BaseTitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        setTitle("修改手机号");
+        setTitle("修改手机");
         timer = new CountDownTimer(GlobalVariable.CountTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

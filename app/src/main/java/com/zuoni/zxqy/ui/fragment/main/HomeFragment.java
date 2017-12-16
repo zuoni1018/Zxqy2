@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.joooonho.SelectableRoundedImageView;
 import com.netease.nimlib.sdk.NIMClient;
@@ -23,6 +21,7 @@ import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.gson.GetUiInfo;
+import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
@@ -34,7 +33,9 @@ import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
 import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
 import com.zuoni.zxqy.ui.activity.resumesearch.ResumeSearchActivity;
+import com.zuoni.zxqy.ui.activity.settings.EssentialInformationActivity;
 import com.zuoni.zxqy.ui.activity.settings.SettingsActivity;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +44,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static com.zuoni.zxqy.AppUrl.refresh_position;
 
 /**
  * Created by zangyi_shuai_ge on 2017/10/18
@@ -156,7 +159,27 @@ public class HomeFragment extends Fragment {
     private boolean isFirstUpDateYX = true;//是否第一次去更新云信资料
 
     public static String chatLast = "0";
+    /**
+     * 刷新职位
+     * 将职位信息改为当前
+     */
+    private void refresh_position() {
+        mainActivity.showLoading();
+        HttpRequest httpRequest = new HttpRequest(refresh_position);//刷新职位
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                mainActivity.closeLoading();
 
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                mainActivity.closeLoading();
+                mainActivity.  showToast("服务器异常");
+            }
+        }, getContext());
+    }
     private void getUiInfo() {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_UI_INFO);//获取主页
@@ -179,15 +202,22 @@ public class HomeFragment extends Fragment {
                     vipTime.setText(info.getData().getVipTime() + "");
                     receiveResume.setText(info.getData().getReceiveResume() + "");
 
-                    RequestOptions requestOptions = new RequestOptions()
-                            .centerCrop()
-                            .placeholder(R.mipmap.zx_113)
-                            .error(R.mipmap.zx_113);
-                    Glide.with(getContext().getApplicationContext())
-                            .asBitmap()
-                            .load(info.getData().getImg())
-                            .apply(requestOptions)
-                            .into(ivHead);
+                    GlideUtils.setHead(getContext(),info.getData().getImg(),ivHead);
+
+                    if(info.getData().getAddress()!=null){
+                        CacheUtils.setAddress(info.getData().getAddress(),getContext());
+                    }
+
+
+//                    RequestOptions requestOptions = new RequestOptions()
+//                            .centerCrop()
+//                            .placeholder(R.mipmap.zx_113)
+//                            .error(R.mipmap.zx_113);
+//                    Glide.with(getContext().getApplicationContext())
+//                            .asBitmap()
+//                            .load(info.getData().getImg())
+//                            .apply(requestOptions)
+//                            .into(ivHead);
 
                     if (info.getData().getVipLevel().equals("1")) {
                         //绿色会员
@@ -214,6 +244,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailed(Exception exception) {
                 mainActivity.closeLoading();
+                mainActivity.showToast("服务器异常");
                 LogUtil.i("获取主页" + exception);
             }
         }, getContext());
@@ -278,8 +309,9 @@ public class HomeFragment extends Fragment {
 //                break;
             case R.id.menu_7:
                 //一键刷新
-                mainActivity.showLoading();
-                getUiInfo();
+                refresh_position();
+//                mainActivity.showLoading();
+//                getUiInfo();
 //                jumpToActivity(OnlineComplaintsActivity.class);
                 break;
         }
@@ -290,11 +322,14 @@ public class HomeFragment extends Fragment {
         startActivity(mIntent);
     }
 
-    @OnClick({R.id.ivSettings, R.id.ivHead})
+    @OnClick({R.id.ivSettings})
     public void onViewClicked2(View view) {
         jumpToActivity(SettingsActivity.class);
     }
-
+    @OnClick({R.id.iv11111111, R.id.ivHead,R.id.title})
+    public void onViewClicked3(View view) {
+        jumpToActivity(EssentialInformationActivity.class);
+    }
     @OnClick(R.id.ivHomePreview)
     public void onViewClicked2() {
         jumpToActivity(HomePreviewActivity.class);

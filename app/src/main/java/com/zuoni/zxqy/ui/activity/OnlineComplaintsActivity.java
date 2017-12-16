@@ -2,7 +2,6 @@ package com.zuoni.zxqy.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,10 +37,12 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
     ImageView iv05;
     @BindView(R.id.et01)
     EditText et01;
-    @BindView(R.id.bt)
-    Button bt;
+    //    @BindView(R.id.bt)
+//    Button bt;
     @BindView(R.id.tvPeople)
     TextView tvPeople;
+    @BindView(R.id.tvRight)
+    TextView tvRight;
 
     private String workId;
     private String name;
@@ -60,13 +61,14 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
 
         name = getIntent().getStringExtra("name");
         workId = getIntent().getStringExtra("workId");
+        tvRight.setText("提交");
 
         if (workId == null) {
             isAdmin = true;
         } else {
             isAdmin = false;
             setTitle("发送留言");
-            tvPeople.setText("收信人："+name);
+            tvPeople.setText("收信人：" + name);
         }
 
     }
@@ -134,7 +136,7 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
         iv05.setImageResource(R.mipmap.zx_117);
     }
 
-    @OnClick(R.id.bt)
+    @OnClick(R.id.tvRight)
     public void onViewClicked() {
 
         String info = et01.getText().toString().trim();
@@ -178,4 +180,5 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
             }
         }, getContext());
     }
+
 }

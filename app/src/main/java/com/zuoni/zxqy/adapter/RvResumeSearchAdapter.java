@@ -61,9 +61,9 @@ public class RvResumeSearchAdapter extends RecyclerView.Adapter<RvResumeSearchAd
         });
         holder.workerId.setText(mList.get(position).getWorkerId());
         holder.name.setText(mList.get(position).getName());
-        holder.jobyear.setText(mList.get(position).getJobyear());
+        holder.jobyear.setText(mList.get(position).getJobyear()+"年");
         holder.hopepostion.setText(mList.get(position).getHopepostion());
-        holder.lastTime.setText(mList.get(position).getLastTime());
+        holder.lastTime.setText("最近登录："+mList.get(position).getLastTime());
         holder.education.setText(mList.get(position).getEducation());
         holder.jiguan.setText(mList.get(position).getJiguan());
         holder.age.setText(mList.get(position).getAge() + "");

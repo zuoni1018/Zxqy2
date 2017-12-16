@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
@@ -20,6 +24,7 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.poi.PoiSortType;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvNearbyPositionAdapter;
 import com.zuoni.zxqy.callback.ItemOnClickListener;
@@ -85,7 +90,6 @@ public class MapSearchActivity extends BaseTitleActivity {
         rvNearbyPositionAdapter.setItemOnClickListener(new ItemOnClickListener() {
             @Override
             public void onClickListener(int pos) {
-
                 Intent mIntent=new Intent();
                 mIntent.putExtra("text",mList.get(pos).name);
                 setResult(10087,mIntent);
@@ -97,6 +101,26 @@ public class MapSearchActivity extends BaseTitleActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(mAdapter);
 
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text=s.toString();
+                if(!text.trim().equals("")){
+                    starch(text);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     private void starch(String key) {
@@ -104,12 +128,19 @@ public class MapSearchActivity extends BaseTitleActivity {
         PoiNearbySearchOption nearbySearchOption = new PoiNearbySearchOption().keyword(key)
                 .sortType(PoiSortType.distance_from_near_to_far)
                 .location(latlng)
-                .radius(10000)
-                .pageNum(20);
+                .radius(10000*200)
+                .pageNum(1);
 
         PoiSearch mPoiSearch = PoiSearch.newInstance();
         OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
             public void onGetPoiResult(PoiResult result) {
+                if (result == null || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+                    Toast.makeText(MapSearchActivity.this, "未找到结果", Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+                LogUtil.i("搜索结果");
+
                 //获取POI检索结果
                 Message message= Message.obtain();
                 mList.clear();
@@ -117,7 +148,6 @@ public class MapSearchActivity extends BaseTitleActivity {
                     mList.addAll(result.getAllPoi());
                 }
                 mHandler.sendMessage(message);
-
             }
 
             public void onGetPoiDetailResult(PoiDetailResult result) {
@@ -132,6 +162,8 @@ public class MapSearchActivity extends BaseTitleActivity {
         mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
         mPoiSearch.searchNearby(nearbySearchOption);
 
+//        mPoiSearch.searchInCity((new PoiCitySearchOption()).city("杭州市")
+//                .keyword("餐厅").pageNum(1));
     }
 
 

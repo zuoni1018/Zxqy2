@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:background="@drawable/bt_bg_red_clickable"
             android:gravity="center"
-            android:text="一键刷新"
+            android:text="刷新职位"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
         <Button

@@ -93,11 +93,27 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layoutMap"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical" />
+        android:layout_height="300dp">
+        <LinearLayout
+            android:id="@+id/layoutMap"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical" />
+
+        <ImageView
+            android:id="@+id/ivLalala"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/zx_67"
+            />
+
+    </FrameLayout>
+
+
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
         android:id="@+id/mRecyclerView"

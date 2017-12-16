@@ -43,7 +43,14 @@ public class CacheUtils {
         String token = (String) SPUtils.get(context, "token", "");
         return token;
     }
+    public static void setAddress(String token, Context context) {
+        SPUtils.put(context, "Address6", token);
+    }
 
+    public static String getAddress(Context context) {
+        String token = (String) SPUtils.get(context, "Address6", "");
+        return token;
+    }
     public static void setSiteId(String siteId, Context context) {
         if (siteId == null) {
             return;

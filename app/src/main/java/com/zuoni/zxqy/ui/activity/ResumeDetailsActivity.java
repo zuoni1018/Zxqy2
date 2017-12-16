@@ -1,6 +1,7 @@
 package com.zuoni.zxqy.ui.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +10,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.joooonho.SelectableRoundedImageView;
 import com.zuoni.common.utils.LogUtil;
@@ -24,6 +23,7 @@ import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +97,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
     Button btBottomMenu03;
     @BindView(R.id.layoutBottomMenu)
     LinearLayout layoutBottomMenu;
+    @BindView(R.id.selfevaluation)
+    TextView selfevaluation;
     private String name2;
     private String workId = "";
 
@@ -104,7 +106,6 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 
     private List<ResumeDetail.DataBean.JobhistoryBean> jobhistorys;
     private String sendresumeId;
-
 
 
     private InvitationPeople invitationPeople;
@@ -122,8 +123,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
         workId = getIntent().getStringExtra("workId");
         sendresumeId = getIntent().getStringExtra("sendresumeId");
 
-        invitationPeople=new InvitationPeople();
-        if(sendresumeId!=null){
+        invitationPeople = new InvitationPeople();
+        if (sendresumeId != null) {
             invitationPeople.setSendresumeId(sendresumeId);
         }
         invitationPeople.setWorkId(workId);
@@ -150,10 +151,19 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
         rv01.setLayoutManager(linearLayoutManager);
         rv01.setAdapter(mAdapter);
 
+        contact01.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contact01.getText().toString().trim()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
-    private String iddd="123456";
+    private String iddd = "123456";
 
 
     private void resume_detail(String workerId) {
@@ -173,17 +183,18 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                 if (info.getStatus().equals("true")) {
 
 //                    iddd=info.getData().getId();
-                    iddd=info.getData().getAccid();
+                    iddd = info.getData().getAccid();
                     //头像
-                    RequestOptions requestOptions = new RequestOptions()
-                            .centerCrop()
-                            .placeholder(R.mipmap.zx_113)
-                            .error(R.mipmap.zx_113);
-                    Glide.with(getContext().getApplicationContext())
-                            .asBitmap()
-                            .load(info.getData().getImg())
-                            .apply(requestOptions)
-                            .into(head);
+                    GlideUtils.setHead(getContext(), info.getData().getImg(), head);
+//                    RequestOptions requestOptions = new RequestOptions()
+//                            .centerCrop()
+//                            .placeholder(R.mipmap.zx_113)
+//                            .error(R.mipmap.zx_113);
+//                    Glide.with(getContext().getApplicationContext())
+//                            .asBitmap()
+//                            .load(info.getData().getImg())
+//                            .apply(requestOptions)
+//                            .into(head);
                     invitationPeople.setHeadUrl(info.getData().getImg());
 
                     //姓名
@@ -201,8 +212,12 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                     info03.setText("户籍：" + info.getData().getJiguan() + "   所在地：" + info.getData().getHome());
 
 //                    未婚 团员 1年以上工作经验
+                    if (info.getData().getJobyear() == null | info.getData().getJobyear().equals("")) {
+                        info04.setText(info.getData().getMarry() + "  " + info.getData().getPolitical() + " ");
+                    } else {
+                        info04.setText(info.getData().getMarry() + "  " + info.getData().getPolitical() + " " + info.getData().getJobyear() + "年工作经验");
+                    }
 
-                    info04.setText(info.getData().getMarry() + "  " + info.getData().getPolitical() + " " + info.getData().getJobyear());
 
                     hopepostion.setText(info.getData().getHopepostion());//岗位
 //                    全职I永嘉市I面议I提供住宿
@@ -234,6 +249,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 //                    "其他能力：无
 
                     specialty04.setText("其他能力：" + info.getData().getOtherability());
+
+                    selfevaluation.setText(info.getData().getSelfevaluation());
 
                     contact01.setText(info.getData().getPhone());
 
@@ -332,7 +349,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
         switch (view.getId()) {
             case R.id.btBottomMenu01:
                 //邀请面试
-                ArrayList<InvitationPeople> peoples=new ArrayList<>();
+                ArrayList<InvitationPeople> peoples = new ArrayList<>();
                 peoples.add(invitationPeople);
                 Intent mIntent = new Intent(getContext(), InvitationInterviewActivity.class);
                 mIntent.putExtra("peoples", peoples);
@@ -364,9 +381,9 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 //                }
 //                NimUIKit.startP2PSession(getContext(), "comp_21790", null);
 
-                Intent mIntent2=new Intent(getContext(),OnlineComplaintsActivity.class);
-                mIntent2.putExtra("workId",invitationPeople.getWorkId());
-                mIntent2.putExtra("name",invitationPeople.getName());
+                Intent mIntent2 = new Intent(getContext(), OnlineComplaintsActivity.class);
+                mIntent2.putExtra("workId", invitationPeople.getWorkId());
+                mIntent2.putExtra("name", invitationPeople.getName());
                 startActivity(mIntent2);
 
 

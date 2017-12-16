@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.joooonho.SelectableRoundedImageView;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.model.InvitationPeople;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,16 +46,7 @@ public class RvInvitationInterviewAdapter extends RecyclerView.Adapter<RvInvitat
 
         holder.name.setText(mList.get(position).getName());
         holder.workName.setText(mList.get(position).getWorkName());
-
-        RequestOptions requestOptions = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.mipmap.zx_113)
-                .error(R.mipmap.zx_113);
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mList.get(position).getHeadUrl())
-                .apply(requestOptions)
-                .into(holder.ivHead);
+        GlideUtils.setHead(mContext,mList.get(position).getHeadUrl(),holder.ivHead);
     }
 
     @Override

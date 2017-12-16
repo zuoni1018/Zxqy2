@@ -102,19 +102,24 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/bg_color" />
-
-
-        <TextView
-            android:id="@+id/tvInfo"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="left"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textColor="#FF999999"
-            android:textSize="14sp" />
+            android:layout_height="200dp">
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="left"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textColor="#FF999999"
+                android:textSize="14sp" />
+        </ScrollView>
+
+
+
 
 
     </LinearLayout>

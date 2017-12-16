@@ -505,7 +505,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                         if (isInPut(edu)) {
                             showToast("请选择学历要求");
                         } else {
-                            if (isInPut(hukou)) {
+                            if (isInPut("222")) {
                                 showToast("请填写户口要求");
                             } else {
                                 if (isInPut(jobs)) {
@@ -532,7 +532,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
 //                                                            if (isInPut(nums)) {
 //                                                                showToast("请输入招聘人数");
 //                                                            } else {
-                                                                if (isInPut(info)) {
+                                                                if (isInPut("222")) {
                                                                     showToast("请输入岗位要求");
                                                                 } else {
                                                                     if (isAdd) {

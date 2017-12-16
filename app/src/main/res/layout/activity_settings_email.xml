@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <include layout="@layout/top_bar_style" />
+    <include layout="@layout/top_bar_style_save" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,14 +19,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="331dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="E-mail :"
-                android:textColor="#FF666666"
-                android:textSize="14sp" />
 
             <EditText
                 android:singleLine="true"
@@ -43,6 +35,7 @@
                 android:textColor="#FF333333"
                 android:textSize="13sp" />
             <Button
+                android:visibility="invisible"
                 android:id="@+id/bt02"
                 android:layout_width="329dp"
                 android:layout_height="40dp"

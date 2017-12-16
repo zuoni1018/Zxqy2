@@ -22,6 +22,7 @@ import com.zuoni.zxqy.bean.gson.GetPosition;
 import com.zuoni.zxqy.bean.model.Contact;
 import com.zuoni.zxqy.bean.model.InvitationPeople;
 import com.zuoni.zxqy.bean.model.Job;
+import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
@@ -76,6 +77,13 @@ public class InvitationInterviewActivity extends BaseTitleActivity {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(new RvInvitationInterviewAdapter(getContext(), peoples));
+
+        String a= CacheUtils.getAddress(getContext());
+        if(a!=null){
+            et05.setText(a);
+        }
+
+
     }
 
     private void interview_invite( String workerId, String jobId, String name, String tele, String address, String info,String sendresumeId) {
