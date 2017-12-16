@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F7"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_bar_style" />
+
+    <ImageView
+        android:layout_width="185dp"
+        android:layout_height="185dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@mipmap/zx2_1" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:text="忘记密码请致电客服充值请致电"
+        android:textColor="#FF666666"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:text="0579-XXXXXXXX"
+        android:textColor="#FF666666"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btSure"
+        android:layout_width="329dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bt_bg_red_clickable"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/color_white"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="义乌市众信人才开发有限公司"
+        android:textColor="#FF666666"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="4dp"
+        android:text="Yiwu Zhongxin Talent development Co.Ltd."
+        android:textColor="#FF666666"
+        android:textSize="13sp" />
+</LinearLayout>
