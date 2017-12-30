@@ -4,21 +4,24 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     android:orientation="vertical">
-
     <include layout="@layout/top_bar_style_save" />
-
-
-    <EditText
-        android:id="@+id/et01"
-        android:layout_width="329dp"
-        android:layout_height="329dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/et_edit_text66"
-        android:gravity="top"
-        android:padding="5dp"
-        android:textColor="#FF151515"
-        android:textSize="14sp" />
+    <ScrollView
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/et01"
+            android:minHeight="329dp"
+            android:layout_width="329dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:background="@drawable/et_edit_text66"
+            android:gravity="top"
+            android:padding="5dp"
+            android:textColor="#FF999999"
+            android:textSize="14sp" />
+    </ScrollView>
 
     <Button
         android:visibility="invisible"

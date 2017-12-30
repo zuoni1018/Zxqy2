@@ -57,6 +57,13 @@ public class AccountInformationActivity extends BaseTitleActivity {
         super.onResume();
         tv02.setText(AppSetting.phone);
         tv03.setText(AppSetting.email);
+
+        if(!AppSetting.email.equals(companyInfo.getEmail())){
+            companyInfo.setEmail(AppSetting.email);
+        }
+        if(!AppSetting.phone.equals(companyInfo.getPhone())){
+            companyInfo.setPhone(AppSetting.phone);
+        }
     }
 
     @Override

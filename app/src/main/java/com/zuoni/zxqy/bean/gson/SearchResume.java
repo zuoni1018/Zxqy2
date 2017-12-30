@@ -80,6 +80,16 @@ public class SearchResume extends  BaseHttpResponse {
         private String age;
         private boolean isChoose=false;
 
+        private String invite;//是否已经获取查看权限了
+
+        public String getInvite() {
+            return invite;
+        }
+
+        public void setInvite(String invite) {
+            this.invite = invite;
+        }
+
         public boolean isChoose() {
             return isChoose;
         }

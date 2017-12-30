@@ -60,7 +60,15 @@ public class RvResumeSearchAdapter extends RecyclerView.Adapter<RvResumeSearchAd
             }
         });
         holder.workerId.setText(mList.get(position).getWorkerId());
-        holder.name.setText(mList.get(position).getName());
+//        holder.name.setText(mList.get(position).getName());
+
+        if(mList.get(position).getInvite().equals("1")){
+            holder.name.setText(mList.get(position).getName());
+        }else {
+            holder.name.setText(mList.get(position).getWorkerId());
+        }
+
+
         holder.jobyear.setText(mList.get(position).getJobyear()+"年");
         holder.hopepostion.setText(mList.get(position).getHopepostion());
         holder.lastTime.setText("最近登录："+mList.get(position).getLastTime());

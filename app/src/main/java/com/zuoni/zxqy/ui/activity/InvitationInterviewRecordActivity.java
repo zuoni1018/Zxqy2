@@ -2,6 +2,7 @@ package com.zuoni.zxqy.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -307,7 +308,17 @@ public class InvitationInterviewRecordActivity extends BaseTitleActivity {
                     closeLoading();
                     BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
                     if (info.getStatus().equals("true")) {
-                        mRecyclerView.refresh();//重新刷新
+                        if(info.getMessage().equals("")){
+                            showToast("删除成功");
+                        }else {
+                            showToast(info.getMessage());
+                        }
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRecyclerView.refresh();//重新刷新
+                            }
+                        },300);
                     } else {
                         showToast(info.getMessage());
                     }

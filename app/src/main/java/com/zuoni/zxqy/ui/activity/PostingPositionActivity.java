@@ -1,14 +1,13 @@
 package com.zuoni.zxqy.ui.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -125,11 +124,18 @@ public class PostingPositionActivity extends BaseTitleActivity {
     RecyclerView rv18;
     @BindView(R.id.layout18)
     LinearLayout layout18;
+    @BindView(R.id.tvzzzzzzz)
+    TextView tvzzzzzzz;
+    @BindView(R.id.ivzzzzzzz)
+    ImageView ivzzzzzzz;
+    @BindView(R.id.layoutzzzzzzz)
+    LinearLayout layoutzzzzzzz;
 
     private boolean isAdd = true;
     private String jobId = "";
     private ArrayList<String> tags;
     private RvPostingTagAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,23 +143,23 @@ public class PostingPositionActivity extends BaseTitleActivity {
         setTitle("发布新职位");
         tv18.setVisibility(View.VISIBLE);
         rv18.setVisibility(View.GONE);
-        tags=new ArrayList<>();
+        tags = new ArrayList<>();
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager(getContext());
         flowLayoutManager.setOnRowsCallbackListener(new OnRowsCallbackListener() {
             @Override
             public void onRowsCallback(int row) {
-                LogUtil.i("行号回调"+row);
-                if(needDo){
-                    needDo=false;
+                LogUtil.i("行号回调" + row);
+                if (needDo) {
+                    needDo = false;
                     final LinearLayout.LayoutParams para1;
                     para1 = (LinearLayout.LayoutParams) rv18.getLayoutParams();
-                    para1.height = DensityUtils.dp2px(getContext(),27)*(row+1);
+                    para1.height = DensityUtils.dp2px(getContext(), 27) * (row + 1);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             rv18.setLayoutParams(para1);
                         }
-                    },50);
+                    }, 50);
                 }
 //                rv18.setLayoutParams(para1);
 //                mAdapter.notifyDataSetChanged();
@@ -171,7 +177,58 @@ public class PostingPositionActivity extends BaseTitleActivity {
             setTitle("修改职位");
             get_position_detail(jobId);
         }
+        //设置可约聊次数
+//        HomeFragment.chatLast.equals("0")
+
+        if(isAdd){
+            if(HomeFragment.chatLast.equals("0")){
+                tvzzzzzzz.setText("当前约聊次数为0"+"次，是否发布可约聊岗位");
+                ivzzzzzzz.setImageResource(R.mipmap.zx_108);
+                isKeYueLiao="0";//当前为不可约聊
+                layoutzzzzzzz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToast("当前约聊次数为0");
+                    }
+                });
+            }else {
+                tvzzzzzzz.setText("当前约聊次数为"+HomeFragment.chatLast+"次，是否发布可约聊岗位");
+                ivzzzzzzz.setImageResource(R.mipmap.zx_108);
+                layoutzzzzzzz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(isKeYueLiao.equals("0")){
+                            isKeYueLiao="1";
+                        }else {
+                            isKeYueLiao="0";
+                        }
+                        if(isKeYueLiao.equals("0")){
+                            ivzzzzzzz.setImageResource(R.mipmap.zx_108);
+                        }else {
+                            ivzzzzzzz.setImageResource(R.mipmap.zx_107);
+                        }
+                    }
+                });
+            }
+        }else {
+            layoutzzzzzzz.setVisibility(View.GONE);
+//            tvzzzzzzz.setTextColor(Color.parseColor("#999999"));
+//            layoutzzzzzzz.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
+
+
+        }
+
+
+
+
+
     }
+    private String  isKeYueLiao="0";
 
     @Override
     public int setLayoutId() {
@@ -236,22 +293,22 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     et11.setText(info.getData().getAges());
                     tv12.setText(info.getData().getHouse());
                     tv13.setText(info.getData().getTele());
-                    if(info.getData().getNums().equals("0")){
+                    if (info.getData().getNums().equals("0")) {
                         et14.setHint("若干");
-                    }else {
+                    } else {
                         et14.setText(info.getData().getNums());
                     }
                     et16.setText(info.getData().getInfo());
-                    if(!info.getData().getTag().equals("")){
+                    if (!info.getData().getTag().equals("")) {
 
                         String[] a = info.getData().getTag().split(",");
                         tags.clear();
                         tags.addAll(Arrays.asList(a));
 
-                        if(tags.size()>0){
+                        if (tags.size() > 0) {
                             tv18.setVisibility(View.GONE);
                             rv18.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
                             tv18.setVisibility(View.VISIBLE);
                             rv18.setVisibility(View.GONE);
                         }
@@ -424,21 +481,21 @@ public class PostingPositionActivity extends BaseTitleActivity {
             //做了添加或者修改的操作需要更新列表
             contact = (Contact) data.getSerializableExtra("Contact");
             tv03.setText(contact.getName() + "   " + contact.getTele());
-        }else if(requestCode == 666&& resultCode == 777){
+        } else if (requestCode == 666 && resultCode == 777) {
 
-            String result=data.getStringExtra("result");
-            LogUtil.i("标签选择回调",result);
-            if(result!=null){
+            String result = data.getStringExtra("result");
+            LogUtil.i("标签选择回调", result);
+            if (result != null) {
                 String[] a = result.split(",");
                 tags.clear();
                 tags.addAll(Arrays.asList(a));
-                if(result.equals("")){
+                if (result.equals("")) {
                     tags.clear();
                 }
-                if(tags.size()>0){
+                if (tags.size() > 0) {
                     tv18.setVisibility(View.GONE);
                     rv18.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     tv18.setVisibility(View.VISIBLE);
                     rv18.setVisibility(View.GONE);
                 }
@@ -485,8 +542,8 @@ public class PostingPositionActivity extends BaseTitleActivity {
         final String cateName = tv02.getText().toString().trim();
 
         //0为若干
-        if(nums.equals("")){
-            nums="0";
+        if (nums.equals("")) {
+            nums = "0";
         }
 
         if (isInPut(title)) {
@@ -532,50 +589,53 @@ public class PostingPositionActivity extends BaseTitleActivity {
 //                                                            if (isInPut(nums)) {
 //                                                                showToast("请输入招聘人数");
 //                                                            } else {
-                                                                if (isInPut("222")) {
-                                                                    showToast("请输入岗位要求");
-                                                                } else {
-                                                                    if (isAdd) {
-                                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                                                                        if (HomeFragment.chatLast.equals("0")) {
-                                                                            builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?");
-                                                                            final String finalContactId = contactId;
-                                                                            final String finalNums1 = nums;
-                                                                            builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-                                                                                @Override
-                                                                                public void onClick(DialogInterface dialog, int which) {
-                                                                                    postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums1, info, cateName, "0");
+                                                            if (isInPut("222")) {
+                                                                showToast("请输入岗位要求");
+                                                            } else {
+                                                                if (isAdd) {
+                                                                    postPosition(title, contactId, area, edu, hukou
+                                                                                        , jobs, years, pay, gender, ages, house, tele, nums, info, cateName, isKeYueLiao);
 
-                                                                                }
-                                                                            });
-                                                                            builder.setNegativeButton("否", null);
-                                                                        } else {
-                                                                            final String finalContactId = contactId;
-                                                                            builder.setMessage("剩余可发布约聊岗位" + HomeFragment.chatLast + "次 是否发布可约聊岗位?");
-                                                                            final String finalNums = nums;
-                                                                            builder.setPositiveButton("可约聊", new DialogInterface.OnClickListener() {
-                                                                                @Override
-                                                                                public void onClick(DialogInterface dialog, int which) {
-                                                                                    postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums, info, cateName, "1");
-                                                                                }
-                                                                            });
-                                                                            final String finalNums2 = nums;
-                                                                            builder.setNegativeButton("不可约聊", new DialogInterface.OnClickListener() {
-                                                                                @Override
-                                                                                public void onClick(DialogInterface dialog, int which) {
-                                                                                    postPosition(title, finalContactId, area, edu, hukou
-                                                                                            , jobs, years, pay, gender, ages, house, tele, finalNums2, info, cateName, "0");
-                                                                                }
-                                                                            });
-                                                                        }
-                                                                        builder.create().show();
-                                                                    } else {
-                                                                        update_position(title, contactId, area, edu, hukou
-                                                                                , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
-                                                                    }
+//                                                                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                                                                    if (HomeFragment.chatLast.equals("0")) {
+//                                                                        builder.setMessage("剩余可发布约聊岗位0次。是否发布不可约聊岗位?");
+//                                                                        final String finalContactId = contactId;
+//                                                                        final String finalNums1 = nums;
+//                                                                        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+//                                                                            @Override
+//                                                                            public void onClick(DialogInterface dialog, int which) {
+//                                                                                postPosition(title, finalContactId, area, edu, hukou
+//                                                                                        , jobs, years, pay, gender, ages, house, tele, finalNums1, info, cateName, "0");
+//
+//                                                                            }
+//                                                                        });
+//                                                                        builder.setNegativeButton("否", null);
+//                                                                    } else {
+//                                                                        final String finalContactId = contactId;
+//                                                                        builder.setMessage("剩余可发布约聊岗位" + HomeFragment.chatLast + "次 是否发布可约聊岗位?");
+//                                                                        final String finalNums = nums;
+//                                                                        builder.setPositiveButton("可约聊", new DialogInterface.OnClickListener() {
+//                                                                            @Override
+//                                                                            public void onClick(DialogInterface dialog, int which) {
+//                                                                                postPosition(title, finalContactId, area, edu, hukou
+//                                                                                        , jobs, years, pay, gender, ages, house, tele, finalNums, info, cateName, "1");
+//                                                                            }
+//                                                                        });
+//                                                                        final String finalNums2 = nums;
+//                                                                        builder.setNegativeButton("不可约聊", new DialogInterface.OnClickListener() {
+//                                                                            @Override
+//                                                                            public void onClick(DialogInterface dialog, int which) {
+//                                                                                postPosition(title, finalContactId, area, edu, hukou
+//                                                                                        , jobs, years, pay, gender, ages, house, tele, finalNums2, info, cateName, "0");
+//                                                                            }
+//                                                                        });
+//                                                                    }
+//                                                                    builder.create().show();
+                                                                } else {
+                                                                    update_position(title, contactId, area, edu, hukou
+                                                                            , jobs, years, pay, gender, ages, house, tele, nums, info, cateName);
                                                                 }
+                                                            }
 //                                                            }
                                                         }
                                                     }
@@ -620,12 +680,12 @@ public class PostingPositionActivity extends BaseTitleActivity {
         httpRequest.add("cateName", cateName);
         httpRequest.add("chat", chat);
 
-        String tag="";
-        for (int i = 0; i <tags.size(); i++) {
-            tag=tag+tags.get(i)+",";
+        String tag = "";
+        for (int i = 0; i < tags.size(); i++) {
+            tag = tag + tags.get(i) + ",";
         }
-        if(!tag.equals("")){
-            tag=tag.substring(0,tag.length()-1);
+        if (!tag.equals("")) {
+            tag = tag.substring(0, tag.length() - 1);
         }
         httpRequest.add("tag", tag);
 
@@ -679,12 +739,12 @@ public class PostingPositionActivity extends BaseTitleActivity {
         httpRequest.add("jobId", jobId);
 
         //
-        String tag="";
-        for (int i = 0; i <tags.size(); i++) {
-            tag=tag+tags.get(i)+",";
+        String tag = "";
+        for (int i = 0; i < tags.size(); i++) {
+            tag = tag + tags.get(i) + ",";
         }
-        if(!tag.equals("")){
-            tag=tag.substring(0,tag.length()-1);
+        if (!tag.equals("")) {
+            tag = tag.substring(0, tag.length() - 1);
         }
         httpRequest.add("tag", tag);
 
@@ -713,13 +773,14 @@ public class PostingPositionActivity extends BaseTitleActivity {
     }
 
 
+    private boolean needDo = true;
 
-    private boolean needDo=true;
-    @OnClick({R.id.rv18,R.id.layout18})
+    @OnClick({R.id.rv18, R.id.layout18})
     public void onlayout18Clicked() {
-        needDo=true;
-        Intent mIntent =new Intent(getContext(),TagSelectionActivity.class);
-        mIntent.putStringArrayListExtra("list",tags);
-        startActivityForResult(mIntent,666);
+        needDo = true;
+        Intent mIntent = new Intent(getContext(), TagSelectionActivity.class);
+        mIntent.putStringArrayListExtra("list", tags);
+        startActivityForResult(mIntent, 666);
     }
+
 }

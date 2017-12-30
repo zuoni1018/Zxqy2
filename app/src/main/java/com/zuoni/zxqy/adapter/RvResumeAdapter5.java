@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.joooonho.SelectableRoundedImageView;
-import com.zuoni.common.utils.LogUtil;
+import com.zuoni.common.utils.ToastUtils;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.model.ResumeManager;
 import com.zuoni.zxqy.callback.OnResumeManagerListener;
@@ -122,7 +122,7 @@ public class RvResumeAdapter5 extends RecyclerView.Adapter<RvResumeAdapter5.MyVi
             public void onClick(View v) {
                 //1不可看
                 if(mList.get(position).getIs_hide().equals("1")){
-                    LogUtil.i("该用户简历已隐藏");
+                    ToastUtils.showToast(mContext,"该用户简历已隐藏");
                 }else {
                     onResumeManagerListener.onClick01(mList.get(position), position);
                 }

@@ -261,6 +261,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="329dp"
         android:layout_height="40dp"
         android:layout_gravity="center"

@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mList = new ArrayList<>();
-        HomeFragment homeFragment=new HomeFragment();
+        HomeFragment homeFragment = new HomeFragment();
         homeFragment.setMainActivity(this);
         mList.add(homeFragment);
         mList.add(new ChartFragment());
@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
             public void run() {
                 showToast("记得刷新职位哦");
             }
-        },1000);
+        }, 1000);
 
 //        api = WXAPIFactory.createWXAPI(this, GlobalVariable.WX_APP_ID);
 //        HttpRequest  mHttpRequest=new HttpRequest("");
@@ -71,8 +71,6 @@ public class MainActivity extends BaseActivity {
 //
 //            }
 //        });
-
-
 
 
     }
@@ -130,31 +128,18 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.layoutMenu2:
                 jumpToActivity(PostingPositionActivity.class);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        restMenu();
+                        viewPager.setCurrentItem(0, false);
+                        tv01.setTextColor(getResources().getColor(R.color.tab_color_02));
+                        iv01.setImageResource(R.mipmap.zx_46);
+                    }
+                },300);
+
                 break;
             case R.id.layoutMenu3:
-//                LoginInfo info = new LoginInfo("123456", "123456"); // config...
-//                RequestCallback<LoginInfo> callback =
-//                        new RequestCallback<LoginInfo>() {
-//                            @Override
-//                            public void onSuccess(LoginInfo param) {
-//                                LogUtil.i("onSuccess");
-//                                showToast("登陆成功");
-//                                jumpToActivity(MainActivity.class);
-//                            }
-//
-//                            @Override
-//                            public void onFailed(int code) {
-//                                LogUtil.i("onFailed");
-//                                showToast("登陆失败");
-//                            }
-//
-//                            @Override
-//                            public void onException(Throwable exception) {
-//
-//                            }
-//                        };
-//
-//                NIMClient.getService(AuthService.class).login(info).setCallback(callback);
                 jumpToActivity(ResumeManagementActivity.class);
                 break;
             case R.id.layoutMenu4:

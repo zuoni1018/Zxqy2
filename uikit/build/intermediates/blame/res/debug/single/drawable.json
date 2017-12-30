@@ -44,12 +44,12 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_align_bottom_green_btn_selector.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_picker_preview_btn_selector.xml",
-        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_picker_preview_btn_selector.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_default_mtrl_shape.xml",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_picker_preview_btn_selector.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_picker_preview_btn_selector.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_message_plus_video_selector.xml",
@@ -92,12 +92,12 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_message_button_bottom_send_selector.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
-        "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\design_fab_background.xml",
         "source": "C:\\Users\\PVer\\.android\\build-cache\\20e74e26f73b3826feab140cffe569db6d7b7a3e\\output\\res\\drawable\\design_fab_background.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\PVer\\.android\\build-cache\\4429929764429005e7d92fa5889c73a5e0061544\\output\\res\\drawable\\abc_item_background_holo_dark.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_chatroom_robot_link_view_selector.xml",
@@ -136,12 +136,12 @@
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\touch_bg.xml"
     },
     {
-        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_popup_menu_item_black_selector.xml",
-        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_popup_menu_item_black_selector.xml"
-    },
-    {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_message_button_bottom_text_selector.xml",
         "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_message_button_bottom_text_selector.xml"
+    },
+    {
+        "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_popup_menu_item_black_selector.xml",
+        "source": "D:\\workSpace\\Zxqy\\uikit\\res\\drawable\\nim_popup_menu_item_black_selector.xml"
     },
     {
         "merged": "D:\\workSpace\\Zxqy\\uikit\\build\\intermediates\\res\\merged\\debug\\drawable\\nim_bg_edittext_rectangle_normal.xml",

@@ -166,6 +166,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
     private String iddd = "123456";
 
 
+    private String ZName="";
     private void resume_detail(String workerId) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.resume_detail);//简历详情
@@ -197,14 +198,15 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 //                            .into(head);
                     invitationPeople.setHeadUrl(info.getData().getImg());
 
-                    //姓名
-                    name.setText(info.getData().getName());
-                    setTitle(info.getData().getName() + "的简历");
+
+//                    setTitle(info.getData().getName() + "的简历");
+                    setTitle("详情");
+
                     invitationPeople.setName(info.getData().getName());
                     //info01  性别+年龄+身高+体重 男I26岁I175cmI63kg
 
                     info01.setText(info.getData().getSex() + "I" + info.getData().getAge() + "岁" + "I" + info.getData().getHeight() + "cm I" + info.getData().getWeight() + "kg");
-
+                    info02.setVisibility(View.GONE);
                     info02.setText(info.getData().getPhone());
 
 //                    户籍：重庆   所在地：杭州
@@ -257,12 +259,16 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                     contact02.setText("QQ:" + info.getData().getQq() + "   " + info.getData().getEmail());
 
                     contact03.setText(info.getData().getAddress());
+                    //姓名
+                    ZName=info.getData().getName();
 
                     if (!info.getData().isPermit()) {
+                        name.setText("******");
                         layoutContact01.setVisibility(View.GONE);
                         layoutContact02.setVisibility(View.VISIBLE);
                         layoutBottomMenu.setVisibility(View.GONE);
                     } else {
+                        name.setText(ZName);
                         layoutContact01.setVisibility(View.VISIBLE);
                         layoutContact02.setVisibility(View.GONE);
                         layoutBottomMenu.setVisibility(View.VISIBLE);
@@ -293,6 +299,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                 LogUtil.i("查看简历联系方式" + response);
                 BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
                 if (info.getStatus().equals("true")) {
+                    name.setText(ZName);
                     layoutContact01.setVisibility(View.VISIBLE);
                     layoutContact02.setVisibility(View.GONE);
                     layoutBottomMenu.setVisibility(View.VISIBLE);

@@ -8,8 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
 import com.google.gson.Gson;
@@ -24,6 +22,7 @@ import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
+import com.zuoni.zxqy.util.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,15 +99,16 @@ public class HomePreviewActivity extends BaseTitleActivity {
                 PreviewCompanyInfo info = gson.fromJson(response, PreviewCompanyInfo.class);
                 if (info.getStatus().equals("true")) {
                     EnterpriseInformation enterpriseInformation = info.getData();
-                    RequestOptions requestOptions = new RequestOptions()
-                            .centerCrop()
-                            .placeholder(R.mipmap.zx_113)
-                            .error(R.mipmap.zx_113);
-                    Glide.with(getContext().getApplicationContext())
-                            .asBitmap()
-                            .load(enterpriseInformation.getLogo())
-                            .apply(requestOptions)
-                            .into(ivHead);
+                    GlideUtils.setHead(getContext(),enterpriseInformation.getLogo(),ivHead);
+//                    RequestOptions requestOptions = new RequestOptions()
+//                            .centerCrop()
+//                            .placeholder(R.mipmap.zx_113)
+//                            .error(R.mipmap.zx_113);
+//                    Glide.with(getContext().getApplicationContext())
+//                            .asBitmap()
+//                            .load(enterpriseInformation.getLogo())
+//                            .apply(requestOptions)
+//                            .into(ivHead);
 
                     title.setText(enterpriseInformation.getTitle());
                     type.setText(enterpriseInformation.getType());

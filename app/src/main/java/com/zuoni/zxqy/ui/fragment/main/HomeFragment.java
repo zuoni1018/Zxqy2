@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
+import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.bean.gson.GetUiInfo;
 import com.zuoni.zxqy.cache.CacheUtils;
 import com.zuoni.zxqy.http.CallServer;
@@ -32,6 +34,7 @@ import com.zuoni.zxqy.ui.activity.MyMailboxActivity;
 import com.zuoni.zxqy.ui.activity.PositionManagementActivity;
 import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
 import com.zuoni.zxqy.ui.activity.YlzpActivity;
+import com.zuoni.zxqy.ui.activity.ZXLTActivity;
 import com.zuoni.zxqy.ui.activity.resumesearch.ResumeSearchActivity;
 import com.zuoni.zxqy.ui.activity.settings.EssentialInformationActivity;
 import com.zuoni.zxqy.ui.activity.settings.SettingsActivity;
@@ -103,6 +106,8 @@ public class HomeFragment extends Fragment {
     SelectableRoundedImageView ivHead;
     @BindView(R.id.ivLeve2)
     ImageView ivLeve2;
+    @BindView(R.id.sccc)
+    ScrollView sccc;
     private View view;
 
     private MainActivity mainActivity;
@@ -126,9 +131,23 @@ public class HomeFragment extends Fragment {
                 builder.create().show();
             }
         });
+        view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                LogUtil.i("changezzz1");
+                LogUtil.i("zzzzz", "bottom" + bottom + "===oldBottom" + oldBottom);
+
+//                if(bottom!=oldBottom){
+//                    sccc.fullScroll(ScrollView.FOCUS_DOWN);
+//                }
+//
+            }
+        });
+
 
         return view;
     }
+
     private void company_upgrade() {
         HttpRequest httpRequest = new HttpRequest(AppUrl.company_upgrade);//会员申请
         CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
@@ -144,6 +163,7 @@ public class HomeFragment extends Fragment {
             }
         }, getContext());
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -159,6 +179,7 @@ public class HomeFragment extends Fragment {
     private boolean isFirstUpDateYX = true;//是否第一次去更新云信资料
 
     public static String chatLast = "0";
+
     /**
      * 刷新职位
      * 将职位信息改为当前
@@ -170,16 +191,24 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSucceed(String response, Gson gson) {
                 mainActivity.closeLoading();
-
+                LogUtil.i("刷新");
+                BaseHttpResponse info = gson.fromJson(response, BaseHttpResponse.class);
+                if (info.getStatus().equals("true")) {
+                    mainActivity.showToast("刷新成功");
+                } else if (info.getStatus().equals("false")) {
+                    mainActivity.showToast("未发布任何职位，请发布");
+                }
             }
 
             @Override
             public void onFailed(Exception exception) {
                 mainActivity.closeLoading();
-                mainActivity.  showToast("服务器异常");
+                mainActivity.showToast("服务器异常");
             }
         }, getContext());
     }
+
+    public  static String VipLevel="";
     private void getUiInfo() {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_UI_INFO);//获取主页
@@ -202,10 +231,10 @@ public class HomeFragment extends Fragment {
                     vipTime.setText(info.getData().getVipTime() + "");
                     receiveResume.setText(info.getData().getReceiveResume() + "");
 
-                    GlideUtils.setHead(getContext(),info.getData().getImg(),ivHead);
+                    GlideUtils.setHead(getContext(), info.getData().getImg(), ivHead);
 
-                    if(info.getData().getAddress()!=null){
-                        CacheUtils.setAddress(info.getData().getAddress(),getContext());
+                    if (info.getData().getAddress() != null) {
+                        CacheUtils.setAddress(info.getData().getAddress(), getContext());
                     }
 
 
@@ -218,7 +247,7 @@ public class HomeFragment extends Fragment {
 //                            .load(info.getData().getImg())
 //                            .apply(requestOptions)
 //                            .into(ivHead);
-
+                    VipLevel=info.getData().getVipLevel();
                     if (info.getData().getVipLevel().equals("1")) {
                         //绿色会员
                         ivLevel.setImageResource(R.mipmap.zx_64);
@@ -234,7 +263,7 @@ public class HomeFragment extends Fragment {
                     }
 
                     if (isFirstUpDateYX) {
-                        upDateYX(info.getData().getCname() + "", info.getData().getImg());
+                        upDateYX(info.getData().getTitle() + "", info.getData().getImg());
                     }
 
 
@@ -280,7 +309,7 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5,R.id.menu_7})
+    @OnClick({R.id.menu_1, R.id.menu_2, R.id.menu_3, R.id.menu_4, R.id.menu_5, R.id.menu_7, R.id.menu_6})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.menu_1:
@@ -303,10 +332,10 @@ public class HomeFragment extends Fragment {
                 //我的信息
                 jumpToActivity(MyMailboxActivity.class);
                 break;
-//            case R.id.menu_6:
+            case R.id.menu_6:
 //                //在线投诉留言
-////                jumpToActivity(OnlineComplaintsActivity.class);
-//                break;
+                jumpToActivity(ZXLTActivity.class);
+                break;
             case R.id.menu_7:
                 //一键刷新
                 refresh_position();
@@ -326,10 +355,12 @@ public class HomeFragment extends Fragment {
     public void onViewClicked2(View view) {
         jumpToActivity(SettingsActivity.class);
     }
-    @OnClick({R.id.iv11111111, R.id.ivHead,R.id.title})
+
+    @OnClick({R.id.iv11111111, R.id.ivHead, R.id.title})
     public void onViewClicked3(View view) {
         jumpToActivity(EssentialInformationActivity.class);
     }
+
     @OnClick(R.id.ivHomePreview)
     public void onViewClicked2() {
         jumpToActivity(HomePreviewActivity.class);
@@ -338,16 +369,16 @@ public class HomeFragment extends Fragment {
 
     @OnClick({R.id.positionManagement01, R.id.positionManagement02, R.id.positionManagement03})
     public void onPositionManagementClicked(View view) {
-        Intent mIntent=new Intent(getContext(),ResumeManagementActivity.class);
+        Intent mIntent = new Intent(getContext(), ResumeManagementActivity.class);
         switch (view.getId()) {
             case R.id.positionManagement01:
-                mIntent.putExtra("pos",0);
+                mIntent.putExtra("pos", 0);
                 break;
             case R.id.positionManagement02:
-                mIntent.putExtra("pos",1);
+                mIntent.putExtra("pos", 1);
                 break;
             case R.id.positionManagement03:
-                mIntent.putExtra("pos",3);
+                mIntent.putExtra("pos", 3);
                 break;
         }
         startActivity(mIntent);

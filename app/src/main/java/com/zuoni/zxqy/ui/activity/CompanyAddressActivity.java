@@ -61,8 +61,6 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
     LinearLayout layoutSearch;
     @BindView(R.id.etSearch)
     EditText etSearch;
-    @BindView(R.id.layoutMap)
-    LinearLayout layoutMap;
     @BindView(R.id.ivLalala)
     ImageView ivLalala;
     private BaiduMap baiduMap;
@@ -115,7 +113,16 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                baiduMap = getBaiduMap();
+                try{
+                    baiduMap = getBaiduMap();
+                }catch (Exception e){
+                    baiduMap=null;
+                }
+                if(baiduMap==null){
+                    showToast("加载地图失败,请直接在输入框中输入地址");
+                    myFinish();
+                    return;
+                }
                 setLocationMode(MyLocationConfiguration.LocationMode.FOLLOWING);
                 setLocationMode(MyLocationConfiguration.LocationMode.NORMAL);
                 closeLoading();
@@ -207,10 +214,6 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
         });
         // 反Geo搜索
         mSearch.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
-
-
-////        search("");
-
     }
 
     @Override
@@ -219,12 +222,21 @@ public class CompanyAddressActivity extends BMapLocationBaseActivity implements 
         if (requestCode == 10086 && resultCode == 10087) {
             String text = data.getStringExtra("text");
             tvSearch01.setText(text);
+            LogUtil.i("为什么没有销毁");
+            String door = etSearch.getText().toString().trim();
+//                if(door.equals("")|tvSearch01.getText().toString().equals("")){
+//                    showToast("请输入门牌号码或选择地址");
+//                }else {
+            String message = tv01.getText().toString() + tvSearch01.getText().toString() + door;
+            Intent mIntent = new Intent();
+            mIntent.putExtra("message", message);
+            setResult(10087, mIntent);
+            myFinish();
         }
     }
 
     @Override
     public void onCity(String city) {
-        LogUtil.i("城市999" + city);
         tv01.setText(city);
     }
 

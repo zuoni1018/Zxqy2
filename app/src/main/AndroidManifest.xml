@@ -48,6 +48,8 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
 
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature
@@ -131,6 +133,8 @@
         <activity android:name=".ui.activity.InterviewContentActivity" />
         <activity android:name=".ui.activity.TagSelectionActivity" />
         <activity android:name=".ui.activity.ForgetActivity2" />
+        <activity android:name=".ui.activity.ZXLTActivity" />
+        <activity android:name=".ui.activity.ZXLTDetailsActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

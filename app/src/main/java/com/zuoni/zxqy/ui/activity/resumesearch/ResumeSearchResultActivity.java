@@ -141,6 +141,10 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
                 String workId = "";
 
                 for (int i = 0; i < mList.size(); i++) {
+                    if(mList.get(i).getInvite().equals("0")){
+                        showToast("选择的简历中有未查看过的简历");
+                        return;
+                    }
                     if (mList.get(i).isChoose()) {
                         InvitationPeople invitationPeople = new InvitationPeople();
                         invitationPeople.setHeadUrl(mList.get(i).getImg());

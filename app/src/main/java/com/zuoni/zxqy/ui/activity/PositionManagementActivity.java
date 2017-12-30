@@ -25,6 +25,7 @@ import com.zuoni.zxqy.http.CallServer;
 import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
+import com.zuoni.zxqy.ui.fragment.main.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,11 @@ public class PositionManagementActivity extends BaseTitleActivity {
 
             @Override
             public void onClick02(Job job, int position) {
+                if (HomeFragment.VipLevel.equals("0")) {
+                    showToast("请联系客服充会员");
+                    return;
+                }
+
                 //本地改状态
                 String state = mList.get(position).getStatus();
                 if (state.equals("1")) {
@@ -307,7 +313,7 @@ public class PositionManagementActivity extends BaseTitleActivity {
         }, getContext());
     }
 
-    @OnClick({R.id.bt01, R.id.bt02,R.id.bt03})
+    @OnClick({R.id.bt01, R.id.bt02, R.id.bt03})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt01:

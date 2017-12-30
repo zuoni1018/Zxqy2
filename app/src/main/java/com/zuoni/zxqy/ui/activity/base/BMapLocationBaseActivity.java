@@ -7,10 +7,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -52,7 +48,6 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
 
     private SensorManager mSensorManager;//传感器
     private LocationMode mCurrentMode;//定位类型 普通 跟随 罗盘
-    private MapView mMapView;
     private BaiduMap mBaiduMap;
     private LocationClient mLocClient;//定位服务
     private UiSettings mUiSettings;
@@ -67,122 +62,88 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
     boolean isFirstLoc = true;
 
     boolean isFirst = true;
-
-    private LinearLayout layoutMap;
-
-
+    private MapView mMapView;
     public OnBMapLocationListener onBMapLocationListener;
-
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
     private GeoCoder mSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        layoutMap = (LinearLayout) findViewById(R.id.layoutMap);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        //去延迟初始化
-        mHandler.postDelayed(new Runnable() {
+
+        mMapView = (MapView) findViewById(R.id.layoutMap);//获得mapView
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
+        mCurrentMode = LocationMode.NORMAL;//定位类型设置为普通模式
+        mBaiduMap = mMapView.getMap();//获取地图图层
+
+        if (mBaiduMap == null) {
+            finish();
+            return;
+        }
+
+        //设置参数
+        mUiSettings = mBaiduMap.getUiSettings();
+
+        mUiSettings.setAllGesturesEnabled(false);
+        mUiSettings.setZoomGesturesEnabled(true);
+        mUiSettings.setScrollGesturesEnabled(true);
+        mUiSettings.setRotateGesturesEnabled(false);
+        mUiSettings.setOverlookingGesturesEnabled(false);
+
+        MapStatusUpdate u = MapStatusUpdateFactory.zoomTo(17);
+        mBaiduMap.animateMapStatus(u);
+        mBaiduMap.setMyLocationEnabled(true); // 开启定位图层
+        mLocClient = new LocationClient(getContext());
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true); // 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+        option.setScanSpan(1000);
+        option.setIsNeedLocationPoiList(true);
+        option.setIsNeedAddress(true);
+
+        //设置定位并开始定位
+        mLocClient.setLocOption(option);
+        mLocClient.start();
+
+        //获取定位信息
+        mLocClient.registerLocationListener(new BDAbstractLocationListener() {
             @Override
-            public void run() {
-                mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-                mCurrentMode = LocationMode.NORMAL;//定位类型设置为普通模式
-                mMapView = new MapView(getContext());
-                mBaiduMap = mMapView.getMap();//获取地图图层
-                mUiSettings = mBaiduMap.getUiSettings();
+            public void onReceiveLocation(BDLocation location) {
+                LogUtil.i("收到定位啦~~~" + location);
+                // map view 销毁后不在处理新接收的位置
+                if (location == null || mMapView == null) {
+                    return;
+                }
+                mCurrentLat = location.getLatitude();
+                mCurrentLon = location.getLongitude();
+                mCurrentAccracy = location.getRadius();
+                locData = new MyLocationData.Builder()
+                        .accuracy(location.getRadius())
+                        // 此处设置开发者获取到的方向信息，顺时针0-360
+                        .direction(mCurrentDirection).latitude(location.getLatitude())
+                        .longitude(location.getLongitude()).build();
 
-                mUiSettings.setAllGesturesEnabled(false);
-                mUiSettings.setZoomGesturesEnabled(true);
-                mUiSettings.setScrollGesturesEnabled(true);
-                mUiSettings.setRotateGesturesEnabled(false);
-                mUiSettings.setOverlookingGesturesEnabled(false);
-
-                MapStatusUpdate u = MapStatusUpdateFactory.zoomTo(17);
-                mBaiduMap.animateMapStatus(u);
-                mBaiduMap.setMyLocationEnabled(true); // 开启定位图层
-                mLocClient = new LocationClient(getContext());
-                LocationClientOption option = new LocationClientOption();
-                option.setOpenGps(true); // 打开gps
-                option.setCoorType("bd09ll"); // 设置坐标类型
-                option.setScanSpan(1000);
-                option.setIsNeedLocationPoiList(true);
-                option.setIsNeedAddress(true);
-//
-//                mBaiduMap.getMapStatus()
-//                latLng = mBaiduMap.getMapStatus().target;
-
-                //自定义定位图标
-//new MyLocationConfiguration(
-//                         mCurrentMode
-//                         , true
-//                         ,BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)
-//                         , Color.parseColor("#0fCCCFE7")
-//                         ,Color.parseColor("#0fCCCFE7")
-//                 );
-
-
-//                new MyLocationConfiguration(mCurrentMode, true, BitmapDescriptorFactory.fromResource(R.mipmap.zx_86), Color.parseColor("#0fCCCFE7"),Color.parseColor("#0fCCCFE7")
-                mLocClient.setLocOption(option);
-                mLocClient.start();
-
-                mLocClient.registerLocationListener(new BDAbstractLocationListener() {
-                    @Override
-                    public void onReceiveLocation(BDLocation location) {
-                        LogUtil.i("收到定位啦~~~" + location);
-                        // map view 销毁后不在处理新接收的位置
-                        if (location == null || mMapView == null) {
-                            return;
+                mBaiduMap.setMyLocationData(locData);//设置最新的坐标 可以吧它get出来
+                LogUtil.i("定位位置", "Latitude:" + mCurrentLat + "mCurrentLon:" + mCurrentLon);
+                location.getPoiList();
+                if (isFirstLoc) {
+                    isFirstLoc = false;
+                    LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+                    MapStatus.Builder builder = new MapStatus.Builder();
+                    builder.target(ll).zoom(18.0f);
+                    mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));//把坐标移动过去
+                    if (onBMapLocationListener != null) {
+                        if (location.getPoiList() != null) {
+                            onBMapLocationListener.onGetLatLng(ll);
+                            onBMapLocationListener.onGetPoiList(location.getPoiList());
+                            onBMapLocationListener.onCity(location.getCity());
                         }
-                        mCurrentLat = location.getLatitude();
-                        mCurrentLon = location.getLongitude();
-                        mCurrentAccracy = location.getRadius();
-                        locData = new MyLocationData.Builder()
-                                .accuracy(location.getRadius())
-                                // 此处设置开发者获取到的方向信息，顺时针0-360
-                                .direction(mCurrentDirection).latitude(location.getLatitude())
-                                .longitude(location.getLongitude()).build();
-
-                        mBaiduMap.setMyLocationData(locData);//设置最新的坐标 可以吧它get出来
-                        LogUtil.i("定位位置", "Latitude:" + mCurrentLat + "mCurrentLon:" + mCurrentLon);
-                        location.getPoiList();
-                        if (isFirstLoc) {
-                            isFirstLoc = false;
-                            LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-                            MapStatus.Builder builder = new MapStatus.Builder();
-                            builder.target(ll).zoom(18.0f);
-                            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));//把坐标移动过去
-                            if (onBMapLocationListener != null) {
-                                if (location.getPoiList() != null) {
-                                    onBMapLocationListener.onGetLatLng(ll);
-                                    onBMapLocationListener.onGetPoiList(location.getPoiList());
-                                    onBMapLocationListener.onCity(location.getCity());
-                                }
-                            }
-                        }
-
                     }
-                });
-                layoutMap.setVisibility(View.INVISIBLE);
-                layoutMap.addView(mMapView);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutMap.setVisibility(View.VISIBLE);
-                    }
-                }, 300);
-
-                mSearch = GeoCoder.newInstance();
-
+                }
 
             }
-
-        }, 200);
+        });
+        mSearch = GeoCoder.newInstance();
     }
 
     //
@@ -322,8 +283,7 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
                 .pageNum(10));
 
 
-
-        mPoiSearch.searchNearby(new PoiNearbySearchOption().location(new LatLng(0,0)));
+        mPoiSearch.searchNearby(new PoiNearbySearchOption().location(new LatLng(0, 0)));
 
     }
 
@@ -335,7 +295,7 @@ public abstract class BMapLocationBaseActivity extends BaseActivity implements S
                 result.getAllPoi();
                 for (int i = 0; i < result.getAllPoi().size(); i++) {
                     PoiInfo mPoiInfo = result.getAllPoi().get(i);
-                    LogUtil.i("检索结果" + mPoiInfo.address + mPoiInfo.name );
+                    LogUtil.i("检索结果" + mPoiInfo.address + mPoiInfo.name);
                 }
             }
 

@@ -156,16 +156,16 @@ public class RegisterActivity extends BaseTitleActivity {
                                 if (passwd2.equals("")) {
                                     showToast("请输入确认密码");
                                 } else {
-                                    if (siteId.equals("-1")) {
-                                        showToast("请选择城市");
-                                    } else {
+//                                    if (siteId.equals("-1")) {
+//                                        showToast("请选择城市");
+//                                    } else {
                                         if (passwd.equals(passwd2)) {
                                             register(userid, phone, verify, siteId, passwd);
                                         } else {
                                             showToast("密码与确认密码不一致");
                                         }
 
-                                    }
+//                                    }
                                 }
                             }
                         }
@@ -182,7 +182,7 @@ public class RegisterActivity extends BaseTitleActivity {
         HttpRequest httpRequest = new HttpRequest(AppUrl.REGIST);//注册
         httpRequest.add("passwd", passwd);
         httpRequest.add("verify", verify);
-        httpRequest.add("siteId", siteId);
+//        httpRequest.add("siteId", siteId);
         httpRequest.add("userid", userid);
         httpRequest.add("phone", phone);
 
