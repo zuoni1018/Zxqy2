@@ -22,6 +22,15 @@ public class Contact implements Serializable{
     private String fax;
     private String email;
     private String address;
+    private String is_lock;
+
+    public String getIs_lock() {
+        return is_lock;
+    }
+
+    public void setIs_lock(String is_lock) {
+        this.is_lock = is_lock;
+    }
 
     public String getContactId() {
         return contactId;

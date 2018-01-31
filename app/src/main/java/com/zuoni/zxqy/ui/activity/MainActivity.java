@@ -49,12 +49,12 @@ public class MainActivity extends BaseActivity {
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager(), mList);
         viewPager.setAdapter(mPagerAdapter);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showToast("记得刷新职位哦");
-            }
-        }, 1000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                showToast("记得刷新职位哦");
+//            }
+//        }, 1000);
 
 //        api = WXAPIFactory.createWXAPI(this, GlobalVariable.WX_APP_ID);
 //        HttpRequest  mHttpRequest=new HttpRequest("");

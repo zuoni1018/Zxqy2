@@ -62,6 +62,16 @@ public class GetUiInfo extends  BaseHttpResponse{
         private String favs;
         private String chatLast;
 
+      private    int postJobs;
+
+        public int getPostJobs() {
+            return postJobs;
+        }
+
+        public void setPostJobs(int postJobs) {
+            this.postJobs = postJobs;
+        }
+
         public String getAddress() {
             return address;
         }

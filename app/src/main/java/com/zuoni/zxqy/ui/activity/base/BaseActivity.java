@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -33,7 +34,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private Context mContext;
     private LoadingDialog loadingDialog;
     private TokenErrorBroadcastReceiver tokenErrorBroadcastReceiver;
-
+    private AlertDialog myAlertDialog;
+    public AlertDialog getMyAlertDialog() {
+        return myAlertDialog;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,29 @@ public abstract class BaseActivity extends AppCompatActivity {
         LoadingDialog.Builder builder = new LoadingDialog.Builder(BaseActivity.this);
         builder.setMessage("加载中...");
         loadingDialog = builder.create();
+
+
+
+
+        android.support.v7.app.AlertDialog.Builder builder2=new android.support.v7.app.AlertDialog.Builder(getContext());
+        builder2.setTitle("请联系客服充值会员");
+        builder2.setMessage(GlobalVariable.phone);
+        builder2.setPositiveButton("联系客服", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ GlobalVariable.phone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder2.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        myAlertDialog=builder2.create();
+
     }
     public abstract int setLayoutId();
 

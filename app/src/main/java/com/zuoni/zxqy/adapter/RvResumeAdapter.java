@@ -107,7 +107,7 @@ public class RvResumeAdapter extends RecyclerView.Adapter<RvResumeAdapter.MyView
                 if (mList.get(position).getIs_hide().equals("1")) {
                     ToastUtils.showToast(mContext, "该简历已被隐藏");
                 } else {
-                    onResumeManagerListener.onClick03(mList.get(position), position);
+                    onResumeManagerListener.onClick02(mList.get(position), position);
                 }
             }
         });

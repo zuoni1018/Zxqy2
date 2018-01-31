@@ -22,6 +22,7 @@ import com.zuoni.zxqy.http.HttpRequest;
 import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.InvitationInterviewActivity;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
+import com.zuoni.zxqy.ui.fragment.main.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +93,16 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
         hopelocation = getIntent().getStringExtra("hopelocation");
         name = getIntent().getStringExtra("name");
         mList = new ArrayList<>();
+
+        if(searchType.equals("normal")){
+            setTitle("简历搜索—"+key);
+        }else {
+            setTitle("简历搜索");
+        }
+
+//        LogUtil.i("zzzsearchType");
+
+
         mRecyclerView.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -137,14 +148,20 @@ public class ResumeSearchResultActivity extends BaseTitleActivity {
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.tv02:
+
+                if(HomeFragment.VipLevel.equals("0")){
+                    getMyAlertDialog().show();
+                    return;
+                }
+
                 ArrayList<InvitationPeople> peoples = new ArrayList<>();
                 String workId = "";
 
                 for (int i = 0; i < mList.size(); i++) {
-                    if(mList.get(i).getInvite().equals("0")){
-                        showToast("选择的简历中有未查看过的简历");
-                        return;
-                    }
+//                    if(mList.get(i).getInvite().equals("0")){
+//                        showToast("选择的简历中有未查看过的简历");
+//                        return;
+//                    }
                     if (mList.get(i).isChoose()) {
                         InvitationPeople invitationPeople = new InvitationPeople();
                         invitationPeople.setHeadUrl(mList.get(i).getImg());

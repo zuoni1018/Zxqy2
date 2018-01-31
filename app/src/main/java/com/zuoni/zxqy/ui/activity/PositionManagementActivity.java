@@ -1,7 +1,10 @@
 package com.zuoni.zxqy.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +18,7 @@ import com.zuoni.common.dialog.picker.DataPickerSingleDialog;
 import com.zuoni.common.dialog.picker.callback.OnSingleDataSelectedListener;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
+import com.zuoni.zxqy.GlobalVariable;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvPositionManagementAdapter;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
@@ -60,11 +64,15 @@ public class PositionManagementActivity extends BaseTitleActivity {
     private List<Job> mList;
     private List<Job> upDateList;
 
+    private AlertDialog alertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("职位管理");
+
+        initDialog();
 
         mList = new ArrayList<>();
         upDateList = new ArrayList<>();
@@ -79,7 +87,8 @@ public class PositionManagementActivity extends BaseTitleActivity {
             @Override
             public void onClick02(Job job, int position) {
                 if (HomeFragment.VipLevel.equals("0")) {
-                    showToast("请联系客服充会员");
+//                    showToast("请联系客服充会员");
+                    alertDialog.show();
                     return;
                 }
 
@@ -129,6 +138,29 @@ public class PositionManagementActivity extends BaseTitleActivity {
         });
         getPosition();
 
+    }
+
+    private void initDialog() {
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        builder.setTitle("请联系客服充值会员");
+        builder.setMessage(GlobalVariable.phone);
+        builder.setPositiveButton("联系客服", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+ GlobalVariable.phone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog=builder.create();
     }
 
     @Override
@@ -338,6 +370,11 @@ public class PositionManagementActivity extends BaseTitleActivity {
                 startActivityForResult(mIntent, 10086);
                 break;
             case R.id.bt03:
+                if (HomeFragment.VipLevel.equals("0")) {
+//                    showToast("请联系客服充会员");
+                    alertDialog.show();
+                    return;
+                }
                 refresh_position("");
                 break;
         }

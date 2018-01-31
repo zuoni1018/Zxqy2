@@ -53,12 +53,12 @@ public class RvMailboxAdapter extends RecyclerView.Adapter<RvMailboxAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-//        holder.layoutMain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onMailBoxListener.onClick03(mList.get(position),position);
-//            }
-//        });
+        holder.layoutMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMailBoxListener.onClick02(mList.get(position),position);
+            }
+        });
 
         holder.layoutMenu1.setOnClickListener(new View.OnClickListener() {
             @Override

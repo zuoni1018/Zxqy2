@@ -29,6 +29,7 @@ import com.zuoni.zxqy.http.HttpResponseListener;
 import com.zuoni.zxqy.ui.activity.InvitationInterviewActivity;
 import com.zuoni.zxqy.ui.activity.ResumeDetailsActivity;
 import com.zuoni.zxqy.ui.activity.ResumeManagementActivity;
+import com.zuoni.zxqy.ui.fragment.main.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,14 +212,18 @@ public class ResumeManagementFragment02 extends Fragment {
 
                 break;
             case R.id.bottom03:
+                if(HomeFragment.VipLevel.equals("0")){
+                    resumeManagementActivity.getMyAlertDialog().show();
+                    return;
+                }
                 //批量邀请面试
                 peoples.clear();
                 for (int i = 0; i < mList.size(); i++) {
                     if (mList.get(i).isChoose()) {
-                        if(mList.get(i).getIs_hide().equals("1")){
-                            resumeManagementActivity.showToast("选择的简历中存在隐藏简历");
-                            return;
-                        }
+//                        if(mList.get(i).getIs_hide().equals("1")){
+//                            resumeManagementActivity.showToast("选择的简历中存在隐藏简历");
+//                            return;
+//                        }
                         InvitationPeople invitationPeople = new InvitationPeople();
                         invitationPeople.setHeadUrl(mList.get(i).getImg());
                         invitationPeople.setName(mList.get(i).getName());

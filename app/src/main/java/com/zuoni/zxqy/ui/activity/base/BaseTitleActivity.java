@@ -1,6 +1,7 @@
 package com.zuoni.zxqy.ui.activity.base;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ public abstract class BaseTitleActivity extends BaseActivity {
     private RelativeLayout layoutLeft;
     private TextView tvTitle;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,15 @@ public abstract class BaseTitleActivity extends BaseActivity {
                 myFinish();
             }
         });
+        initDialog();
     }
+
+    private void initDialog() {
+
+
+
+    }
+
 
     public void setTitle(String title) {
         tvTitle.setText(title);

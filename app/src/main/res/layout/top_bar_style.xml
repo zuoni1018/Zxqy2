@@ -12,10 +12,10 @@
         android:layout_alignParentLeft="true">
 
         <ImageView
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dp"
             android:layout_width="7.2dp"
             android:layout_height="16.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"
             android:src="@mipmap/back_left" />
     </RelativeLayout>
 
@@ -24,6 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:singleLine="true"
         android:text="测试标题"
         android:textColor="@color/color_white"
         android:textSize="17sp" />

@@ -22,6 +22,7 @@ import com.zuoni.zxqy.AppUrl;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.adapter.RvPostingTagAdapter;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
+import com.zuoni.zxqy.bean.gson.GetContact;
 import com.zuoni.zxqy.bean.gson.GetJobsCate;
 import com.zuoni.zxqy.bean.gson.GetSetting;
 import com.zuoni.zxqy.bean.gson.getPositionDetail;
@@ -135,7 +136,41 @@ public class PostingPositionActivity extends BaseTitleActivity {
     private String jobId = "";
     private ArrayList<String> tags;
     private RvPostingTagAdapter mAdapter;
+    //获取联系人列表
+    private void getContact() {
+        showLoading();
+        HttpRequest httpRequest = new HttpRequest(AppUrl.GET_CONTACT);//联系人列表
+        CallServer.getInstance().request(httpRequest, new HttpResponseListener() {
+            @Override
+            public void onSucceed(String response, Gson gson) {
+                closeLoading();
+                LogUtil.i("联系人列表" + response);
+                GetContact info = gson.fromJson(response, GetContact.class);
+                if (info.getStatus().equals("true")) {
+                    try {
+                        contact=    info.getData().get(0);
+                        tv03.setText(contact.getName() + "   " + contact.getTele());
+                    }catch (Exception e){
 
+                    }
+
+//                    mList.clear();
+//                    mList.addAll(info.getData());
+//                    mAdapter.notifyDataSetChanged();
+                } else {
+                    showToast("未添加联系人");
+//                    mList.clear();
+//                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailed(Exception exception) {
+                closeLoading();
+                LogUtil.i("联系人列表" + exception);
+            }
+        }, getContext());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,6 +211,11 @@ public class PostingPositionActivity extends BaseTitleActivity {
             jobId = getIntent().getStringExtra("jobId");
             setTitle("修改职位");
             get_position_detail(jobId);
+        }else {
+            //先设置联系人
+
+            getContact();
+
         }
         //设置可约聊次数
 //        HomeFragment.chatLast.equals("0")
@@ -699,6 +739,7 @@ public class PostingPositionActivity extends BaseTitleActivity {
                     showToast("发布成功");
                     setResult(10087);
                     myFinish();
+                    jumpToActivity(PositionManagementActivity.class);
                 } else {
                     showToast(info.getMessage());
                 }

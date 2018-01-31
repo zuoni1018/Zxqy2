@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zuoni.common.widget.SwipeMenuView;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.model.Contact;
 import com.zuoni.zxqy.callback.ContactManagerListener;
@@ -71,6 +70,14 @@ public class RvContactManagerAdapter extends RecyclerView.Adapter<RvContactManag
         holder.tele.setText(mList.get(position).getTele());
         holder.email.setText(mList.get(position).getEmail());
 //        holder.address.setText(mList.get(position).getAddress());
+
+        if(mList.get(position).getIs_lock().equals("1")){
+            holder.layout01.setVisibility(View.INVISIBLE);
+            holder.layout02.setVisibility(View.INVISIBLE);
+        }else {
+            holder.layout01.setVisibility(View.VISIBLE);
+            holder.layout02.setVisibility(View.VISIBLE);
+        }
 
 
         holder.layout01.setOnClickListener(new View.OnClickListener() {

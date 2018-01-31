@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -43,6 +44,8 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
     TextView tvPeople;
     @BindView(R.id.tvRight)
     TextView tvRight;
+    @BindView(R.id.layoutType)
+    LinearLayout layoutType;
 
     private String workId;
     private String name;
@@ -69,6 +72,7 @@ public class OnlineComplaintsActivity extends BaseTitleActivity {
             isAdmin = false;
             setTitle("发送留言");
             tvPeople.setText("收信人：" + name);
+            layoutType.setVisibility(View.GONE);
         }
 
     }

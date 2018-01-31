@@ -1,6 +1,8 @@
 package com.zuoni.zxqy.ui.fragment.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +22,7 @@ import com.netease.nimlib.sdk.uinfo.UserService;
 import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum;
 import com.zuoni.common.utils.LogUtil;
 import com.zuoni.zxqy.AppUrl;
+import com.zuoni.zxqy.GlobalVariable;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.bean.gson.BaseHttpResponse;
 import com.zuoni.zxqy.bean.gson.GetUiInfo;
@@ -121,14 +124,17 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, null);
         unbinder = ButterKnife.bind(this, view);
 
+        initDialog();
+
         tvhycz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                company_upgrade();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("您已成功通知客服");
-                builder.setPositiveButton("知道了", null);
-                builder.create().show();
+//                company_upgrade();
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setMessage("您已成功通知客服");
+//                builder.setPositiveButton("知道了", null);
+//                builder.create().show();
+                mainActivity.getMyAlertDialog().show();
             }
         });
         view.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
@@ -146,6 +152,32 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    private AlertDialog alertDialog;
+
+    private void initDialog() {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("请联系客服充值会员");
+        builder.setMessage(GlobalVariable.phone);
+        builder.setPositiveButton("联系客服", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + GlobalVariable.phone));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        alertDialog = builder.create();
     }
 
     private void company_upgrade() {
@@ -208,7 +240,9 @@ public class HomeFragment extends Fragment {
         }, getContext());
     }
 
-    public  static String VipLevel="";
+    public static String VipLevel = "";
+    private boolean isFirst = true;
+
     private void getUiInfo() {
 
         HttpRequest httpRequest = new HttpRequest(AppUrl.GET_UI_INFO);//获取主页
@@ -237,7 +271,14 @@ public class HomeFragment extends Fragment {
                         CacheUtils.setAddress(info.getData().getAddress(), getContext());
                     }
 
+                    if (info.getData().getPostJobs() == 0) {
 
+                    } else {
+                        if (isFirst) {
+                            mainActivity.showToast("记得刷新职位哦");
+                        }
+                    }
+                    isFirst = false;
 //                    RequestOptions requestOptions = new RequestOptions()
 //                            .centerCrop()
 //                            .placeholder(R.mipmap.zx_113)
@@ -247,7 +288,7 @@ public class HomeFragment extends Fragment {
 //                            .load(info.getData().getImg())
 //                            .apply(requestOptions)
 //                            .into(ivHead);
-                    VipLevel=info.getData().getVipLevel();
+                    VipLevel = info.getData().getVipLevel();
                     if (info.getData().getVipLevel().equals("1")) {
                         //绿色会员
                         ivLevel.setImageResource(R.mipmap.zx_64);
@@ -338,6 +379,12 @@ public class HomeFragment extends Fragment {
                 break;
             case R.id.menu_7:
                 //一键刷新
+
+                if (HomeFragment.VipLevel.equals("0")) {
+//                    showToast("请联系客服充会员");
+                    alertDialog.show();
+                    return;
+                }
                 refresh_position();
 //                mainActivity.showLoading();
 //                getUiInfo();

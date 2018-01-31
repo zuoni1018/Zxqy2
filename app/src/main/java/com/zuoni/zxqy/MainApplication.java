@@ -121,7 +121,7 @@ public class MainApplication extends Application {
 
         // 初始化
         NimUIKit.init(this);
-
+//        NimUIKit.setLocationProvider(new NimDemoLocationProvider());
         // 可选定制项
         // 注册定位信息提供者类（可选）,如果需要发送地理位置消息，必须提供。
         // demo中使用高德地图实现了该提供者，开发者可以根据自身需求，选用高德，百度，google等任意第三方地图和定位SDK。

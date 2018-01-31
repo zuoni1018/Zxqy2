@@ -38,7 +38,7 @@ public class RemarksActivity extends BaseTitleActivity {
         et01.setSelection(et01.getText().length());
     }
 
-    @OnClick(R.id.bt01)
+    @OnClick(R.id.tvRight)
     public void onViewClicked() {
         String info = et01.getText().toString().trim();
         if (info.equals("")) {

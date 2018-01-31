@@ -130,7 +130,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
         invitationPeople.setWorkId(workId);
         invitationPeople.setWorkName("");
 
-        setTitle(name2 + "的简历");
+        setTitle("详情");
         if (workId.equals("")) {
             myFinish();
         } else {
@@ -154,7 +154,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
         contact01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+contact01.getText().toString().trim()));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact01.getText().toString().trim()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -166,7 +166,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
     private String iddd = "123456";
 
 
-    private String ZName="";
+    private String ZName = "";
+
     private void resume_detail(String workerId) {
         showLoading();
         HttpRequest httpRequest = new HttpRequest(AppUrl.resume_detail);//简历详情
@@ -260,7 +261,7 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
 
                     contact03.setText(info.getData().getAddress());
                     //姓名
-                    ZName=info.getData().getName();
+                    ZName = info.getData().getName();
 
                     if (!info.getData().isPermit()) {
                         name.setText("******");
@@ -304,7 +305,8 @@ public class ResumeDetailsActivity extends BaseTitleActivity {
                     layoutContact02.setVisibility(View.GONE);
                     layoutBottomMenu.setVisibility(View.VISIBLE);
                 } else {
-                    showToast(info.getMessage());
+                    getMyAlertDialog().show();
+//                    showToast(info.getMessage());
                 }
             }
 

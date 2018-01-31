@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.zuoni.zxqy.GlobalVariable;
 import com.zuoni.zxqy.R;
 import com.zuoni.zxqy.ui.activity.base.BaseTitleActivity;
 
@@ -21,6 +23,8 @@ public class ForgetActivity2 extends BaseTitleActivity {
 
     @BindView(R.id.btSure)
     Button btSure;
+    @BindView(R.id.tvPhone)
+    TextView tvPhone;
 
     @Override
     public int setLayoutId() {
@@ -32,11 +36,12 @@ public class ForgetActivity2 extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setTitle("忘记密码");
+        tvPhone.setText(GlobalVariable.phone);
     }
 
     @OnClick(R.id.btSure)
     public void onViewClicked() {
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+"1234567890"));
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + GlobalVariable.phone));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
